@@ -1,6 +1,6 @@
 import type { CodegenConfig } from '@graphql-codegen/cli';
 
-const graphqlEndpoint = 'https://raw.githubusercontent.com/ci7lus/miraktest-plugins/cabde97b252529783d44db8fd1260877e1f33bc5/src/miraktest-annict/schema.graphql';
+const graphqlEndpoint = 'https://docs.github.com/public/fpt/schema.docs.graphql'
 
 const scalars = {
   Time: 'DateString',

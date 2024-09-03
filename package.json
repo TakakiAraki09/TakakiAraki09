@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "build": "turbo build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "check-types": "turbo check-types",
+    "dev": "turbo dev"
   },
   "keywords": [],
   "author": "",

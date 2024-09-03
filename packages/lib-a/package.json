@@ -4,6 +4,7 @@
   "description": "",
   "main": "./dist/index.js",
   "scripts": {
+    "check-types": "tsc --noEmit",
     "build": "tsc ./src/index.ts --outDir ./dist --declaration"
   },
   "keywords": [],

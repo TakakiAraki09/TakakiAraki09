@@ -1,8 +1,8 @@
 {
-  "name": "lib-a",
+  "name": "lib-b",
   "version": "1.0.0",
   "description": "",
-  "main": "./dist/index.js",
+  "main": "index.js",
   "scripts": {
     "build": "tsc ./src/index.ts --outDir ./dist --declaration"
   },
@@ -11,5 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "lib-a": "workspace:*"
   }
 }

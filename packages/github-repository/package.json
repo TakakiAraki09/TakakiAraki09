@@ -2,13 +2,15 @@
   "name": "github-repository",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "type": "module",
+  "types": "dist/index.d.ts",
   "scripts": {
     "check-types": "tsc --noEmit",
     "dev": "vite",
     "dev-gql-watch": "graphql-codegen --watch",
     "codegen": "graphql-codegen",
-    "build": "tsc -b && vite build"
+    "build": "vite build"
   },
   "keywords": [],
   "author": "",

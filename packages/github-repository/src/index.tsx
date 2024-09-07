@@ -1,1 +1,3 @@
-console.log('hello')
+export function Github() {
+  return <div>Github</div>
+}

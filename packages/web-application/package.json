@@ -8,6 +8,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "antict-repository": "workspace:*",
+    "github-repository": "workspace:*",
     "next": "latest"
   }
 }

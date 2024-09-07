@@ -1,14 +1,16 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import dts from 'vite-plugin-dts'
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), dts({ tsconfigPath: './tsconfig.app.json' }), tsconfigPaths()],
   build: {
     lib: {
       entry: 'src/index.tsx',
-      formats: ['umd'],
-      name: 'reactTs',
-      fileName: 'react-ts',
+      name: 'index',
+      formats: ['es'],
+      fileName: 'index',
     }},
 })

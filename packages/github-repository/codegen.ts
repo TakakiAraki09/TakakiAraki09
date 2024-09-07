@@ -3,15 +3,6 @@ import type { CodegenConfig } from '@graphql-codegen/cli';
 const graphqlEndpoint =
   'https://docs.github.com/public/fpt/schema.docs.graphql';
 
-const scalars = {
-  Time: 'DateString',
-  Date: 'DateString',
-  ImagePath: 'ImgixImagePath',
-  Uint: 'number',
-  MarkDown: 'MarkdownString',
-  JISX0402: 'string',
-};
-
 const config = {
   schema: {
     [graphqlEndpoint]: {},
@@ -25,7 +16,6 @@ const config = {
     'gql/': {
       preset: 'client',
       config: {
-        scalars,
         useTypeImports: true,
       },
       presetConfig: {

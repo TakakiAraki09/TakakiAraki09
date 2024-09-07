@@ -14,16 +14,5 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "typescript": "^5.5.4"
-  },
-  "dependencies": {
-    "@graphql-codegen/cli": "^5.0.2",
-    "@graphql-codegen/client-preset": "^4.3.3",
-    "@graphql-codegen/introspection": "^4.0.3",
-    "@graphql-typed-document-node/core": "^3.2.0",
-    "graphql": "^16.9.0",
-    "react": "^18.3.1"
-  }
+  "license": "ISC"
 }

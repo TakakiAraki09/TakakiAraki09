@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "dev": "turbo dev",
     "build": "turbo build",
-    "prettier": "prettier --write \"./**/*.ts\" \"./**/*.tsx\" \"./**/*.js\"",
     "check-types": "turbo check-types",
-    "dev": "turbo dev"
+    "codegen": "turbo codegen",
+    "codegen:watch": "turbo codegen:watch",
+    "prettier": "prettier --write \"./**/*.ts\" \"./**/*.tsx\" \"./**/*.js\""
   },
   "keywords": [],
   "author": "",

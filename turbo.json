@@ -6,13 +6,13 @@
     },
     "build": {
       "dependsOn": ["^check-types", "^codegen", "^build"],
-      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+      "outputs": [".next/**", "dist/**"]
     },
     "codegen": {
       "dependsOn": ["^codegen"],
       "outputs": ["gql/**"]
     },
-    "dev-gql-watch": {
+    "codegen:watch": {
       "persistent": true,
       "cache": false
     },

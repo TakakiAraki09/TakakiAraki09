@@ -1,6 +1,7 @@
 import type { CodegenConfig } from '@graphql-codegen/cli';
 
-const graphqlEndpoint = 'https://docs.github.com/public/fpt/schema.docs.graphql'
+const graphqlEndpoint =
+  'https://docs.github.com/public/fpt/schema.docs.graphql';
 
 const scalars = {
   Time: 'DateString',
@@ -13,13 +14,9 @@ const scalars = {
 
 const config = {
   schema: {
-    [graphqlEndpoint]: {
-    },
+    [graphqlEndpoint]: {},
   },
-  documents: [
-    './app/**/*.ts',
-    './app/**/*.tsx',
-  ],
+  documents: ['./app/**/*.ts', './app/**/*.tsx'],
   ignoreNoDocuments: true,
   generates: {
     'schema.generated.json': {

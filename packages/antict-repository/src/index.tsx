@@ -1,3 +1,3 @@
 export function Antict() {
-  return <div>Antict</div>
+  return <div>Antict</div>;
 }

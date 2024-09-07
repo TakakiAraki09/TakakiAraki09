@@ -1,3 +1,3 @@
 export function Github() {
-  return <div>Github</div>
+  return <div>Github</div>;
 }

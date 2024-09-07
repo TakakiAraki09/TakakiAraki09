@@ -1,0 +1,7 @@
+.vscode/
+packages/*/.nuxt/
+packages/*/.output/
+packages/*/dist/
+**/node_modules/
+**/*.generated.ts
+**/.eslintrc.js

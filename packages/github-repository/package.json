@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "check-types": "tsc --noEmit",
+    "dev": "vite",
+    "dev-gql-watch": "graphql-codegen --watch",
     "codegen": "graphql-codegen",
-    "build": "tsc ./src/index.ts --outDir ./dist --declaration"
+    "build": "tsc -b && vite build"
   },
   "keywords": [],
   "author": "",
@@ -20,7 +22,6 @@
     "@graphql-codegen/introspection": "^4.0.3",
     "@graphql-typed-document-node/core": "^3.2.0",
     "graphql": "^16.9.0",
-    "lib-a": "workspace:*",
     "react": "^18.3.1"
   }
 }

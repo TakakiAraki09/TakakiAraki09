@@ -14,9 +14,9 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@gql/*": ["./gql/*"]
     },
-
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,

@@ -16,7 +16,7 @@ const config = {
   schema: {
     [graphqlEndpoint]: {},
   },
-  documents: ['./app/**/*.ts', './app/**/*.tsx'],
+  documents: ['./src/**/*.ts', './src/**/*.tsx'],
   ignoreNoDocuments: true,
   generates: {
     'schema.generated.json': {

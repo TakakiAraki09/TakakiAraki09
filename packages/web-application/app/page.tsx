@@ -1,11 +1,12 @@
-import { Antict } from 'antict-repository';
+"use client"
 import { Github } from 'github-repository';
+import { Antict } from "antict-repository";
 
 export default function Page() {
   return (
     <div>
-      <Github />
       <Antict />
+      <Github />
     </div>
   );
 }

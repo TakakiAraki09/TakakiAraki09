@@ -13,9 +13,18 @@ export default defineConfig({
   build: {
     lib: {
       entry: 'src/index.tsx',
-      name: 'index',
-      formats: ['es'],
+      name: 'antict-repository',
+      formats: ['es', 'umd'],
       fileName: 'index',
+    },
+    rollupOptions: {
+      external: ['react', 'react-dom'],
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
+        },
+      },
     },
   },
 });

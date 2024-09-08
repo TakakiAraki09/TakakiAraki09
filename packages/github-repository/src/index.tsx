@@ -10,9 +10,10 @@ import { useCallback } from 'react';
 //   }
 // `);
 
+// k"StringValue"
 const repositoryGql = graphql(`
-query GetRepository{
-	repository(name: "TakakiAraki09", owner: "TakakiAraki09"){
+query GetRepository($name: String!, $owner: String!){
+	repository(name: $name, owner: $owner){
 		createdAt
 		issues(first: 3){
 			nodes{
@@ -26,9 +27,35 @@ query GetRepository{
 }
 `)
 
+const hogeGql = graphql(`
+query User {
+  user(login: "TakakiAraki09") {
+      issues(first: 10) {
+          nodes {
+              title
+          }
+      }
+      pullRequests(first: 10) {
+          totalCount
+      }
+  }
+}
+`)
+
 export function Github() {
+
   const query = useCallback(async () => {
-    const hoge = await urqlClient.query(repositoryGql, {});
+    console.log(repositoryGql);
+    const hoge = await urqlClient.query(repositoryGql, {
+      name: 'TakakiAraki09',
+      owner: 'TakakiAraki09',
+    });
+    console.log(hoge);
+  }, []);
+
+  const query2 = useCallback(async () => {
+    console.log(hogeGql);
+    const hoge = await urqlClient.query(hogeGql, {});
     console.log(hoge);
   }, []);
 
@@ -36,6 +63,7 @@ export function Github() {
     <div>
       <p>Github</p>
       <button onClick={query}>send</button>
+      <button onClick={query2}>send2</button>
     </div>
   );
-}
+};

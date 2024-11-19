@@ -12,38 +12,37 @@ import { useCallback } from 'react';
 
 // k"StringValue"
 const repositoryGql = graphql(`
-query GetRepository($name: String!, $owner: String!){
-	repository(name: $name, owner: $owner){
-		createdAt
-		issues(first: 3){
-			nodes{
-				url
-				title
-				closed
-				number
-			}
-		}
-	}
-}
-`)
+  query GetRepository($name: String!, $owner: String!) {
+    repository(name: $name, owner: $owner) {
+      createdAt
+      issues(first: 3) {
+        nodes {
+          url
+          title
+          closed
+          number
+        }
+      }
+    }
+  }
+`);
 
 const hogeGql = graphql(`
-query User {
-  user(login: "TakakiAraki09") {
+  query User {
+    user(login: "TakakiAraki09") {
       issues(first: 10) {
-          nodes {
-              title
-          }
+        nodes {
+          title
+        }
       }
       pullRequests(first: 10) {
-          totalCount
+        totalCount
       }
+    }
   }
-}
-`)
+`);
 
 export function Github() {
-
   const query = useCallback(async () => {
     console.log(repositoryGql);
     const hoge = await urqlClient.query(repositoryGql, {
@@ -66,4 +65,4 @@ export function Github() {
       <button onClick={query2}>send2</button>
     </div>
   );
-};
+}

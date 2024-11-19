@@ -1,5 +1,5 @@
-import { UserConfig } from 'vite';
 import { dependencies } from '../../package.json';
+import { UserConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export const libraryConfig: UserConfig = {
@@ -14,4 +14,4 @@ export const libraryConfig: UserConfig = {
       },
     },
   },
-}
+};

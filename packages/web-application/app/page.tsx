@@ -1,6 +1,7 @@
-"use client"
+'use client';
+
+import { Antict } from 'antict-repository';
 import { Github } from 'github-repository';
-import { Antict } from "antict-repository";
 import { Theme } from 'theme';
 
 export default function Page() {

@@ -8,15 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@parcel/watcher':
-        specifier: ^2.4.1
-        version: 2.4.1
-      '@trivago/prettier-plugin-sort-imports':
-        specifier: ^4.3.0
-        version: 4.3.0(prettier@3.3.3)
-      prettier:
-        specifier: ^3.3.3
-        version: 3.3.3
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -39,6 +30,12 @@ importers:
       '@graphql-typed-document-node/core':
         specifier: ^3.2.0
         version: 3.2.0(graphql@16.9.0)
+      '@parcel/watcher':
+        specifier: ^2.4.1
+        version: 2.4.1
+      '@trivago/prettier-plugin-sort-imports':
+        specifier: ^4.3.0
+        version: 4.3.0(prettier@3.3.3)
       '@types/node':
         specifier: 20.8.10
         version: 20.8.10
@@ -54,6 +51,9 @@ importers:
       graphql:
         specifier: ^16.9.0
         version: 16.9.0
+      prettier:
+        specifier: ^3.3.3
+        version: 3.3.3
       turbo:
         specifier: ^2.1.0
         version: 2.1.0
@@ -70,17 +70,34 @@ importers:
         specifier: ^5.0.1
         version: 5.0.1(typescript@5.5.4)(vite@5.4.3(@types/node@20.8.10))
 
-  packages/antict-repository: {}
+  packages/antict-repository:
+    dependencies:
+      config:
+        specifier: workspace:*
+        version: link:../config
 
-  packages/github-repository: {}
+  packages/config: {}
 
-  packages/theme: {}
+  packages/github-repository:
+    dependencies:
+      config:
+        specifier: workspace:*
+        version: link:../config
+
+  packages/theme:
+    dependencies:
+      config:
+        specifier: workspace:*
+        version: link:../config
 
   packages/web-application:
     dependencies:
       antict-repository:
         specifier: workspace:*
         version: link:../antict-repository
+      config:
+        specifier: workspace:*
+        version: link:../config
       github-repository:
         specifier: workspace:*
         version: link:../github-repository

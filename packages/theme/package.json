@@ -10,6 +10,9 @@
     "dev": "vite build --watch",
     "build": "vite build"
   },
+  "dependencies": {
+    "config": "workspace:*"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC"

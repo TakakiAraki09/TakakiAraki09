@@ -3,6 +3,7 @@ import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import packageJson from './package.json';
+import { CONFIGRATIONS } from 'config';
 
 
 // https://vitejs.dev/config/
@@ -13,20 +14,12 @@ export default defineConfig({
     tsconfigPaths(),
   ],
   build: {
+    ...CONFIGRATIONS.viteConfig.libraryConfig.build,
     lib: {
       entry: 'src/index.tsx',
       name: packageJson.name,
       formats: ['es', 'umd'],
       fileName: 'index',
-    },
-    rollupOptions: {
-      external: ['react', 'react-dom'],
-      output: {
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM',
-        },
-      },
     },
   },
 });

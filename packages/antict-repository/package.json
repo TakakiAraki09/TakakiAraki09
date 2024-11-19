@@ -12,9 +12,6 @@
     "codegen:watch": "graphql-codegen --watch",
     "build": "vite build"
   },
-  "dependencies": {
-    "config": "workspace:*"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC"

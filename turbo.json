@@ -8,6 +8,9 @@
       "dependsOn": ["^check-types", "^codegen", "^build"],
       "outputs": [".next/**", "dist/**"]
     },
+    "start": {
+      "dependsOn": ["^start"]
+    },
     "codegen": {
       "dependsOn": ["^codegen"],
       "outputs": ["gql/**"]

@@ -10,7 +10,6 @@
   "dependencies": {
     "antict-repository": "workspace:*",
     "github-repository": "workspace:*",
-    "config": "workspace:*",
     "theme": "workspace:*",
     "next": "latest"
   }

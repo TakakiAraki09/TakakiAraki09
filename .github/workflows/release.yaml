@@ -7,12 +7,23 @@ jobs:
   setup:
     name: setup
     runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        node-version: [20]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
-      - uses: pnpm/action-setup@v2.2.2
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
         with:
-          version: 7.1.0
+          version: 9
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install
       - name: キャッシュのリストア
         id: cache-node-modules
         uses: actions/cache@v4

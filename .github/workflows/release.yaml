@@ -19,8 +19,7 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
       - name: install dpendencies
         run: pnpm i --frozen-lockfile
-        with:
-          version: 7.1.0
+
   build:
     name: build
     runs-on: ubuntu-20.04

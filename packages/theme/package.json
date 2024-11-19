@@ -8,8 +8,6 @@
   "scripts": {
     "check-types": "tsc --noEmit",
     "dev": "vite build --watch",
-    "codegen": "graphql-codegen",
-    "codegen:watch": "graphql-codegen --watch",
     "build": "vite build"
   },
   "keywords": [],

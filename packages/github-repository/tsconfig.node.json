@@ -11,7 +11,10 @@
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,
-
+    "paths": {
+      "@/*": ["./src/*"],
+      "@gql/*": ["./gql/*"]
+    },
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,

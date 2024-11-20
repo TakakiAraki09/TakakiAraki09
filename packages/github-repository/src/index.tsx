@@ -1,17 +1,9 @@
 import React from 'react';
-import { gql } from 'urql';
-gql`
-  query {
-    viewer {
-      login
-    }
-  }
-`
 export function Github() {
   return (
     <div>
       <p>Github</p>
-      <button>send3</button>
+      <button>send4</button>
       <button>send1</button>
     </div>
   );

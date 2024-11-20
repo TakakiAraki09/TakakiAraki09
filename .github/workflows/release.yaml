@@ -19,7 +19,9 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
 
       - name: Trubo cache
-        uses: dtinth/setup-github-actions-caching-for-turbo@v1.1.0
+        uses: felixmosh/turborepo-gh-artifacts@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/checkout@v4
 
@@ -36,6 +38,10 @@ jobs:
 
       - name: check build
         run: pnpm run build
+        env:
+          TURBO_API: 'http://127.0.0.1:9080'
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          TURBO_TEAM: 'foo'
 
       - uses: actions/upload-artifact@v3
         with:
@@ -45,7 +51,6 @@ jobs:
       - uses: actions/upload-pages-artifact@v1
         with:
           path: packages/web-application/out
-
 
   deploy:
     runs-on: ubuntu-latest

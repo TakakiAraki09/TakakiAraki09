@@ -12,22 +12,19 @@ jobs:
         node-version: [20]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 9
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-      - name: Install dependencies
-        run: pnpm install
       - name: キャッシュのリストア
         id: cache-node-modules
         uses: actions/cache@v4
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
-      - name: install dpendencies
+      - name: Install dependencies
         run: pnpm i --frozen-lockfile
 
   build:

@@ -22,13 +22,6 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
       - name: Install dependencies
         run: pnpm i --frozen-lockfile
-
-  build:
-    name: build
-    runs-on: ubuntu-20.04
-    needs: setup
-    steps:
-      - run: corepack enable
       - name: restore node modules
         id: cache-node-modules
         uses: actions/cache@v4

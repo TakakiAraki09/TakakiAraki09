@@ -1,6 +1,5 @@
 import packageJson from './package.json';
 import react from '@vitejs/plugin-react';
-import { dependencies } from '../../package.json';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 import tsconfigPaths from 'vite-tsconfig-paths';
@@ -21,7 +20,10 @@ export default defineConfig({
     },
 
     rollupOptions: {
-      external: [...Object.keys(dependencies)],
+      external: [
+        'react',
+        'react-dom',
+      ],
       output: {
         globals: {
           react: 'React',

@@ -4,7 +4,7 @@
 const nextConfig = {
   /* config options here */
   output: 'export' ,
-  basePath: 'TakakiAraki09',
+  basePath: '/TakakiAraki09',
 }
 
 module.exports = nextConfig

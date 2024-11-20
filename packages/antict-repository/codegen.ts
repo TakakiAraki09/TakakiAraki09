@@ -13,7 +13,7 @@ const config = {
     'schema.generated.json': {
       plugins: ['introspection'],
     },
-    'gql/': {
+    'src/gql/': {
       preset: 'client',
       config: {
         useTypeImports: true,

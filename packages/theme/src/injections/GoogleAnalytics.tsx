@@ -12,7 +12,6 @@ export const GoogleAnalytics = (props: {
         async
         src={`https://www.googletagmanager.com/gtag/js?id=${props.tagId || TAG_ID}`}
       />
-
       <Script>
         {`
 window.dataLayer = window.dataLayer || [];

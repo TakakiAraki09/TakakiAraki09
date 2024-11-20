@@ -8,7 +8,8 @@
   "scripts": {
     "codegen": "graphql-codegen",
     "codegen:watch": "graphql-codegen --watch",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",

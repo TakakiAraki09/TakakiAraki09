@@ -1,4 +1,12 @@
 import React from 'react';
+import { gql } from 'urql';
+gql`
+  query {
+    viewer {
+      login
+    }
+  }
+`
 export function Github() {
   return (
     <div>

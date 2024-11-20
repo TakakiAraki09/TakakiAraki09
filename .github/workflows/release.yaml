@@ -17,7 +17,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 8
       - name: キャッシュのリストア
         id: cache-node-modules
         uses: actions/cache@v4

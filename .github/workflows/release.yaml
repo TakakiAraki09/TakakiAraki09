@@ -5,10 +5,12 @@ on:
     branches: [ "main" ]
 
 jobs:
-  setup:
-    name: setup
+
+  build:
+    name: build
     runs-on: ubuntu-20.04
     steps:
+
       - uses: actions/checkout@v4
 
       - name: Install PNPM
@@ -22,20 +24,6 @@ jobs:
       - name: install dpendencies
         run: pnpm i --frozen-lockfile
 
-  build:
-    name: build
-    runs-on: ubuntu-20.04
-    needs: setup
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install PNPM
-        uses: pnpm/action-setup@v4
-
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: "pnpm"
       - name: check build
         run: pnpm run build
 

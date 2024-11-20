@@ -1,3 +1,5 @@
+import React from 'react';
+
 export function Antict() {
-  return <div>Antict</div>;
+  return <div>Antict test</div>;
 }

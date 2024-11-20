@@ -5,7 +5,7 @@
       "dependsOn": ["^check-types"]
     },
     "build": {
-      "dependsOn": ["^check-types", "^codegen", "^build"],
+      "dependsOn": ["^codegen", "^build"],
       "outputs": [".next/**", "dist/**"]
     },
     "start": {

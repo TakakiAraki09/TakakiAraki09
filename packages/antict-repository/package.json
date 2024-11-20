@@ -6,11 +6,9 @@
   "type": "module",
   "types": "dist/index.d.ts",
   "scripts": {
-    "check-types": "tsc --noEmit",
-    "dev": "vite build --watch",
     "codegen": "graphql-codegen",
     "codegen:watch": "graphql-codegen --watch",
-    "build": "vite build"
+    "dev": "tsc --watch"
   },
   "keywords": [],
   "author": "",

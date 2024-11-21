@@ -16,7 +16,7 @@ export const PartytownGtm = (props: { tagId?: string }) => {
   return (
     <Fragment>
       <script type="text/partytown" async src={createUrl(props.tagId)} dangerouslySetInnerHTML={{ __html: createTag() }} defer />
-      <Partytown forward={['dataLayer.push']} lib="/TakakiAraki09/~partytown/" logCalls debug />
+      <Partytown forward={['dataLayer.push']} lib="/TakakiAraki09/~partytown/" />
     </Fragment>
   )
 }

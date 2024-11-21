@@ -41,7 +41,7 @@ jobs:
 
       - uses: actions/upload-pages-artifact@v1
         with:
-          path: packages/web-application/out
+          path: packages/main-pages/dist
 
   deploy:
     runs-on: ubuntu-latest

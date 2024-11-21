@@ -1,4 +1,5 @@
-import { GoogleAnalytics, GoogleTagManager } from "theme";
+import { GoogleAnalytics } from "theme";
+import { Gtm } from "../components/gtm";
 
 
 export default function RootLayout({
@@ -6,13 +7,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const Tag = GoogleTagManager();
   return (
     <html lang="ja">
       <GoogleAnalytics />
-      <Tag.Script />
       <body>
-        <Tag.NoScript />
+        <Gtm />
         {children}
       </body>
     </html>

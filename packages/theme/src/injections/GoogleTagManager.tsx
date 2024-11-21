@@ -27,7 +27,7 @@ export const GoogleTagManager = (tagId: string = TAG_ID) => ({
 
     return (
       <Fragment key={id}>
-        <Script src={createUrl(tagId)} defer>{createTag()}</Script>;
+        <Script src={createUrl(tagId)} defer>{createTag()}</Script>
       </Fragment>
     )
   },

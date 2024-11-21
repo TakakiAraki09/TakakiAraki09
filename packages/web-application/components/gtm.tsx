@@ -6,7 +6,7 @@ export const Gtm = () => {
   const Tag = GoogleTagManager();
   return (
     <>
-      <Tag.Script type="text/partytown" />
+      <Tag.Script />
       <Tag.NoScript />
     </>
   );

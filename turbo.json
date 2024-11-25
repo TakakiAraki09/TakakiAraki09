@@ -1,4 +1,5 @@
 {
+  "globalEnv": [".env"],
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
     "check-types": {

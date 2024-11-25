@@ -14,27 +14,27 @@ console.log('hello');
 `
 
 // <script type={props.type} async src={createUrl(tagId)} defer dangerouslySetInnerHTML={{ __html: createTag() }} />
-export const GoogleTagManager = (tagId: string = TAG_ID) => ({
+export const GoogleTagManager = ({
   Script: (props: {
     type?: 'text/partytown'
   }) => {
     const id = useId();
     if (props.type === 'text/partytown') {
       return (
-        <PartytownGtm tagId={tagId} />
+        <PartytownGtm tagId={TAG_ID} />
       )
     }
 
     return (
       <Fragment key={id}>
-        <Script src={createUrl(tagId)} defer>{createTag()}</Script>
+        <Script src={createUrl(TAG_ID)} defer>{createTag()}</Script>
       </Fragment>
     )
   },
   NoScript: () => (
     <noscript>
       <iframe
-        src={`https://www.googletagmanager.com/ns.html?id=${tagId}`}
+        src={`https://www.googletagmanager.com/ns.html?id=${TAG_ID}`}
         height="0"
         width="0"
         style={{ display: 'none', visibility: 'hidden' }}

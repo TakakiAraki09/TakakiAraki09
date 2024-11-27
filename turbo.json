@@ -1,5 +1,5 @@
 {
-  "globalEnv": [".env"],
+  "globalEnv": ["PUBLIC_SITE", "PUBLIC_SITE_BASE"],
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
     "check-types": {

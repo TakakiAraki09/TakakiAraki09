@@ -14,6 +14,3 @@ world
 test
 
 ::video{src=/TakakiAraki09/example.mp4}
-
-
-

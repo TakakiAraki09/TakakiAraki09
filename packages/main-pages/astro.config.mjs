@@ -5,9 +5,11 @@ import remarkDirective from 'remark-directive';
 import react from '@astrojs/react';
 import remarkVideoPlugin from './lib/remark/video';
 
+
 // https://astro.build/config
 export default defineConfig({
-  base: '/TakakiAraki09',
+  site: process.env.PUBLIC_SITE,
+  base: process.env.PUBLIC_SITE_BASE,
   integrations: [
     react({
       experimentalReactChildren: true,

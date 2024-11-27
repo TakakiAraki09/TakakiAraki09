@@ -68,3 +68,5 @@ schema.generated.json
 gql
 
 vite.config.ts.timestamp-*
+
+.astro

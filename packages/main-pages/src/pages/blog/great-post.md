@@ -10,6 +10,3 @@ hello
 ## world
 
 world
-
-
-

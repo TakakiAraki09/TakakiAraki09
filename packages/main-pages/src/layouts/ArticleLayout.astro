@@ -1,11 +1,9 @@
 ---
 import "the-new-css-reset";
 import { GoogleAnalytics, GoogleTagManager } from 'theme';
-import OGP from '../components/meta/OGP.astro'
 interface Props {
 	title: string;
 }
-
 
 const { title } = Astro.props;
 ---
@@ -20,8 +18,15 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<GoogleAnalytics client:only />
 		<GoogleTagManager.Script client:only />
+
+        <meta property="og:url" content="ページの URL" />
+        <meta property="og:type" content="ページの種類" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content="ページの説明文" />
+        <meta property="og:site_name" content="サイト名" />
+        <meta property="og:image" content="サムネイル画像の URL" />
+
 		<title>{title}</title>
-		<OGP title={title} type="website" />
 	</head>
 	<body>
 		<GoogleTagManager.NoScript />

@@ -4,8 +4,11 @@ on:
   push:
     branches: [ "main" ]
 
-jobs:
+env:
+  PUBLIC_SITE: https://takakiaraki09.github.io
+  PUBLIC_SITE_BASE: TakakiAraki09
 
+jobs:
   build:
     name: build
     runs-on: ubuntu-20.04

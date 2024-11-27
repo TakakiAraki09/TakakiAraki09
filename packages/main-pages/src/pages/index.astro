@@ -1,15 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ArticleList from '../components/blog/articleList.astro';
-
-const ev = process.env.PUBLIC_EXAPMLE;
-const tz = process.env.TZ;
 ---
 
 <Layout title="Welcome to Astro.">
 	<p>hoge</p>
-	<p>{ev}</p>
-	<p>{tz}</p>
 	<ArticleList />
 </Layout>
 

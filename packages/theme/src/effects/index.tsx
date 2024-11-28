@@ -1,0 +1,1 @@
+export { StickyEffect } from './StickyEffect';

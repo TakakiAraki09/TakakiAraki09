@@ -15,6 +15,7 @@
     "@types/hast": "^3.0.4",
     "@types/mdast": "^4.0.4",
     "antict-repository": "workspace:*",
+    "configs": "workspace:*",
     "astro": "^4.16.13",
     "github-repository": "workspace:*",
     "hast": "^1.0.0",

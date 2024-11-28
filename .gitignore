@@ -70,3 +70,5 @@ gql
 vite.config.ts.timestamp-*
 
 .astro
+
+~partytown

@@ -1,10 +1,6 @@
 ---
 title: 'Example'
 author: 'araki'
-type: 'Article'
-published: '2024/11/27'
-modified: '2024/11/27'
-author: 'TakakiAraki'
 ---
 
 

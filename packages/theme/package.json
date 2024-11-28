@@ -13,7 +13,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "configs": "workspace:*",
     "remark": "^15.0.1"
   }
 }

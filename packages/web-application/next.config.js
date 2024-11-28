@@ -3,8 +3,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   /* config options here */
-  output: 'export' ,
+  output: 'export',
   basePath: '/TakakiAraki09',
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

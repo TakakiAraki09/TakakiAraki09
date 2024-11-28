@@ -1,11 +1,10 @@
 /// <reference types="mdast-util-directive" />
-
-import { visit } from "unist-util-visit";
-import type { Root } from "mdast";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import fs from "node:fs";
-import type { ElementContent } from "hast";
+import type { ElementContent } from 'hast';
+import type { Root } from 'mdast';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { visit } from 'unist-util-visit';
 
 interface Props {
   baseURL: string;
@@ -16,15 +15,15 @@ const __dirname = path.dirname(__filename);
 
 export default function remarkVideoPlugin({ baseURL }: Props) {
   return function (tree: Root) {
-    visit(tree, "leafDirective", (node) => {
-      if (node.name !== "video") return;
+    visit(tree, 'leafDirective', (node) => {
+      if (node.name !== 'video') return;
       if (!node.attributes?.src) return;
 
       // webm の存在チェックのためにパスを構築する
       const mp4VideoPath = path.join(
         __dirname,
-        "../../../public",
-        node.attributes.src,
+        '../../../public',
+        node.attributes.src
       );
       const webmVideoPath = `${mp4VideoPath.slice(0, -3)}webm`;
       const mp4VideoUrl = path.join(baseURL, node.attributes.src);
@@ -32,37 +31,37 @@ export default function remarkVideoPlugin({ baseURL }: Props) {
       const sources: ElementContent[] = [];
       if (fs.existsSync(webmVideoPath)) {
         sources.push({
-          type: "element",
-          tagName: "source",
+          type: 'element',
+          tagName: 'source',
           properties: {
             src: `${mp4VideoUrl.slice(0, -3)}webm`,
-            type: "video/webm",
+            type: 'video/webm',
           },
           children: [],
         });
       }
       sources.push({
-        type: "element",
-        tagName: "source",
+        type: 'element',
+        tagName: 'source',
         properties: {
           src: mp4VideoUrl,
-          type: "video/mp4",
+          type: 'video/mp4',
         },
         children: [],
       });
 
       node.data = {
-        hName: "div",
+        hName: 'div',
         hProperties: {
-          class: ["mb-8", "flex", "justify-center"],
+          class: ['mb-8', 'flex', 'justify-center'],
         },
         hChildren: [
           {
-            type: "element",
-            tagName: "video",
+            type: 'element',
+            tagName: 'video',
             properties: {
               controls: true,
-              preload: "metadata",
+              preload: 'metadata',
             },
             children: sources,
           },

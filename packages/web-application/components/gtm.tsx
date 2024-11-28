@@ -1,6 +1,7 @@
-"use client"
+'use client';
+
 import React from 'react';
-import { GoogleTagManager } from "theme";
+import { GoogleTagManager } from 'theme';
 
 export const Gtm = () => {
   const Tag = GoogleTagManager();
@@ -10,4 +11,4 @@ export const Gtm = () => {
       <Tag.NoScript />
     </>
   );
-}
+};

@@ -1,6 +1,5 @@
-import { GoogleAnalytics } from "theme";
-import { Gtm } from "../components/gtm";
-
+import { Gtm } from '../components/gtm';
+import { GoogleAnalytics } from 'theme';
 
 export default function RootLayout({
   children,

@@ -9,7 +9,7 @@
     "check-types": "pnpm with-env turbo check-types",
     "codegen": "pnpm with-env turbo codegen",
     "codegen:watch": "pnpm with-env turbo codegen:watch",
-    "prettier": "prettier --write \"./**/*.ts\" \"./**/*.tsx\" \"./**/*.js\"",
+    "format": "prettier --write \"./**/*.ts\" \"./**/*.tsx\" \"./**/*.js\"",
     "with-env": "dotenv -e .env.local --"
   },
   "keywords": [],

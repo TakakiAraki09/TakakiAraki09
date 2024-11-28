@@ -1,11 +1,9 @@
+import Script from 'next/script';
 import React from 'react';
-import Script from "next/script";
 
 const TAG_ID = 'G-QLEQQ4K0K1';
 
-export const GoogleAnalytics = (props: {
-  tagId?: string;
-}) => {
+export const GoogleAnalytics = (props: { tagId?: string }) => {
   return (
     <>
       <Script
@@ -22,4 +20,4 @@ gtag('config', '${props.tagId ?? TAG_ID}');
       </Script>
     </>
   );
-}
+};

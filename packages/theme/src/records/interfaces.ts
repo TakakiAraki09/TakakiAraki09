@@ -1,4 +1,3 @@
-
 interface BaseRecord<Type extends string> {
   id: string;
   type: Type;

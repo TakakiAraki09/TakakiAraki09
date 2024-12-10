@@ -3,7 +3,7 @@ import "the-new-css-reset";
 import { GoogleAnalytics, GoogleTagManager } from 'theme';
 import { SITE_TITLE } from '../constants/index.ts';
 import ViewTransitions from "astro/components/ViewTransitions.astro";
-import 'theme/dist/index.css'
+import css from 'theme/dist/index.css?url'
 
 interface Props {
 	title: string;
@@ -35,6 +35,8 @@ const { title, description, thambnail, type, siteTitle } = Astro.props;
         <meta property="og:site_name" content={siteTitle || SITE_TITLE} />
         {thambnail != null ? <meta property="og:image" content={thambnail} /> : <></>}
 		<title>{title}</title>
+
+		<link rel="stylesheet" href={css} />
 	</head>
 	<body>
 		<slot />
@@ -46,7 +48,6 @@ const { title, description, thambnail, type, siteTitle } = Astro.props;
 <style is:global>
 	html {
         --bg-base-color: #e0e0e0;
-		
 	}
 
     body {

@@ -1,5 +1,6 @@
 export { GoogleAnalytics } from './injections/GoogleAnalytics';
 export { GoogleTagManager } from './injections/GoogleTagManager';
-export * as Interfaces from './fragments/interfaces';
-export * as Records from './records/interfaces';
-export { Example } from './components/Example';
+export * as CONSTANTS from './constants';
+export * as Components from './components';
+export * as Interfaces from './interfaces';
+export * as Layouts from './layouts';

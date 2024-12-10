@@ -1,0 +1,13 @@
+
+.list-wrap {
+  display: block;
+
+  > .item {
+    display: block;
+  }
+}
+
+
+.list-item {
+  display: block;
+}

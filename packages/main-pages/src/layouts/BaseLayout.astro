@@ -26,16 +26,13 @@ const { title, description, thambnail, type, siteTitle } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<ViewTransitions />
-
         <meta property="og:url" content={Astro.request.url} />
         <meta property="og:type" content={type} />
         <meta property="og:title" content={title} />
-
         {description != null ? <meta property="og:description" content={description} /> : <></>}
         <meta property="og:site_name" content={siteTitle || SITE_TITLE} />
         {thambnail != null ? <meta property="og:image" content={thambnail} /> : <></>}
 		<title>{title}</title>
-
 		<link rel="stylesheet" href={css} />
 	</head>
 	<body>

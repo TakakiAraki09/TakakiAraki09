@@ -1,4 +1,5 @@
 ---
+layout: ../../layouts/Layout.astro
 title: 'Example'
 author: 'araki'
 ---

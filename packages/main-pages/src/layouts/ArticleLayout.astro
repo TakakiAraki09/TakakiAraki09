@@ -1,39 +1,13 @@
 ---
 import "the-new-css-reset";
-import { GoogleAnalytics, GoogleTagManager } from 'theme';
+import BaseLayout from './BaseLayout.astro';
 interface Props {
 	title: string;
 }
 
+
 const { title } = Astro.props;
 ---
-
-<!doctype html>
-<html lang="ja">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<GoogleAnalytics client:only />
-		<GoogleTagManager.Script client:only />
-
-        <meta property="og:url" content="ページの URL" />
-        <meta property="og:type" content="ページの種類" />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content="ページの説明文" />
-        <meta property="og:site_name" content="サイト名" />
-        <meta property="og:image" content="サムネイル画像の URL" />
-
-		<title>{title}</title>
-	</head>
-	<body>
-		<GoogleTagManager.NoScript />
-		<slot />
-	</body>
-</html>
-<style is:global>
-	html {
-	}
-</style>
+<BaseLayout title={title} type="article">
+	<slot />
+</BaseLayout>

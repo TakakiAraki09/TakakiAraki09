@@ -1,5 +1,4 @@
 import { PartytownGtm } from './PatytownComponent';
-import Script from 'next/script';
 import React, { Fragment, useId } from 'react';
 
 const TAG_ID = 'GTM-MS7Q6JFP';
@@ -24,9 +23,9 @@ export const GoogleTagManager = {
 
     return (
       <Fragment key={id}>
-        <Script src={createUrl(TAG_ID)} defer>
+        <script src={createUrl(TAG_ID)} defer>
           {createTag()}
-        </Script>
+        </script>
       </Fragment>
     );
   },

@@ -1,4 +1,3 @@
-
 export interface Item {
   target: 'external' | 'internal';
   label: string;

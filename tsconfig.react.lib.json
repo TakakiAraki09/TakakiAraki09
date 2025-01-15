@@ -8,6 +8,7 @@
     "pretty": true,
     "rootDir": "src",
     "sourceMap": false,
+    "resolveJsonModule": true,
     "strict": false,
     "esModuleInterop": true,
     "noUnusedLocals": false,

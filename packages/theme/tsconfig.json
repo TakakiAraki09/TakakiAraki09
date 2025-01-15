@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.react.lib.json",
   "compilerOptions": {
+    "resolveJsonModule": true,
     "rootDir": "src",
     "outDir": "dist",
   },

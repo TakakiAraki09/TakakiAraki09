@@ -1,4 +1,4 @@
-import { entries } from "../utils/entries";
+import { entries } from '../utils/entries';
 
 export const SIZE = {
   SM: 576,

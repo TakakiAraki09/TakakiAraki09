@@ -8,11 +8,29 @@
     "dist/**/*.d.ts"
   ],
   "exports": {
-    ".package.json": "./package.json",
-    "./dist/*": "./*.mjs",
-    "config.ts": "./panda.config.ts"
+    "./package.json": "./package.json",
+    "./css": {
+      "import": "./dist/css/index.mjs",
+      "types": "./dist/css/index.d.ts"
+    },
+    "./tokens": {
+      "import": "./dist/tokens/index.mjs",
+      "types": "./dist/tokens/index.d.ts"
+    },
+    "./patterns": {
+      "import": "./dist/patterns/index.mjs",
+      "types": "./dist/patterns/index.d.ts"
+    },
+    "./recipes": {
+      "import": "./dist/recipes/index.mjs",
+      "types": "./dist/recipes/index.d.ts"
+    },
+    "./jsx": {
+      "import": "./dist/jsx/index.mjs",
+      "types": "./dist/jsx/index.d.ts"
+    },
+    "./config": "./panda.config.ts"
   },
-  "types": "./dist/*.d.ts",
   "scripts": {
     "prepare": "panda codegen",
     "build": "panda codegen"

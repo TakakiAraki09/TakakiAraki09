@@ -4,11 +4,10 @@
     "//"
   ],
   "tasks": {
-    "dev": {
-      "dependsOn": [
-        "@repo/panda-config#build"
+    "build": {
+      "outputs": [
+        "dist/**"
       ]
-    },
-    "build": {}
+    }
   }
 }

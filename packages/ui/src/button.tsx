@@ -2,6 +2,7 @@
 
 import { ReactNode } from "react";
 import { motion } from "framer-motion";
+import { css } from "@repo/panda-config/css";
 
 export const Card = () => (
   <motion.div
@@ -15,20 +16,21 @@ export const Card = () => (
 );
 
 interface ButtonProps {
-  children: ReactNode;
+  children?: ReactNode;
   className?: string;
-  appName: string;
+  appName?: string;
 }
 
-export const Button = ({ children, className, appName }: ButtonProps) => {
+export const Button = ({ children }: ButtonProps) => {
   return (
-    <div className={css}>
-      <button
-        className={className}
-        onClick={() => alert(`Hello from your ${appName} app!`)}
-      >
-        {children}
-      </button>
+    <div
+      className={css({
+        display: 'inline-block',
+        paddingX: "40",
+        paddingY: "20",
+      })}
+    >
+      {children}
     </div>
   );
 };

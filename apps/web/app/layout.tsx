@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import clsx from "clsx";
+import { css } from "@repo/panda-config/css";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,7 +25,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={clsx(
+        geistSans.variable,
+        geistMono.variable,
+        css({
+          bg: 'gray.900',
+          color: 'gray.50',
+        })
+      )}>
         {children}
       </body>
     </html>

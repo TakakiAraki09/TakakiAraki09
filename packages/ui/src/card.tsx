@@ -14,7 +14,7 @@ export function Card({
 }): JSX.Element {
   return (
     <div className={css({
-      border: '1px solid #000'
+      bg: "amber.800",
     })}>
       <a
         className={className}

@@ -6,8 +6,7 @@ export default defineConfig({
   include: [
     "./app/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
-    "./node_modules/@repo/ui/src/**/*.{ts,tsx}",
+    "../../packages/ui/**/*.{ts,tsx}",
   ],
-  dependencies: ["./node_modules/@repo/ui/src/**/*.{ts,tsx}"],
-  importMap: "@repo/styled-system",
+  importMap: "@repo/panda-config/dist",
 });

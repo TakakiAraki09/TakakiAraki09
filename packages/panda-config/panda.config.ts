@@ -46,5 +46,4 @@ export default defineConfig({
   },
   conditions: pandaConditions,
   utilities: pandaUtilities,
-
 });

@@ -26,7 +26,8 @@ export const Button = ({ children }: ButtonProps) => {
     <div
       className={css({
         display: 'inline-block',
-        paddingX: "40",
+        bg: 'rose.500',
+        paddingX: "10",
         paddingY: "20",
       })}
     >

@@ -8,6 +8,9 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types"
   },
+  "dependencies": {
+    "@pandacss/dev": "^0.38.0"
+  },
   "devDependencies": {
     "prettier": "^3.6.2",
     "turbo": "^2.6.1",

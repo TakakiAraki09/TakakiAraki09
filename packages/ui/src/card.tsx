@@ -1,4 +1,5 @@
 import { type JSX } from "react";
+import { css } from "../../panda-config/dist/css";
 
 export function Card({
   className,
@@ -12,16 +13,20 @@ export function Card({
   href: string;
 }): JSX.Element {
   return (
-    <a
-      className={className}
-      href={`${href}?utm_source=create-turbo&utm_medium=basic&utm_campaign=create-turbo"`}
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      <h2>
-        {title} <span>-&gt;</span>
-      </h2>
-      <p>{children}</p>
-    </a>
+    <div className={css({
+      border: '1px solid #000'
+    })}>
+      <a
+        className={className}
+        href={`${href}?utm_source=create-turbo&utm_medium=basic&utm_campaign=create-turbo"`}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <h2>
+          {title} <span>-&gt;</span>
+        </h2>
+        <p>{children}</p>
+      </a>
+    </div>
   );
 }

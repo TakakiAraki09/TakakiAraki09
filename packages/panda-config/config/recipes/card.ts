@@ -1,13 +1,12 @@
 import type { RecipeConfig } from "@pandacss/dev";
-
-export const button: RecipeConfig = {
-  className: "button",
+export const card: RecipeConfig = {
+  className: "card",
   description: "Button component styles",
   base: {
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: "inner",
+    borderRadius: "round",
     fontFamily: "sans",
     fontWeight: "semibold",
     cursor: "pointer",

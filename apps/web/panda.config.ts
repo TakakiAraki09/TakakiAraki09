@@ -8,5 +8,5 @@ export default defineConfig({
     "./components/**/*.{ts,tsx}",
     "../../packages/ui/**/*.{ts,tsx}",
   ],
-  importMap: "@repo/panda-config/dist",
+  importMap: "@repo/panda-config",
 });

@@ -33,6 +33,8 @@
   },
   "scripts": {
     "prepare": "panda codegen",
+    "lint": "oxlint .",
+    "dev": "panda codegen -w",
     "build": "panda codegen"
   },
   "devDependencies": {

@@ -29,8 +29,9 @@ export default function RootLayout({
         geistSans.variable,
         geistMono.variable,
         css({
-          bg: 'gray.900',
-          color: 'gray.50',
+          bg: 'bg.primary',
+          color: 'contents.primary',
+          fontSize: 'body'
         })
       )}>
         {children}

@@ -1,5 +1,7 @@
 import type { GetPandaConfigMap } from "./interfaces";
 
 export const pandaRadii: GetPandaConfigMap<"radii"> = {
-  md: { value: "5px" },
+  inner: { value: "8px" },
+  outer: { value: '16px' },
+  full: { value: '9999px' },
 };

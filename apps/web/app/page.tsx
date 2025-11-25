@@ -46,12 +46,13 @@ export default async function Home() {
                   <p>
                     終了日: {anime.my_list_status.score}
                   </p>
-                  <p className={css({ flex: '1' })}>
+                  <p className={css({ flex: 'none' })}>
                     視聴済み: {anime.my_list_status.num_episodes_watched} / {anime.num_episodes}
                   </p>
 
                   <ul className={css({
                     display: 'flex',
+                    flex: '1',
                     flexWrap: 'wrap',
                     gap: '2',
                   })}>
@@ -59,6 +60,7 @@ export default async function Home() {
                       anime.genres.map(genre => (
                         <li key={genre.id} className={css({
                           bg: 'bg.info',
+                          height: 'min',
                           borderRadius: 'full',
                           paddingX: '2',
                           paddingY: '1',

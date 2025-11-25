@@ -3,6 +3,7 @@ import config from "@repo/panda-config/config";
 
 export default defineConfig({
   ...config,
+  outdir: "styled-system",
   include: [
     "./app/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",

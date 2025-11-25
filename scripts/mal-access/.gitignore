@@ -2,3 +2,6 @@
 auth-example-token-cache.txt
 dist
 run.sh
+result.json
+anime_list/cache*
+.env

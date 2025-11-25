@@ -2,17 +2,14 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
+	"os"
+	"time"
 
 	"github.com/nstratos/go-myanimelist/mal"
 )
 
-// demoClient has methods showcasing the usage of the different MyAnimeList API
-// methods. It stores the first error it encounters so error checking only needs
-// to be done once.
-//
-// This pattern is used for convenience and should not be used in concurrent
-// code without guarding the error.
 type demoClient struct {
 	*mal.Client
 	err error
@@ -20,27 +17,7 @@ type demoClient struct {
 
 func (c *demoClient) showcase(ctx context.Context) error {
 	methods := []func(context.Context){
-		// Uncomment the methods you need to see their results. Run or build
-		// using -tags=debug to see the full HTTP request and response.
-		c.userMyInfo,
-		// c.animeList,
-		// c.mangaList,
-		// c.animeDetails,
-		// c.mangaDetails,
-		// c.animeRanking,
-		// c.mangaRanking,
-		// c.animeSeasonal,
-		// c.animeSuggested,
-		// c.animeListForLoop, // Warning: Many requests.
-		// c.updateMyAnimeListStatus,
-		// c.userAnimeList,
-		// c.deleteMyAnimeListItem,
-		// c.updateMyMangaListStatus,
-		// c.userMangaList,
-		// c.deleteMyMangaListItem,
-		// c.forumBoards,
-		// c.forumTopics,
-		// c.forumTopicDetails,
+		c.userAnimeList,
 	}
 	for _, m := range methods {
 		m(ctx)
@@ -51,170 +28,121 @@ func (c *demoClient) showcase(ctx context.Context) error {
 	return nil
 }
 
-func (c *demoClient) userMyInfo(ctx context.Context) {
-	if c.err != nil {
-		return
-	}
-	u, _, err := c.User.MyInfo(ctx)
-	if err != nil {
-		c.err = err
-		return
-	}
-	fmt.Printf("ID: %5d, Joined: %v, Username: %s\n", u.ID, u.JoinedAt.Format("Jan 2006"), u.Name)
-}
+//	func (c *demoClient) userMyInfo(ctx context.Context) {
+//		if c.err != nil {
+//			return
+//		}
+//		u, _, err := c.User.MyInfo(ctx)
+//		if err != nil {
+//			c.err = err
+//			return
+//		}
+//		fmt.Printf("ID: %5d, Joined: %v, Username: %s\n", u.ID, u.JoinedAt.Format("Jan 2006"), u.Name)
+//	}
+func (c *demoClient) getAnimeDetails(ctx context.Context, animeID int) (*mal.Anime, error) {
+	cacheName := fmt.Sprintf("anime_list/cache_%d.json", animeID)
+	cache, err := os.ReadFile(cacheName)
+	if err == nil {
+		anime := new(mal.Anime)
+		// completed only cache
+		if err := json.Unmarshal(cache, anime); err == nil && (anime.MyListStatus.Status == "completed" || anime.MyListStatus.Status == "dropped") {
+			fmt.Printf("Using cached data for anime %d\n", animeID)
+			return anime, nil
+		}
 
-func (c *demoClient) animeList(ctx context.Context) {
-	if c.err != nil {
-		return
+		if err != nil {
+			fmt.Printf("Cache corrupted for anime %d, fetching from API\n", animeID)
+		}
+
+		if anime.MyListStatus.Status != "completed" && anime.MyListStatus.Status != "dropped" {
+			fmt.Printf("Cache incomplete for anime %s status %s, fetching from API\n", anime.AlternativeTitles.Ja, anime.MyListStatus.Status)
+		}
 	}
-	anime, _, err := c.Anime.List(ctx, "hokuto no ken",
-		mal.Fields{"rank", "popularity", "start_season"},
-		mal.Limit(3),
-		mal.Offset(0),
+
+	fmt.Printf("Fetching anime details for %d from API\n", animeID)
+	animeDetail, _, err := c.Anime.Details(ctx, animeID, mal.Fields{
+		"id",
+		"title",
+		"main_picture",
+		"alternative_titles",
+		"start_date",
+		"end_date",
+		"synopsis",
+		"mean",
+		"rank",
+		"popularity",
+		"num_list_users",
+		"num_scoring_users",
+		"nsfw",
+		"created_at",
+		"updated_at",
+		"media_type",
+		"status",
+		"genres",
+		"my_list_status",
+		"num_episodes",
+		"start_season",
+		"broadcast",
+		"source",
+		"average_episode_duration",
+		"rating",
+		"pictures",
+		"background",
+		"related_anime",
+		"related_manga",
+		"recommendations",
+		"studios",
+	},
 	)
 	if err != nil {
+		return nil, fmt.Errorf("fetching anime details: %v", err)
+	}
+
+	time.Sleep(5 * time.Second)
+	jsonData, err := json.MarshalIndent(animeDetail, "", "   ")
+	if err != nil {
+		return nil, fmt.Errorf("marshaling anime details: %v", err)
+	}
+
+	if err := os.WriteFile(cacheName, jsonData, 0644); err != nil {
+		return nil, fmt.Errorf("writing cache file: %v", err)
+	}
+
+	return animeDetail, nil
+}
+
+func (c *demoClient) userAnimeList(ctx context.Context) {
+	user := "araki0809"
+	animeList, _, err := c.User.AnimeList(
+		ctx,
+		user,
+		mal.Limit(100),
+		mal.Offset(0),
+	)
+
+	if err != nil {
 		c.err = err
 		return
 	}
-	for _, a := range anime {
-		fmt.Printf("Rank: %5d, Popularity: %5d %s\n", a.Rank, a.Popularity, a.Title)
-	}
-}
 
-func (c *demoClient) animeRanking(ctx context.Context) {
-	if c.err != nil {
-		return
-	}
-	rankings := []mal.AnimeRanking{
-		mal.AnimeRankingAll,
-		mal.AnimeRankingByPopularity,
-	}
-	for _, r := range rankings {
-		fmt.Println("Ranking:", r)
-		anime, _, err := c.Anime.Ranking(ctx, r,
-			mal.Fields{"rank", "popularity"},
-		)
+	userAnimeList := []*mal.Anime{}
+	for _, anime := range animeList {
+		a, err := c.getAnimeDetails(ctx, anime.Anime.ID)
 		if err != nil {
 			c.err = err
 			return
 		}
-		for _, a := range anime {
-			fmt.Printf("Rank: %5d, Popularity: %5d %s\n", a.Rank, a.Popularity, a.Title)
-		}
-		fmt.Println("--------")
+		userAnimeList = append(userAnimeList, a)
 	}
-}
-
-func (c *demoClient) mangaRanking(ctx context.Context) {
-	if c.err != nil {
-		return
-	}
-	manga, _, err := c.Manga.Ranking(ctx,
-		mal.MangaRankingByPopularity,
-		mal.Fields{"rank", "popularity"},
-		mal.Limit(6),
-	)
+	m, err := json.Marshal(userAnimeList)
 	if err != nil {
 		c.err = err
 		return
 	}
-	for _, m := range manga {
-		fmt.Printf("Rank: %5d, Popularity: %5d %s\n", m.Rank, m.Popularity, m.Title)
-	}
-}
 
-func (c *demoClient) animeSeasonal(ctx context.Context) {
-	if c.err != nil {
-		return
-	}
-	anime, _, err := c.Anime.Seasonal(ctx, 2020, mal.AnimeSeasonFall,
-		mal.Fields{"rank", "popularity"},
-		mal.SortSeasonalByAnimeNumListUsers,
-		mal.Limit(3),
-		mal.Offset(0),
-	)
-	if err != nil {
+	if err := os.WriteFile("result.json", []byte(m), 0644); err != nil {
 		c.err = err
 		return
 	}
-	for _, a := range anime {
-		fmt.Printf("Rank: %5d, Popularity: %5d %s\n", a.Rank, a.Popularity, a.Title)
-	}
-}
-
-func (c *demoClient) animeSuggested(ctx context.Context) {
-	if c.err != nil {
-		return
-	}
-	anime, _, err := c.Anime.Suggested(ctx,
-		mal.Limit(3),
-		mal.Fields{"rank", "popularity"},
-	)
-	if err != nil {
-		c.err = err
-		return
-	}
-	for _, a := range anime {
-		fmt.Printf("Rank: %5d, Popularity: %5d %s\n", a.Rank, a.Popularity, a.Title)
-	}
-}
-
-func (c *demoClient) forumBoards(ctx context.Context) {
-	if c.err != nil {
-		return
-	}
-	forum, _, err := c.Forum.Boards(ctx)
-	if err != nil {
-		c.err = err
-		return
-	}
-	for _, category := range forum.Categories {
-		fmt.Printf("%s\n", category.Title)
-		for _, b := range category.Boards {
-			fmt.Printf("|-> %s\n", b.Title)
-			for _, b := range b.Subboards {
-				fmt.Printf("    |-> %s\n", b.Title)
-			}
-		}
-		fmt.Println("---")
-	}
-}
-
-func (c *demoClient) forumTopics(ctx context.Context) {
-	if c.err != nil {
-		return
-	}
-	topics, _, err := c.Forum.Topics(ctx,
-		mal.Query("JoJo opening"),
-		mal.SortTopicsRecent,
-		mal.Limit(2),
-	)
-	if err != nil {
-		c.err = err
-		return
-	}
-	for _, t := range topics {
-		fmt.Printf("ID: %5d, Title: %5q created by %q\n", t.ID, t.Title, t.CreatedBy.Name)
-	}
-}
-
-func (c *demoClient) forumTopicDetails(ctx context.Context) {
-	if c.err != nil {
-		return
-	}
-	topicDetails, _, err := c.Forum.TopicDetails(ctx, 1877721, mal.Limit(3), mal.Offset(0))
-	if err != nil {
-		c.err = err
-		return
-	}
-	fmt.Printf("Topic title: %q\n", topicDetails.Title)
-	if topicDetails.Poll != nil {
-		fmt.Printf("Poll: %q\n", topicDetails.Poll.Question)
-		for _, o := range topicDetails.Poll.Options {
-			fmt.Printf("- %-25s %2d\n", o.Text, o.Votes)
-		}
-	}
-	for _, p := range topicDetails.Posts {
-		fmt.Printf("Post: %2d created by %q\n", p.Number, p.CreatedBy.Name)
-	}
+	fmt.Println("completed my anime list")
 }

@@ -6,3 +6,5 @@ require (
 	github.com/nstratos/go-myanimelist v0.9.5
 	golang.org/x/oauth2 v0.33.0
 )
+
+require github.com/joho/godotenv v1.5.1 // indirect

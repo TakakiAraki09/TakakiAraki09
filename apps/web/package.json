@@ -12,6 +12,7 @@
     "check-types": "next typegen && tsc --noEmit"
   },
   "dependencies": {
+    "@repo/mal-access": "workspace:*",
     "@repo/oxlint-config": "workspace:*",
     "@repo/ui": "workspace:*",
     "framer-motion": "^12.23.24",

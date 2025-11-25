@@ -33,6 +33,7 @@ export default function Home() {
           height={38}
           priority
         />
+        <img src="https://cdn.myanimelist.net/images/anime/1711/142478l.webp" />
         <ol>
           <li>
             Get started by editing <code>apps/web/app/page.tsx</code>

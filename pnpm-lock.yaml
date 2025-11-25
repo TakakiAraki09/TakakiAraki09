@@ -112,6 +112,8 @@ importers:
         specifier: 5.9.2
         version: 5.9.2
 
+  scripts/mal-access: {}
+
 packages:
 
   '@babel/helper-string-parser@7.27.1':

@@ -5,13 +5,13 @@ import (
 	"context"
 	"crypto/rand"
 	"encoding/json"
-	"flag"
 	"fmt"
 	"net/http"
 	"os"
 	"os/exec"
 	"runtime"
 
+	"github.com/joho/godotenv"
 	"github.com/nstratos/go-myanimelist/mal"
 	"golang.org/x/oauth2"
 )
@@ -38,20 +38,27 @@ const (
 // https://myanimelist.net/apiconfig/references/authorization
 
 func run() error {
-	var (
-		clientID     = flag.String("client-id", defaultClientID, "your registered MyAnimeList.net application client ID")
-		clientSecret = flag.String("client-secret", defaultClientSecret, "your registered MyAnimeList.net application client secret; optional if you chose App Type 'other'")
-		// state is a token to protect the user from CSRF attacks. In a web
-		// application, you should provide a non-empty string and validate that
-		// it matches the state query parameter on the redirect URL callback
-		// after the MyAnimeList authentication. It can stay empty here.
-		state = flag.String("state", "", "token to protect against CSRF attacks")
-	)
-	flag.Parse()
+	// Load .env file
+	if err := godotenv.Load(); err != nil {
+		fmt.Println("Warning: .env file not found, using environment variables or defaults")
+	}
+
+	// Get credentials from environment variables
+	clientID := os.Getenv("MAL_CLIENT_ID")
+	if clientID == "" {
+		clientID = defaultClientID
+	}
+
+	clientSecret := os.Getenv("MAL_CLIENT_SECRET")
+	if clientSecret == "" {
+		clientSecret = defaultClientSecret
+	}
+
+	state := os.Getenv("MAL_STATE")
 
 	ctx := context.Background()
 
-	tokenClient, err := authenticate(ctx, *clientID, *clientSecret, *state)
+	tokenClient, err := authenticate(ctx, clientID, clientSecret, state)
 	if err != nil {
 		return err
 	}
@@ -137,7 +144,7 @@ func authenticate(ctx context.Context, clientID, clientSecret, state string) (*h
 	return conf.Client(ctx, token), nil
 }
 
-const cacheName = "auth-example-token-cache.txt"
+const cacheName = "anime_list/auth-example-token-cache.json"
 
 func cacheToken(token oauth2.Token) error {
 	b, err := json.MarshalIndent(token, "", "   ")

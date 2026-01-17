@@ -43,6 +43,8 @@ const ignores = [
   "**/package-lock.json",
   "**/yarn.lock",
   "**/server",
+  "**/styled-system",
+  "panda.config.ts",
   "eslint.config.js",
 ];
 

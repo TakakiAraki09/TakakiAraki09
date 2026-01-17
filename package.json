@@ -9,10 +9,10 @@
     "check-types": "turbo run check-types"
   },
   "dependencies": {
-    "@pandacss/dev": "^0.38.0",
     "clsx": "^2.1.1"
   },
   "devDependencies": {
+    "@pandacss/dev": "^0.38.0",
     "oxlint": "^1.29.0",
     "oxlint-tsgolint": "^0.8.0",
     "prettier": "^3.6.2",

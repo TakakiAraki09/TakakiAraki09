@@ -1,4 +1,5 @@
-import { defineConfig } from '@pandacss/dev';
+import { definePreset } from '@pandacss/dev';
+import { pandaBaseColors } from "./config/baseColors";
 import { pandaBreakpoints } from "./config/breakpoints";
 import { pandaSemanticColors } from "./config/colors";
 import { pandaConditions } from "./config/conditions";
@@ -13,15 +14,12 @@ import { pandaSizes } from "./config/sizes";
 import { pandaSpacing } from "./config/spacing";
 import { pandaUtilities } from "./config/utilities";
 
-export default defineConfig({
-  outdir: './dist',
-  preflight: true,
-  strictTokens: true,
-  strictPropertyValues: true,
-  jsxFramework: 'react',
+export default definePreset({
+  presets: ["@pandacss/preset-base"],
   theme: {
     extend: {
       tokens: {
+        colors: pandaBaseColors,
         fontSizes: pandaFontSizes,
         fontWeights: pandaFontWeights,
         spacing: pandaSpacing,
@@ -35,10 +33,6 @@ export default defineConfig({
         colors: pandaSemanticColors,
       },
       keyframes: {
-        // bounce: {
-        //   "0%, 100%": { transform: "translateX(-50%) translateY(0)" },
-        //   "50%": { transform: "translateX(-50%) translateY(-10px)" },
-        // },
       },
       recipes: pandaRecipes,
       breakpoints: pandaBreakpoints,

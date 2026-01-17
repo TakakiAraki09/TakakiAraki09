@@ -5,6 +5,7 @@ import { globalIgnores } from "eslint/config";
 import { qwikEslint9Plugin } from "eslint-plugin-qwik";
 
 const ignores = [
+  "src/routes.gen.d.ts",
   "**/*.log",
   "**/.DS_Store",
   "**/*.",

@@ -8,6 +8,8 @@ import { qwikCity } from "@builder.io/qwik-city/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import pkg from "./package.json";
 import { macroPlugin } from "@builder.io/vite-plugin-macro";
+import { qwikTypes } from '@builder.io/qwik-labs/vite';
+
 type PkgDep = Record<string, string>;
 const { dependencies = {}, devDependencies = {} } = pkg as any as {
   dependencies: PkgDep;
@@ -26,11 +28,9 @@ export default defineConfig((): UserConfig => {
       qwikCity(),
       qwikVite(),
       tsconfigPaths({ root: "." }),
+      qwikTypes(),
     ],
-    // This tells Vite which dependencies to pre-build in dev mode.
     optimizeDeps: {
-      // Put problematic deps that break bundling here, mostly those with binaries.
-      // For example ['better-sqlite3'] if you use that in server functions.
       exclude: [],
     },
     /**
@@ -49,18 +49,16 @@ export default defineConfig((): UserConfig => {
     //         external: Object.keys(dependencies),
     //       }
     //     : undefined,
-    server: {
-      headers: {
-        // Don't cache the server response in dev mode
-        "Cache-Control": "public, max-age=0",
-      },
-    },
-    preview: {
-      headers: {
-        // Do cache the server response in preview (non-adapter production build)
-        "Cache-Control": "public, max-age=600",
-      },
-    },
+    // server: {
+    //   headers: {
+    //     "Cache-Control": "public, max-age=0",
+    //   },
+    // },
+    // preview: {
+    //   headers: {
+    //     "Cache-Control": "public, max-age=600",
+    //   },
+    // },
   };
 });
 // *** utils ***

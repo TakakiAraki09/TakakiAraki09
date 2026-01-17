@@ -1,41 +1,30 @@
 import type { GetPandaConfigMap } from "./interfaces";
 
-export const pandaBaseColors: GetPandaConfigMap<"colors"> = {
-  black: { value: "#000000" },
-  white: { value: "#FFFFFF" },
-
-  gray: {
-    100: { value: "#F3F4F6" },
-    400: { value: "#9CA3AF" },
-    600: { value: "#4B5563" },
-    900: { value: "#111827" },
-  },
-
-  blue: {
-    100: { value: "#DBEAFE" },
-    400: { value: "#60A5FA" },
-    600: { value: "#2563EB" },
-    900: { value: "#1E3A8A" },
-  },
-
-  green: {
-    100: { value: "#D1FAE5" },
-    400: { value: "#34D399" },
-    600: { value: "#059669" },
-    900: { value: "#064E3B" },
-  },
-
-  red: {
-    100: { value: "#FEE2E2" },
-    400: { value: "#F87171" },
-    600: { value: "#DC2626" },
-    900: { value: "#7F1D1D" },
-  },
-
-  yellow: {
-    100: { value: "#FEF3C7" },
-    400: { value: "#FBBF24" },
-    600: { value: "#D97706" },
-    900: { value: "#78350F" },
-  },
+const createOklch = (l: number) => {
+  return {
+    100: { value: `oklch(94% 0.12 ${l})` },
+    200: { value: `oklch(89% 0.12 ${l})` },
+    300: { value: `oklch(83% 0.12 ${l})` },
+    400: { value: `oklch(74% 0.12 ${l})` },
+    500: { value: `oklch(63% 0.12 ${l})` },
+    600: { value: `oklch(52% 0.12 ${l})` },
+    700: { value: `oklch(42% 0.12 ${l})` },
+    800: { value: `oklch(32% 0.12 ${l})` },
+    900: { value: `oklch(24% 0.12 ${l})` },
+  }
+}
+const types = {
+  gray: 250,
+  blue: 260,
+  green: 145,
+  red: 40,
+  yellow: 85,
+}
+export const pandaBaseColors = {
+  black: { value: "#222222" },
+  white: { value: "#EEEEEE" },
+  ...Object.entries(types).reduce((acc, [key, l]) => {
+    acc[key] = createOklch(l);
+    return acc;
+  }, {} as Record<string, Record<number, { value: string }>>),
 };

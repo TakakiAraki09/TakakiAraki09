@@ -97,7 +97,7 @@ function createRouteBuilder<
   const fn = createPathBuilder<z.output<Params>>(route);
 
   return (params?: z.input<Params>, search?: z.input<Search>) => {
-    let checkedParams = params || {};
+    let checkedParams: z.output<Params> | {} = params || {};
     if (info.params) {
       const safeParams = info.params.safeParse(checkedParams);
       if (!safeParams?.success) {

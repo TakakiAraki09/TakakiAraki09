@@ -9,9 +9,11 @@
   ],
   "exports": {
     "./package.json": "./package.json",
-    "./config": "./panda.config.ts"
+    "./preset": "./panda.preset.ts"
   },
-  "scripts": {},
+  "scripts": {
+    "prepare": "panda codegen"
+  },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*"
   },

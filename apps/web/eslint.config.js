@@ -47,6 +47,7 @@ const ignores = [
   "**/styled-system",
   "panda.config.ts",
   "eslint.config.js",
+  "**/declarativeRoutes",
 ];
 
 export default tseslint.config(

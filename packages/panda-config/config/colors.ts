@@ -10,76 +10,76 @@ export const pandaSemanticColors: GetPandaSematicToken<"colors"> = {
     },
     secondary: {
       value: {
-        _light: "{colors.gray.100}",
-        _dark: "{colors.gray.900}"
+        _light: "{colors.gray.200}",
+        _dark: "{colors.gray.800}"
       }
     },
     info: {
       value: {
-        _light: "{colors.blue.100}",
-        _dark: "{colors.blue.900}"
+        _light: "{colors.blue.200}",
+        _dark: "{colors.blue.800}"
       }
     },
-    sccess: {
+    success: {
       value: {
-        _light: "{colors.green.100}",
-        _dark: "{colors.green.900}"
+        _light: "{colors.green.200}",
+        _dark: "{colors.green.800}"
       }
     },
     error: {
       value: {
-        _light: "{colors.red.100}",
-        _dark: "{colors.red.900}"
+        _light: "{colors.red.200}",
+        _dark: "{colors.red.800}"
       }
     },
     warn: {
       value: {
-        _light: "{colors.yellow.100}",
-        _dark: "{colors.yellow.900}"
+        _light: "{colors.yellow.200}",
+        _dark: "{colors.yellow.800}"
       }
     },
     disabled: {
       value: {
-        _light: "{colors.gray.100}",
-        _dark: "{colors.gray.900}"
+        _light: "{colors.gray.200}",
+        _dark: "{colors.gray.800}"
       }
     },
   },
   contents: {
     primary: {
       value: {
-        _light: "{colors.gray.900}",
-        _dark: "{colors.gray.100}"
+        _light: "{colors.gray.800}",
+        _dark: "{colors.gray.200}"
       }
     },
     info: {
       value: {
-        _light: "{colors.blue.900}",
-        _dark: "{colors.blue.100}"
+        _light: "{colors.blue.800}",
+        _dark: "{colors.blue.200}"
       }
     },
-    sccess: {
+    success: {
       value: {
-        _light: "{colors.green.900}",
-        _dark: "{colors.green.100}"
+        _light: "{colors.green.800}",
+        _dark: "{colors.green.200}"
       }
     },
     error: {
       value: {
-        _light: "{colors.red.900}",
-        _dark: "{colors.red.100}"
+        _light: "{colors.red.800}",
+        _dark: "{colors.red.200}"
       }
     },
     warn: {
       value: {
-        _light: "{colors.yellow.900}",
-        _dark: "{colors.yellow.100}"
+        _light: "{colors.yellow.800}",
+        _dark: "{colors.yellow.200}"
       }
     },
     disabled: {
       value: {
-        _light: "{colors.gray.900}",
-        _dark: "{colors.gray.100}"
+        _light: "{colors.gray.800}",
+        _dark: "{colors.gray.200}"
       }
     },
   },
@@ -96,7 +96,7 @@ export const pandaSemanticColors: GetPandaSematicToken<"colors"> = {
         _dark: "{colors.blue.400}"
       }
     },
-    sccess: {
+    success: {
       value: {
         _light: "{colors.green.600}",
         _dark: "{colors.green.400}"

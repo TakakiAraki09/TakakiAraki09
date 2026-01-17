@@ -1,13 +1,18 @@
-import preset from '@repo/panda-config/config';
+import preset from '@repo/panda-config/preset';
 import { defineConfig } from "@pandacss/dev";
 
 export default defineConfig({
   jsxFramework: "qwik",
   outdir: "src/styled-system",
-  preflight: true,
-  strictTokens: true,
-  strictPropertyValues: true,
+  // preflight: true,
+  // strictTokens: true,
+  // strictPropertyValues: true,
   include: ["./src/**/*.{js,jsx,ts,tsx}"],
   presets: [preset],
-
+  globalCss: {
+    body: {
+      bg: "bg.primary",
+      color: "accent.primary",
+    }
+  }
 });

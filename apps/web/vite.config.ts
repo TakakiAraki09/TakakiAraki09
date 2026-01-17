@@ -23,6 +23,7 @@ errorOnDuplicatesPkgDeps(devDependencies, dependencies);
 
 export default defineConfig((): UserConfig => {
   return {
+    base: '/TakakiAraki09/',
     plugins: [
       macroPlugin({ preset: "pandacss" }),
       qwikCity(),

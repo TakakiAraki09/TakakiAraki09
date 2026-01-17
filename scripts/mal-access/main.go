@@ -1,5 +1,9 @@
 package main
 
+// winter	January, February, March
+// spring	April, May, June
+// summer	July, August, September
+// fall	October, November, December
 import (
 	"bufio"
 	"context"

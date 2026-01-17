@@ -15,10 +15,16 @@ type demoClient struct {
 	err error
 }
 
+func sleep() {
+	time.Sleep(5 * time.Second)
+}
+
 func (c *demoClient) showcase(ctx context.Context) error {
 	methods := []func(context.Context){
+		// c.seasonalAnime,
 		c.userAnimeList,
 	}
+
 	for _, m := range methods {
 		m(ctx)
 	}
@@ -28,30 +34,16 @@ func (c *demoClient) showcase(ctx context.Context) error {
 	return nil
 }
 
-//	func (c *demoClient) userMyInfo(ctx context.Context) {
-//		if c.err != nil {
-//			return
-//		}
-//		u, _, err := c.User.MyInfo(ctx)
-//		if err != nil {
-//			c.err = err
-//			return
-//		}
-//		fmt.Printf("ID: %5d, Joined: %v, Username: %s\n", u.ID, u.JoinedAt.Format("Jan 2006"), u.Name)
-//	}
 func (c *demoClient) getAnimeDetails(ctx context.Context, animeID int) (*mal.Anime, error) {
 	cacheName := fmt.Sprintf("anime_list/cache_%d.json", animeID)
 	cache, err := os.ReadFile(cacheName)
+
 	if err == nil {
 		anime := new(mal.Anime)
 		// completed only cache
 		if err := json.Unmarshal(cache, anime); err == nil && (anime.MyListStatus.Status == "completed" || anime.MyListStatus.Status == "dropped") {
 			fmt.Printf("Using cached data for anime %d\n", animeID)
 			return anime, nil
-		}
-
-		if err != nil {
-			fmt.Printf("Cache corrupted for anime %d, fetching from API\n", animeID)
 		}
 
 		if anime.MyListStatus.Status != "completed" && anime.MyListStatus.Status != "dropped" {
@@ -98,7 +90,7 @@ func (c *demoClient) getAnimeDetails(ctx context.Context, animeID int) (*mal.Ani
 		return nil, fmt.Errorf("fetching anime details: %v", err)
 	}
 
-	time.Sleep(5 * time.Second)
+	sleep()
 	jsonData, err := json.MarshalIndent(animeDetail, "", "   ")
 	if err != nil {
 		return nil, fmt.Errorf("marshaling anime details: %v", err)

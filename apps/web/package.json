@@ -29,17 +29,19 @@
   },
   "dependencies": {
     "@repo/panda-config": "workspace:*",
+    "dayjs": "^1.11.19",
     "query-string": "^9.3.1",
     "zod": "^4.3.5"
   },
   "devDependencies": {
-    "@qwikest/icons": "^0.0.13",
     "@builder.io/qwik": "^1.18.0",
     "@builder.io/qwik-city": "^1.18.0",
     "@builder.io/qwik-labs": "github:QwikDev/qwik-labs-build#main",
     "@builder.io/vite-plugin-macro": "~0.0.7",
     "@eslint/js": "latest",
     "@qwik-ui/headless": "^0.7.4",
+    "@qwikest/icons": "^0.0.13",
+    "@repo/mal-access": "workspace:*",
     "@types/node": "20.19.0",
     "eslint": "9.32.0",
     "eslint-plugin-qwik": "^1.18.0",

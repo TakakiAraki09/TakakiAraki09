@@ -80,9 +80,6 @@ func (c *demoClient) getAnimeDetails(ctx context.Context, animeID int) (*mal.Ani
 		"rating",
 		"pictures",
 		"background",
-		"related_anime",
-		"related_manga",
-		"recommendations",
 		"studios",
 	},
 	)
@@ -100,6 +97,8 @@ func (c *demoClient) getAnimeDetails(ctx context.Context, animeID int) (*mal.Ani
 		return nil, fmt.Errorf("writing cache file: %v", err)
 	}
 
+	fmt.Println(animeDetail.MyListStatus.Status)
+
 	return animeDetail, nil
 }
 
@@ -111,6 +110,14 @@ func (c *demoClient) userAnimeList(ctx context.Context) {
 		mal.Limit(100),
 		mal.Offset(0),
 	)
+
+	animeList2, _, err := c.User.AnimeList(
+		ctx,
+		user,
+		mal.Limit(100),
+		mal.Offset(100),
+	)
+	animeList = append(animeList, animeList2...)
 
 	if err != nil {
 		c.err = err

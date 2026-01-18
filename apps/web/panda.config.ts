@@ -7,6 +7,7 @@ export default defineConfig({
   // preflight: true,
   // strictTokens: true,
   // strictPropertyValues: true,
+  minify: true,
   include: ["./src/**/*.{js,jsx,ts,tsx}"],
   presets: [preset],
   globalCss: {

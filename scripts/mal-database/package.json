@@ -1,0 +1,23 @@
+{
+  "name": "mal-database",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "generate": "node src/main.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "ArakiTakaki09",
+  "license": "ISC",
+  "packageManager": "pnpm@10.23.0",
+  "dependencies": {
+    "@types/node": "20.19.0",
+    "better-sqlite3": "^12.6.2",
+    "kysely": "^0.28.9"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13"
+  }
+}

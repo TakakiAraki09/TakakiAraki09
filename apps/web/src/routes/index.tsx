@@ -45,6 +45,68 @@ export default component$(() => {
       <Button size="small">button</Button>
       <AppLink route="/">home</AppLink>
       <p>{contentStates.length}</p>
+      <h2>視聴可能</h2>
+      <ul
+        class={css({
+          display: "flex",
+          gap: "16px",
+          flexWrap: "wrap",
+          padding: "0",
+        })}
+      >
+        {list.filter(val => day(val.content.startDate).unix() <= day().unix() && val.state.listStatusStatus === "plan_to_watch").map(({ state, content }) => {
+          return (
+            <li
+              key={content.id}
+              class={css({
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                listStyle: "none",
+                width: "200px",
+                border: "1px solid",
+                borderColor: "accent.secondary",
+              })}
+            >
+              <img
+                src={content?.mainPictureLarge ?? ""}
+                alt={content?.title}
+                width={200}
+                height={300}
+                class={css({
+                  bg: "bg.secondary",
+                  objectFit: "contain",
+                  borderBottom: "1px solid",
+                  borderColor: "accent.primary",
+                })}
+              />
+              <p>{state.listStatusStatus}</p>
+              <p
+                class={css({
+                  fontSize: "sm",
+                  color: "text.secondary",
+                  flex: "1",
+                })}
+              >
+                <Link
+                  href={`https://myanimelist.net/anime/${content?.myanimelistId}/`}
+                  target="_blank"
+                >
+                  {content?.alternativeTitlesJa}
+                </Link>
+              </p>
+              <p>{day(content.startDate).format('YYYY/MM/DD')}</p>
+              <p>
+                {/* 視聴開始できるかどうかをstartDateで比較し確認する。 */}
+                {day(content.startDate).unix() > day().unix()
+                  ? "Not started"
+                  : "Started"}
+              </p>
+            </li>
+          );
+        })}
+      </ul>
+      <h2>すべて</h2>
       <ul
         class={css({
           display: "flex",
@@ -73,6 +135,7 @@ export default component$(() => {
                 width={200}
                 height={300}
                 class={css({
+                  bg: "bg.secondary",
                   objectFit: "contain",
                   borderBottom: "1px solid",
                   borderColor: "accent.primary",

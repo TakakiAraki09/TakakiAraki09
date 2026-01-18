@@ -7,6 +7,7 @@ interface Root {
   main_picture: MainPicture
   alternative_titles: AlternativeTitles
   start_date: string
+  end_date?: string
   synopsis: string
   mean: number
   rank: number
@@ -92,6 +93,7 @@ const convertToContentAnimeEntity = (
     alternativeTitlesJa: detail.alternative_titles?.ja ?? null,
     alternativeTitlesSynonyms: detail.alternative_titles?.synonyms ? JSON.stringify(detail.alternative_titles.synonyms) : null,
     startDate: detail.start_date ?? null,
+    endDate: detail.end_date ?? null,
     synopsis: detail.synopsis ?? null,
     mean: detail.mean ?? null,
     rank: detail.rank ?? null,

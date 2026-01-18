@@ -1,6 +1,6 @@
 export interface ContentEntity {
   id: string
-  contentType: 'anime' | 'manga'
+  contentType: 'anime' | 'manga' | 'news'
 }
 
 export interface ContentAnimeEntity {
@@ -13,6 +13,7 @@ export interface ContentAnimeEntity {
   alternativeTitlesJa: string | null
   alternativeTitlesSynonyms: string | null
   startDate: string | null
+  endDate: string | null
   synopsis: string | null
   mean: number | null
   rank: number | null
@@ -25,5 +26,17 @@ export interface ContentAnimeEntity {
   mediaType: string | null
   status: string | null
   genres: string | null
+  createdAt: Date
+}
+
+export interface ContentNewsEntity {
+  id: string
+  guid: string
+  title: string
+  link: string
+  pubDate: string | null
+  isoDate: string | null
+  content: string | null
+  contentSnippet: string | null
   createdAt: Date
 }

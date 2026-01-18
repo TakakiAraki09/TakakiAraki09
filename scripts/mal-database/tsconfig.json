@@ -19,7 +19,9 @@
 		// Stricter Typechecking Options
 		"noUncheckedIndexedAccess": true,
 		"exactOptionalPropertyTypes": true,
+		"noEmit": true,
 		"allowImportingTsExtensions": true,
+		"resolveJsonModule": true,
 		// Style Options
 		// "noImplicitReturns": true,
 		// "noImplicitOverride": true,

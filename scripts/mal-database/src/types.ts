@@ -8,12 +8,13 @@ import type {
 export interface Database {
   content: ContentTable
   content_anime: ContentAnimeTable
+  content_news: ContentNewsTable
   content_state: ContentStateTable
 }
 
 export interface ContentTable {
   id: string
-  content_type: 'anime' | 'manga'
+  content_type: 'anime' | 'manga' | 'news'
 }
 
 export type Content = Selectable<ContentTable>
@@ -30,6 +31,7 @@ export interface ContentAnimeTable {
   alternative_titles_ja: string | null
   alternative_titles_synonyms: string | null
   start_date: string | null
+  end_date: string | null
   synopsis: string | null
   mean: number | null
   rank: number | null
@@ -48,6 +50,22 @@ export interface ContentAnimeTable {
 export type ContentAnime = Selectable<ContentAnimeTable>
 export type NewContentAnime = Insertable<ContentAnimeTable>
 export type ContentAnimeUpdate = Updateable<ContentAnimeTable>
+
+export interface ContentNewsTable {
+  id: string
+  guid: string
+  title: string
+  link: string
+  pub_date: string | null
+  iso_date: string | null
+  content: string | null
+  content_snippet: string | null
+  created_at: ColumnType<Date, string | undefined, never>
+}
+
+export type ContentNews = Selectable<ContentNewsTable>
+export type NewContentNews = Insertable<ContentNewsTable>
+export type ContentNewsUpdate = Updateable<ContentNewsTable>
 
 export interface ContentStateTable {
   id: string

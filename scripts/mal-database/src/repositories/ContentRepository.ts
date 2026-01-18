@@ -1,5 +1,5 @@
 import { db } from '../database.ts'
-import type { Content, ContentAnime, ContentState, NewContent, NewContentAnime, NewContentState } from '../types.ts'
+import type { Content, ContentAnime, ContentNews, ContentState, NewContent, NewContentAnime, NewContentNews, NewContentState } from '../types.ts'
 
 export const findContentByMalId = async (
   myanimelist_id: number,
@@ -94,6 +94,39 @@ export const findAllContentAnime = async (): Promise<ContentAnime[]> => {
 export const findAllContentState = async (): Promise<ContentState[]> => {
   return await db
     .selectFrom('content_state')
+    .selectAll()
+    .execute()
+}
+
+export const findContentNewsByGuid = async (
+  guid: string
+): Promise<ContentNews | undefined> => {
+  return await db
+    .selectFrom('content_news')
+    .where('content_news.guid', '=', guid)
+    .selectAll()
+    .executeTakeFirst()
+}
+
+export const createContentNews = async (content: NewContent, contentNews: NewContentNews) => {
+  const createdContent = await db
+    .insertInto('content')
+    .values(content)
+    .returningAll()
+    .executeTakeFirstOrThrow()
+
+  const createdContentNews = await db
+    .insertInto('content_news')
+    .values(contentNews)
+    .returningAll()
+    .executeTakeFirstOrThrow()
+
+  return { content: createdContent, contentNews: createdContentNews }
+}
+
+export const findAllContentNews = async (): Promise<ContentNews[]> => {
+  return await db
+    .selectFrom('content_news')
     .selectAll()
     .execute()
 }

@@ -1,5 +1,5 @@
-import type { Content, ContentAnime, ContentState, NewContent, NewContentAnime, NewContentState } from '../types.ts'
-import type { ContentEntity, ContentAnimeEntity } from './Content.ts'
+import type { Content, ContentAnime, ContentNews, ContentState, NewContent, NewContentAnime, NewContentNews, NewContentState } from '../types.ts'
+import type { ContentEntity, ContentAnimeEntity, ContentNewsEntity } from './Content.ts'
 import type { ContentStateEntity } from './ContentState.ts'
 
 const toDate = (value: string | null): Date | null => {
@@ -34,6 +34,7 @@ export const toContentAnimeEntity = (contentAnime: ContentAnime): ContentAnimeEn
     alternativeTitlesJa: contentAnime.alternative_titles_ja,
     alternativeTitlesSynonyms: contentAnime.alternative_titles_synonyms,
     startDate: contentAnime.start_date,
+    endDate: contentAnime.end_date,
     synopsis: contentAnime.synopsis,
     mean: contentAnime.mean,
     rank: contentAnime.rank,
@@ -47,6 +48,20 @@ export const toContentAnimeEntity = (contentAnime: ContentAnime): ContentAnimeEn
     status: contentAnime.status,
     genres: contentAnime.genres,
     createdAt: contentAnime.created_at instanceof Date ? contentAnime.created_at : new Date(contentAnime.created_at),
+  }
+}
+
+export const toContentNewsEntity = (contentNews: ContentNews): ContentNewsEntity => {
+  return {
+    id: contentNews.id,
+    guid: contentNews.guid,
+    title: contentNews.title,
+    link: contentNews.link,
+    pubDate: contentNews.pub_date,
+    isoDate: contentNews.iso_date,
+    content: contentNews.content,
+    contentSnippet: contentNews.content_snippet,
+    createdAt: contentNews.created_at instanceof Date ? contentNews.created_at : new Date(contentNews.created_at),
   }
 }
 
@@ -82,6 +97,7 @@ export const fromContentAnimeEntity = (entity: ContentAnimeEntity): NewContentAn
     alternative_titles_ja: entity.alternativeTitlesJa,
     alternative_titles_synonyms: entity.alternativeTitlesSynonyms,
     start_date: entity.startDate,
+    end_date: entity.endDate,
     synopsis: entity.synopsis,
     mean: entity.mean,
     rank: entity.rank,
@@ -94,6 +110,20 @@ export const fromContentAnimeEntity = (entity: ContentAnimeEntity): NewContentAn
     media_type: entity.mediaType,
     status: entity.status,
     genres: entity.genres,
+    created_at: undefined,
+  }
+}
+
+export const fromContentNewsEntity = (entity: ContentNewsEntity): NewContentNews => {
+  return {
+    id: entity.id,
+    guid: entity.guid,
+    title: entity.title,
+    link: entity.link,
+    pub_date: entity.pubDate,
+    iso_date: entity.isoDate,
+    content: entity.content,
+    content_snippet: entity.contentSnippet,
     created_at: undefined,
   }
 }

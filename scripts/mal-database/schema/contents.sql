@@ -1,7 +1,7 @@
 
 CREATE TABLE "content" (
     "id" varchar(36) not null primary key,
-    "content_type" varchar(50) not null check(content_type in ('anime', 'manga'))
+    "content_type" varchar(50) not null check(content_type in ('anime', 'manga', 'news'))
 );
 
 CREATE TABLE "content_anime" (
@@ -14,6 +14,7 @@ CREATE TABLE "content_anime" (
     "alternative_titles_ja" text,
     "alternative_titles_synonyms" text,
     "start_date" text,
+    "end_date" text,
     "synopsis" text,
     "mean" real,
     "rank" integer,
@@ -28,6 +29,19 @@ CREATE TABLE "content_anime" (
     "genres" text,
     "created_at" timestamp default current_timestamp not null,
     unique (myanimelist_id),
+    foreign key (id) references content(id)
+);
+CREATE TABLE "content_news" (
+    "id" varchar(36) not null primary key,
+    "guid" text not null,
+    "title" varchar(255) not null,
+    "link" text not null,
+    "pub_date" text,
+    "iso_date" text,
+    "content" text,
+    "content_snippet" text,
+    "created_at" timestamp default current_timestamp not null,
+    unique (guid),
     foreign key (id) references content(id)
 );
 

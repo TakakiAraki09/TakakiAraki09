@@ -1,12 +1,12 @@
 import { randomUUID } from 'crypto'
-import type { UserAnimeListItemEntity, ContentStateEntity } from '../entities/index.ts'
+import type { UserAnimeListItemEntity, ContentStateEntity, ContentEntity } from '../entities/index.ts'
 import { animeDetail } from '../api/getAnimeDetail.ts'
 import {
   findContentByMalId,
   createContent,
   upsertContentState,
 } from '../repositories/ContentRepository.ts'
-import { fromContentEntity, fromContentStateEntity } from '../entities/index.ts'
+import { fromContentEntity, fromContentAnimeEntity, fromContentStateEntity } from '../entities/index.ts'
 
 interface SyncAnimeListItemParams {
   item: UserAnimeListItemEntity
@@ -33,14 +33,21 @@ export const syncAnimeListItem = async ({
     console.log(`  - Content not found, fetching details...`)
 
     contentId = randomUUID()
-    const newContentEntity = await animeDetail({
+
+    const newContentAnimeEntity = await animeDetail({
       animeId: malId,
       id: contentId,
-      contentType
     })
     await sleep(rateLimitMs)
 
-    await createContent(fromContentEntity(newContentEntity))
+    const newContentEntity: ContentEntity = {
+      id: contentId,
+      contentType,
+    }
+
+    const content = fromContentEntity(newContentEntity)
+    const contentAnime = fromContentAnimeEntity(newContentAnimeEntity)
+    await createContent(content, contentAnime)
     console.log(`  - Created content with id: ${contentId}`)
   } else {
     contentId = existingContent.id

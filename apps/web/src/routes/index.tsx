@@ -7,7 +7,12 @@ import { css } from "~/styled-system/css";
 import { contentStates, getContentById } from "@repo/mal-database";
 import { day } from "~/libs/day";
 
+import { SiNetflix } from "@qwikest/icons/simpleicons";
+import { TbBrandAmazon } from "@qwikest/icons/tablericons";
+import { broadcastUtils } from "~/libs/broadcast";
+
 const list = contentStates
+
   .map((state) => {
     const content = getContentById(state.id);
     if (content == null) return;
@@ -54,57 +59,98 @@ export default component$(() => {
           padding: "0",
         })}
       >
-        {list.filter(val => day(val.content.startDate).unix() <= day().unix() && val.state.listStatusStatus === "plan_to_watch").map(({ state, content }) => {
-          return (
-            <li
-              key={content.id}
-              class={css({
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                listStyle: "none",
-                width: "200px",
-                border: "1px solid",
-                borderColor: "accent.secondary",
-              })}
-            >
-              <img
-                src={content?.mainPictureLarge ?? ""}
-                alt={content?.title}
-                width={200}
-                height={300}
+        {list
+          .filter(
+            (val) =>
+              day(val.content.startDate).unix() <= day().unix() &&
+              val.state.listStatusStatus === "plan_to_watch",
+          )
+          .map(({ state, content }) => {
+            return (
+              <li
+                key={content.id}
                 class={css({
-                  bg: "bg.secondary",
-                  objectFit: "contain",
-                  borderBottom: "1px solid",
-                  borderColor: "accent.primary",
-                })}
-              />
-              <p>{state.listStatusStatus}</p>
-              <p
-                class={css({
-                  fontSize: "sm",
-                  color: "text.secondary",
-                  flex: "1",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  listStyle: "none",
+                  width: "200px",
+                  border: "1px solid",
+                  borderColor: "accent.secondary",
                 })}
               >
-                <Link
-                  href={`https://myanimelist.net/anime/${content?.myanimelistId}/`}
-                  target="_blank"
+                <img
+                  src={content?.mainPictureLarge ?? ""}
+                  alt={content?.title}
+                  width={200}
+                  height={300}
+                  class={css({
+                    bg: "bg.secondary",
+                    objectFit: "contain",
+                    borderBottom: "1px solid",
+                    borderColor: "accent.primary",
+                  })}
+                />
+                <p>{state.listStatusStatus}</p>
+                <p
+                  class={css({
+                    fontSize: "sm",
+                    color: "text.secondary",
+                    flex: "1",
+                  })}
                 >
-                  {content?.alternativeTitlesJa}
-                </Link>
-              </p>
-              <p>{day(content.startDate).format('YYYY/MM/DD')}</p>
-              <p>
-                {/* 視聴開始できるかどうかをstartDateで比較し確認する。 */}
-                {day(content.startDate).unix() > day().unix()
-                  ? "Not started"
-                  : "Started"}
-              </p>
-            </li>
-          );
-        })}
+                  <Link
+                    href={`https://myanimelist.net/anime/${content?.myanimelistId}/`}
+                    target="_blank"
+                  >
+                    {content?.alternativeTitlesJa}
+                  </Link>
+                </p>
+                <p>{day(content.startDate).format("YYYY/MM/DD")}</p>
+                <p class={css({ display: "flex", gap: "8px" })}>
+                  <Link
+                    href={broadcastUtils.netflix(
+                      content.alternativeTitlesJa ?? "",
+                    )}
+                    target="_blank"
+                  >
+                    <SiNetflix font-size={"30px"} color="#E50914" />
+                  </Link>
+                  <Link
+                    href={broadcastUtils.amazon(
+                      content.alternativeTitlesJa ?? "",
+                    )}
+                    target="_blank"
+                  >
+                    <TbBrandAmazon font-size={"30px"} color="#FF9900" />
+                  </Link>
+                  <Link
+                    href={broadcastUtils.unext(
+                      content.alternativeTitlesJa ?? "",
+                    )}
+                    target="_blank"
+                  >
+                    UNext
+                  </Link>
+                  <Link
+                    href={broadcastUtils.abema(
+                      content.alternativeTitlesJa ?? "",
+                    )}
+                    target="_blank"
+                  >
+                    Abema
+                  </Link>
+                </p>
+
+                <p>
+                  {/* 視聴開始できるかどうかをstartDateで比較し確認する。 */}
+                  {day(content.startDate).unix() > day().unix()
+                    ? "Not started"
+                    : "Started"}
+                </p>
+              </li>
+            );
+          })}
       </ul>
       <h2>すべて</h2>
       <ul
@@ -156,7 +202,7 @@ export default component$(() => {
                   {content?.alternativeTitlesJa}
                 </Link>
               </p>
-              <p>{day(content.startDate).format('YYYY/MM/DD')}</p>
+              <p>{day(content.startDate).format("YYYY/MM/DD")}</p>
               <p>
                 {/* 視聴開始できるかどうかをstartDateで比較し確認する。 */}
                 {day(content.startDate).unix() > day().unix()

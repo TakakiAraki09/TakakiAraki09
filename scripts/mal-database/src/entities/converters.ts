@@ -1,5 +1,5 @@
-import type { Content, ContentState, NewContent, NewContentState } from '../types.ts'
-import type { ContentEntity } from './Content.ts'
+import type { Content, ContentAnime, ContentState, NewContent, NewContentAnime, NewContentState } from '../types.ts'
+import type { ContentEntity, ContentAnimeEntity } from './Content.ts'
 import type { ContentStateEntity } from './ContentState.ts'
 
 const toDate = (value: string | null): Date | null => {
@@ -19,28 +19,34 @@ const fromDate = (value: Date | null): string | null => {
 export const toContentEntity = (content: Content): ContentEntity => {
   return {
     id: content.id,
-    myanimelistId: content.myanimelist_id,
     contentType: content.content_type,
-    title: content.title,
-    mainPictureMedium: content.main_picture_medium,
-    mainPictureLarge: content.main_picture_large,
-    alternativeTitlesEn: content.alternative_titles_en,
-    alternativeTitlesJa: content.alternative_titles_ja,
-    alternativeTitlesSynonyms: content.alternative_titles_synonyms,
-    startDate: content.start_date,
-    synopsis: content.synopsis,
-    mean: content.mean,
-    rank: content.rank,
-    popularity: content.popularity,
-    numListUsers: content.num_list_users,
-    numScoringUsers: content.num_scoring_users,
-    nsfw: content.nsfw,
-    malCreatedAt: content.mal_created_at,
-    malUpdatedAt: content.mal_updated_at,
-    mediaType: content.media_type,
-    status: content.status,
-    genres: content.genres,
-    createdAt: content.created_at instanceof Date ? content.created_at : new Date(content.created_at),
+  }
+}
+
+export const toContentAnimeEntity = (contentAnime: ContentAnime): ContentAnimeEntity => {
+  return {
+    id: contentAnime.id,
+    myanimelistId: contentAnime.myanimelist_id,
+    title: contentAnime.title,
+    mainPictureMedium: contentAnime.main_picture_medium,
+    mainPictureLarge: contentAnime.main_picture_large,
+    alternativeTitlesEn: contentAnime.alternative_titles_en,
+    alternativeTitlesJa: contentAnime.alternative_titles_ja,
+    alternativeTitlesSynonyms: contentAnime.alternative_titles_synonyms,
+    startDate: contentAnime.start_date,
+    synopsis: contentAnime.synopsis,
+    mean: contentAnime.mean,
+    rank: contentAnime.rank,
+    popularity: contentAnime.popularity,
+    numListUsers: contentAnime.num_list_users,
+    numScoringUsers: contentAnime.num_scoring_users,
+    nsfw: contentAnime.nsfw,
+    malCreatedAt: contentAnime.mal_created_at,
+    malUpdatedAt: contentAnime.mal_updated_at,
+    mediaType: contentAnime.media_type,
+    status: contentAnime.status,
+    genres: contentAnime.genres,
+    createdAt: contentAnime.created_at instanceof Date ? contentAnime.created_at : new Date(contentAnime.created_at),
   }
 }
 
@@ -61,8 +67,14 @@ export const toContentStateEntity = (contentState: ContentState): ContentStateEn
 export const fromContentEntity = (entity: ContentEntity): NewContent => {
   return {
     id: entity.id,
-    myanimelist_id: entity.myanimelistId,
     content_type: entity.contentType,
+  }
+}
+
+export const fromContentAnimeEntity = (entity: ContentAnimeEntity): NewContentAnime => {
+  return {
+    id: entity.id,
+    myanimelist_id: entity.myanimelistId,
     title: entity.title,
     main_picture_medium: entity.mainPictureMedium,
     main_picture_large: entity.mainPictureLarge,

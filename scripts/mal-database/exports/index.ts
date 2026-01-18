@@ -1,14 +1,20 @@
-import type { ContentEntity, ContentStateEntity } from '../src/entities/index.ts'
+import type { ContentEntity, ContentAnimeEntity, ContentStateEntity } from '../src/entities/index.ts'
 // JSONファイルを静的にインポート（Viteがビルド時にバンドルに含める）
 import contentData from './content.json'
+import contentAnimeData from './content_anime.json'
 import contentStateData from './content_state.json'
 
 // 型アサーションでJSONデータをエンティティ型として扱う
 const contentsCache = contentData as unknown as ContentEntity[]
+const contentAnimesCache = contentAnimeData as unknown as ContentAnimeEntity[]
 const contentStatesCache = contentStateData as unknown as ContentStateEntity[]
 
 export const getContents = (): ContentEntity[] => {
   return contentsCache
+}
+
+export const getContentAnimes = (): ContentAnimeEntity[] => {
+  return contentAnimesCache
 }
 
 export const getContentStates = (): ContentStateEntity[] => {
@@ -21,23 +27,28 @@ export const getContentById = (id: string): ContentEntity | undefined => {
   return contents.find(content => content.id === id)
 }
 
+export const getContentAnimeById = (id: string): ContentAnimeEntity | undefined => {
+  const contentAnimes = getContentAnimes()
+  return contentAnimes.find(anime => anime.id === id)
+}
+
 export const getContentStateById = (id: string): ContentStateEntity | undefined => {
   const contentStates = getContentStates()
   return contentStates.find(state => state.id === id)
 }
 
 // MyAnimeList IDで取得
-export const getContentByMalId = (myanimelistId: number): ContentEntity | undefined => {
-  const contents = getContents()
-  return contents.find(content => content.myanimelistId === myanimelistId)
+export const getContentAnimeByMalId = (myanimelistId: number): ContentAnimeEntity | undefined => {
+  const contentAnimes = getContentAnimes()
+  return contentAnimes.find(anime => anime.myanimelistId === myanimelistId)
 }
 
 // タイトルで検索（部分一致）
-export const searchContentsByTitle = (searchTerm: string): ContentEntity[] => {
-  const contents = getContents()
+export const searchContentAnimesByTitle = (searchTerm: string): ContentAnimeEntity[] => {
+  const contentAnimes = getContentAnimes()
   const lowerSearchTerm = searchTerm.toLowerCase()
-  return contents.filter(content =>
-    content.title.toLowerCase().includes(lowerSearchTerm)
+  return contentAnimes.filter(anime =>
+    anime.title.toLowerCase().includes(lowerSearchTerm)
   )
 }
 
@@ -51,4 +62,5 @@ export const getContentStatesByStatus = (
 
 // 互換性のためのエクスポート
 export const contents = contentsCache
+export const contentAnimes = contentAnimesCache
 export const contentStates = contentStatesCache

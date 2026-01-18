@@ -1,7 +1,11 @@
 export interface ContentEntity {
   id: string
-  myanimelistId: number
   contentType: 'anime' | 'manga'
+}
+
+export interface ContentAnimeEntity {
+  id: string
+  myanimelistId: number
   title: string
   mainPictureMedium: string | null
   mainPictureLarge: string | null

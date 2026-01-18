@@ -1,5 +1,5 @@
 import { createMyAnimeListAPI } from "./base.ts"
-import type { ContentEntity } from '../entities/index.ts'
+import type { ContentAnimeEntity } from '../entities/index.ts'
 
 interface Root {
   id: number
@@ -40,7 +40,6 @@ interface Genre {
 interface Parameter {
   animeId: number
   id: string
-  contentType: 'anime' | 'manga'
   fields?: string[]
 }
 
@@ -79,15 +78,13 @@ const DEFAULT_FIELDS = [
   'tatistics',
 ];
 
-const convertToContentEntity = (
+const convertToContentAnimeEntity = (
   detail: Root,
-  id: string,
-  contentType: 'anime' | 'manga'
-): ContentEntity => {
+  id: string
+): ContentAnimeEntity => {
   return {
     id,
     myanimelistId: detail.id,
-    contentType,
     title: detail.title,
     mainPictureMedium: detail.main_picture?.medium ?? null,
     mainPictureLarge: detail.main_picture?.large ?? null,
@@ -114,14 +111,13 @@ const convertToContentEntity = (
 export const animeDetail = async ({
   animeId,
   id,
-  contentType,
   fields = DEFAULT_FIELDS,
-}: Parameter): Promise<ContentEntity> => {
+}: Parameter): Promise<ContentAnimeEntity> => {
   const detail = await createMyAnimeListAPI<Root>(`/v2/anime/${animeId}`)(url => {
     url.searchParams.set('fields', fields.join(','))
     return url
   })
 
-  return convertToContentEntity(detail, id, contentType)
+  return convertToContentAnimeEntity(detail, id)
 }
 

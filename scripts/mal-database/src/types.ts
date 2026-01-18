@@ -7,13 +7,22 @@ import type {
 
 export interface Database {
   content: ContentTable
+  content_anime: ContentAnimeTable
   content_state: ContentStateTable
 }
 
 export interface ContentTable {
   id: string
-  myanimelist_id: number
   content_type: 'anime' | 'manga'
+}
+
+export type Content = Selectable<ContentTable>
+export type NewContent = Insertable<ContentTable>
+export type ContentUpdate = Updateable<ContentTable>
+
+export interface ContentAnimeTable {
+  id: string
+  myanimelist_id: number
   title: string
   main_picture_medium: string | null
   main_picture_large: string | null
@@ -36,9 +45,9 @@ export interface ContentTable {
   created_at: ColumnType<Date, string | undefined, never>
 }
 
-export type Content = Selectable<ContentTable>
-export type NewContent = Insertable<ContentTable>
-export type ContentUpdate = Updateable<ContentTable>
+export type ContentAnime = Selectable<ContentAnimeTable>
+export type NewContentAnime = Insertable<ContentAnimeTable>
+export type ContentAnimeUpdate = Updateable<ContentAnimeTable>
 
 export interface ContentStateTable {
   id: string

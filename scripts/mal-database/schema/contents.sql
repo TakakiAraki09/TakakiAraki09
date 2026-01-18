@@ -1,8 +1,12 @@
 
 CREATE TABLE "content" (
     "id" varchar(36) not null primary key,
+    "content_type" varchar(50) not null check(content_type in ('anime', 'manga'))
+);
+
+CREATE TABLE "content_anime" (
+    "id" varchar(36) not null primary key,
     "myanimelist_id" integer not null,
-    "content_type" varchar(50) not null check(content_type in ('anime', 'manga')),
     "title" varchar(255) not null,
     "main_picture_medium" text,
     "main_picture_large" text,
@@ -23,8 +27,10 @@ CREATE TABLE "content" (
     "status" varchar(50),
     "genres" text,
     "created_at" timestamp default current_timestamp not null,
-    unique (myanimelist_id, content_type)
+    unique (myanimelist_id),
+    foreign key (id) references content(id)
 );
+
 CREATE TABLE "content_state" (
     "id" varchar(36) not null primary key,
     "list_status_status" varchar(50) not null default 'empty' check(list_status_status in ('watching', 'completed', 'on_hold', 'dropped', 'plan_to_watch', 'empty')),

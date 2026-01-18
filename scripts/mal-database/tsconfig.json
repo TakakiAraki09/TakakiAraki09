@@ -19,6 +19,7 @@
 		// Stricter Typechecking Options
 		"noUncheckedIndexedAccess": true,
 		"exactOptionalPropertyTypes": true,
+		"allowImportingTsExtensions": true,
 		// Style Options
 		// "noImplicitReturns": true,
 		// "noImplicitOverride": true,
@@ -33,7 +34,6 @@
 		"noUncheckedSideEffectImports": true,
 		"moduleDetection": "force",
 		"verbatimModuleSyntax": true,
-		"allowImportingTsExtensions": true,
 		"skipLibCheck": true
 	}
 }

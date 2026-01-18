@@ -1,5 +1,5 @@
 import { db } from '../database.ts'
-import type { Content, NewContent, NewContentState } from '../types.ts'
+import type { Content, ContentState, NewContent, NewContentState } from '../types.ts'
 
 export const findContentByMalId = async (
   myanimelist_id: number,
@@ -47,4 +47,18 @@ export const upsertContentState = async (contentState: NewContentState) => {
   }
 
   return await createContentState(contentState)
+}
+
+export const findAllContent = async (): Promise<Content[]> => {
+  return await db
+    .selectFrom('content')
+    .selectAll()
+    .execute()
+}
+
+export const findAllContentState = async (): Promise<ContentState[]> => {
+  return await db
+    .selectFrom('content_state')
+    .selectAll()
+    .execute()
 }

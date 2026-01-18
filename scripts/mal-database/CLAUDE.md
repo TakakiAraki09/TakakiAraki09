@@ -233,4 +233,82 @@ find src -name "*Repository*" -type f
 
 # 型エラーをフィルタ
 npx tsc --noEmit 2>&1 | grep "usecase"
+
+# ライブラリデータのエクスポート
+tsx src/export-main.ts
 ```
+
+## ライブラリデータのエクスポート/インポート
+
+### エクスポート機能
+
+データベースの全データをJSON形式でエクスポートできるのだ。
+
+```bash
+# 全データをJSONファイルにエクスポート
+tsx src/export-main.ts
+```
+
+**生成されるファイル:**
+- `exports/content.json` - 全contentデータ（エンティティ形式）
+- `exports/content_state.json` - 全content_stateデータ（エンティティ形式）
+
+**重要:**
+- データはエンティティ形式（camelCase + Date型）で出力される
+- JSONファイルは`.gitignore`に含まれている（Gitには入らない）
+- DB型（snake_case）ではなく、ドメイン型（camelCase）を使っている
+
+### インポート機能
+
+エクスポートしたデータを他のコードから簡単にimportできるのだ。
+
+```typescript
+// 直接import（推奨）
+import { contents, contentStates } from './exports/index.ts'
+
+console.log(`Total: ${contents.length} contents`)
+
+// 動的に取得
+import { getContents, getContentStates } from './exports/index.ts'
+const contents = getContents()
+
+// ID指定で取得
+import {
+  getContentById,
+  getContentStateById,
+  getContentByMalId,
+  searchContentsByTitle,
+  getContentStatesByStatus,
+} from './exports/index.ts'
+
+const content = getContentById('uuid-here')
+const watching = getContentStatesByStatus('watching')
+const searchResults = searchContentsByTitle('進撃の巨人')
+```
+
+**注意:**
+- エクスポートを実行する前にimportするとwarningが出る（正常動作）
+- JSONファイルが無い場合は空配列`[]`を返す
+
+### アーキテクチャ上のポイント
+
+1. **Repository層に`findAll`を追加**
+   ```typescript
+   export const findAllContent = async (): Promise<Content[]>
+   export const findAllContentState = async (): Promise<ContentState[]>
+   ```
+
+2. **Usecase層で変換を実行**
+   ```typescript
+   // DB型 → エンティティに変換してエクスポート
+   const contentEntities = contents.map(toContentEntity)
+   ```
+
+3. **exports/index.tsで型安全にimport**
+   ```typescript
+   // JSONを読み込んで型付きで返す
+   export const contents: ContentEntity[]
+   export const contentStates: ContentStateEntity[]
+   ```
+
+詳細は `exports/README.md` を参照なのだ。

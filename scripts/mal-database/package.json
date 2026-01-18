@@ -2,13 +2,27 @@
   "name": "mal-database",
   "type": "module",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.ts",
+  "description": "MyAnimeList database with export/import functionality",
+  "main": "exports/index.ts",
+  "exports": {
+    ".": "./exports/index.ts",
+    "./exports": "./exports/index.ts",
+    "./entities": "./src/entities/index.ts",
+    "./usecases": "./src/usecases/exportLibrary.ts"
+  },
   "scripts": {
+    "sync": "tsx src/main.ts",
+    "export": "tsx src/export-main.ts",
     "generate": "node src/main.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "myanimelist",
+    "mal",
+    "anime",
+    "manga",
+    "database"
+  ],
   "author": "ArakiTakaki09",
   "license": "ISC",
   "packageManager": "pnpm@10.23.0",

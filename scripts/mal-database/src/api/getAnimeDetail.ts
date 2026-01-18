@@ -1,4 +1,5 @@
 import { createMyAnimeListAPI } from "./base.ts"
+import type { ContentEntity } from '../entities/index.ts'
 
 interface Root {
   id: number
@@ -37,8 +38,10 @@ interface Genre {
 }
 
 interface Parameter {
-  animeId: number;
-  fields?: string[];
+  animeId: number
+  id: string
+  contentType: 'anime' | 'manga'
+  fields?: string[]
 }
 
 const DEFAULT_FIELDS = [
@@ -76,11 +79,49 @@ const DEFAULT_FIELDS = [
   'tatistics',
 ];
 
-export const animeDetail = ({
+const convertToContentEntity = (
+  detail: Root,
+  id: string,
+  contentType: 'anime' | 'manga'
+): ContentEntity => {
+  return {
+    id,
+    myanimelistId: detail.id,
+    contentType,
+    title: detail.title,
+    mainPictureMedium: detail.main_picture?.medium ?? null,
+    mainPictureLarge: detail.main_picture?.large ?? null,
+    alternativeTitlesEn: detail.alternative_titles?.en ?? null,
+    alternativeTitlesJa: detail.alternative_titles?.ja ?? null,
+    alternativeTitlesSynonyms: detail.alternative_titles?.synonyms ? JSON.stringify(detail.alternative_titles.synonyms) : null,
+    startDate: detail.start_date ?? null,
+    synopsis: detail.synopsis ?? null,
+    mean: detail.mean ?? null,
+    rank: detail.rank ?? null,
+    popularity: detail.popularity ?? null,
+    numListUsers: detail.num_list_users ?? null,
+    numScoringUsers: detail.num_scoring_users ?? null,
+    nsfw: detail.nsfw ?? null,
+    malCreatedAt: detail.created_at ?? null,
+    malUpdatedAt: detail.updated_at ?? null,
+    mediaType: detail.media_type ?? null,
+    status: detail.status ?? null,
+    genres: detail.genres ? JSON.stringify(detail.genres) : null,
+    createdAt: new Date(),
+  }
+}
+
+export const animeDetail = async ({
   animeId,
+  id,
+  contentType,
   fields = DEFAULT_FIELDS,
-}: Parameter) => createMyAnimeListAPI<Root>(`/v2/anime/${animeId}`)(url => {
-  url.searchParams.set('fields', fields.join(','));
-  return url;
-})
+}: Parameter): Promise<ContentEntity> => {
+  const detail = await createMyAnimeListAPI<Root>(`/v2/anime/${animeId}`)(url => {
+    url.searchParams.set('fields', fields.join(','))
+    return url
+  })
+
+  return convertToContentEntity(detail, id, contentType)
+}
 

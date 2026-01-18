@@ -1,10 +1,11 @@
 import { createMyAnimeListAPI } from "./base.ts"
+import type { ContentStateEntity } from '../entities/index.ts'
 
 interface Root {
   data: Daum[]
 }
 
-interface Daum {
+export interface Daum {
   node: Node
   list_status: ListStatus
 }
@@ -20,7 +21,7 @@ interface MainPicture {
   large: string
 }
 
-interface ListStatus {
+export interface ListStatus {
   status: string
   score: number
   num_episodes_watched: number
@@ -45,3 +46,31 @@ export const userAnimeList = ({
   url.searchParams.set('limit', limit.toString());
   return url;
 })
+
+const mapListStatusToEnum = (status: string): 'watching' | 'completed' | 'on_hold' | 'dropped' | 'plan_to_watch' | 'empty' => {
+  const statusMap: Record<string, 'watching' | 'completed' | 'on_hold' | 'dropped' | 'plan_to_watch' | 'empty'> = {
+    'watching': 'watching',
+    'completed': 'completed',
+    'on_hold': 'on_hold',
+    'dropped': 'dropped',
+    'plan_to_watch': 'plan_to_watch',
+  }
+  return statusMap[status] ?? 'empty'
+}
+
+export const convertToContentStateEntity = (
+  listStatus: ListStatus,
+  id: string
+): ContentStateEntity => {
+  return {
+    id,
+    listStatusStatus: mapListStatusToEnum(listStatus.status),
+    listStatusScore: listStatus.score,
+    listStatusNumEpisodesWatched: listStatus.num_episodes_watched,
+    listStatusIsRewatching: listStatus.is_rewatching ? 1 : 0,
+    listStatusUpdatedAt: listStatus.updated_at ? new Date(listStatus.updated_at) : null,
+    listStatusStartDate: listStatus.start_date ? new Date(listStatus.start_date) : null,
+    listStatusFinishDate: listStatus.finish_date ? new Date(listStatus.finish_date) : null,
+    createdAt: new Date(),
+  }
+}

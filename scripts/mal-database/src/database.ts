@@ -2,7 +2,7 @@
 import type { Database } from './types.ts' // this is the Database interface we defined earlier
 import SQLite from 'better-sqlite3'
 import { Kysely, SqliteDialect } from 'kysely'
-import { createCache } from './base.ts'
+import { createCache } from './utils/file.ts'
 
 const dialect = new SqliteDialect({
   database: new SQLite(createCache('database.db')),

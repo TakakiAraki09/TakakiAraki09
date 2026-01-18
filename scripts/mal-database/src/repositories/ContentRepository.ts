@@ -1,5 +1,5 @@
-import { db } from './database.ts'
-import type { Content, NewContent, NewContentState } from './types.ts'
+import { db } from '../database.ts'
+import type { Content, NewContent, NewContentState } from '../types.ts'
 
 export const findContentByMalId = async (
   myanimelist_id: number,
@@ -37,9 +37,10 @@ export const upsertContentState = async (contentState: NewContentState) => {
     .executeTakeFirst()
 
   if (existing) {
+    const { created_at, ...updateData } = contentState
     return await db
       .updateTable('content_state')
-      .set(contentState)
+      .set(updateData)
       .where('id', '=', contentState.id)
       .returningAll()
       .executeTakeFirstOrThrow()

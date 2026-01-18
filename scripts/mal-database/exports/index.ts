@@ -1,28 +1,18 @@
 import type { ContentEntity, ContentStateEntity } from '../src/entities/index.ts'
-import { readFileSync, existsSync } from 'fs'
-import { join, dirname } from 'path'
-import { fileURLToPath } from 'url'
+// JSONファイルを静的にインポート（Viteがビルド時にバンドルに含める）
+import contentData from './content.json'
+import contentStateData from './content_state.json'
 
-const __dirname = dirname(fileURLToPath(import.meta.url))
-
-const loadJsonFile = <T>(filename: string): T[] => {
-  const filePath = join(__dirname, filename)
-
-  if (!existsSync(filePath)) {
-    console.warn(`Warning: ${filename} not found. Please run exportLibrary first.`)
-    return []
-  }
-
-  const data = readFileSync(filePath, 'utf-8')
-  return JSON.parse(data) as T[]
-}
+// 型アサーションでJSONデータをエンティティ型として扱う
+const contentsCache = contentData as unknown as ContentEntity[]
+const contentStatesCache = contentStateData as unknown as ContentStateEntity[]
 
 export const getContents = (): ContentEntity[] => {
-  return loadJsonFile<ContentEntity>('content.json')
+  return contentsCache
 }
 
 export const getContentStates = (): ContentStateEntity[] => {
-  return loadJsonFile<ContentStateEntity>('content_state.json')
+  return contentStatesCache
 }
 
 // ID指定で取得
@@ -60,5 +50,5 @@ export const getContentStatesByStatus = (
 }
 
 // 互換性のためのエクスポート
-export const contents = getContents()
-export const contentStates = getContentStates()
+export const contents = contentsCache
+export const contentStates = contentStatesCache

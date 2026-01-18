@@ -1,9 +1,9 @@
-export type { ContentEntity } from './Content.ts'
-export type { ContentStateEntity } from './ContentState.ts'
-export type { UserAnimeListItemEntity } from './UserAnimeListItem.ts'
+export type { ContentEntity } from './Content'
+export type { ContentStateEntity } from './ContentState'
+export type { UserAnimeListItemEntity } from './UserAnimeListItem'
 export {
   toContentEntity,
   toContentStateEntity,
   fromContentEntity,
   fromContentStateEntity,
-} from './converters.ts'
+} from './converters'

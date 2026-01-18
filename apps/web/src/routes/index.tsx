@@ -5,7 +5,30 @@ import { Button } from "~/components/parts/Button/Button";
 import { AppLink } from "~/routes.config";
 import { css } from "~/styled-system/css";
 import { contentStates, getContentById } from "@repo/mal-database";
+import { day } from "~/libs/day";
 
+const list = contentStates
+  .map((state) => {
+    const content = getContentById(state.id);
+    if (content == null) return;
+    return {
+      state: state,
+      content: content,
+    };
+  })
+  .filter(
+    (
+      val,
+    ): val is {
+      state: (typeof contentStates)[number];
+      content: NonNullable<ReturnType<typeof getContentById>>;
+    } => val != null,
+  )
+  .sort(
+    (a, b) =>
+      day(b.content.startDate ?? 0).unix() -
+      day(a.content.startDate ?? 0).unix(),
+  );
 const styled = css({
   fontSize: "heading-lg",
   color: "accent.disabled",
@@ -30,11 +53,10 @@ export default component$(() => {
           padding: "0",
         })}
       >
-        {contentStates.map((state) => {
-          const content = getContentById(state.id);
+        {list.map(({ state, content }) => {
           return (
             <li
-              key={state.id}
+              key={content.id}
               class={css({
                 display: "flex",
                 flexDirection: "column",
@@ -70,6 +92,13 @@ export default component$(() => {
                 >
                   {content?.alternativeTitlesJa}
                 </Link>
+              </p>
+              <p>{day(content.startDate).format('YYYY/MM/DD')}</p>
+              <p>
+                {/* 視聴開始できるかどうかをstartDateで比較し確認する。 */}
+                {day(content.startDate).unix() > day().unix()
+                  ? "Not started"
+                  : "Started"}
               </p>
             </li>
           );

@@ -1,13 +1,10 @@
 import { component$ } from "@builder.io/qwik";
 import { Link, type DocumentHead } from "@builder.io/qwik-city";
 import { AccordionContent } from "~/components/Accordion";
-import { animeContents } from "~/components/contents/media/anime/data";
-import { myListStateGetById } from "~/components/contents/media/myList/data";
 import { Button } from "~/components/parts/Button/Button";
 import { AppLink } from "~/routes.config";
 import { css } from "~/styled-system/css";
-import { MyListState } from "~/utils/mal/MyListState";
-
+import { contentStates, getContentById } from "@repo/mal-database";
 
 const styled = css({
   fontSize: "heading-lg",
@@ -24,51 +21,58 @@ export default component$(() => {
       </div>
       <Button size="small">button</Button>
       <AppLink route="/">home</AppLink>
-      <p>{animeContents.length}</p>
-      <ul>
-        {animeContents.map(val => {
-          const myState = myListStateGetById(val.id);
-          if (myState?.status !== MyListState.PLAN_TO_WATCH) return null
+      <p>{contentStates.length}</p>
+      <ul
+        class={css({
+          display: "flex",
+          gap: "16px",
+          flexWrap: "wrap",
+          padding: "0",
+        })}
+      >
+        {contentStates.map((state) => {
+          const content = getContentById(state.id);
           return (
-            <li key={val.id}>
-              <p>
-                <Link href={`https://myanimelist.net/anime/${val.id}/`} target="_blank">
-                  {val.name}
+            <li
+              key={state.id}
+              class={css({
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                listStyle: "none",
+                width: "200px",
+                border: "1px solid",
+                borderColor: "accent.secondary",
+              })}
+            >
+              <img
+                src={content?.mainPictureLarge ?? ""}
+                alt={content?.title}
+                width={200}
+                height={300}
+                class={css({
+                  objectFit: "contain",
+                  borderBottom: "1px solid",
+                  borderColor: "accent.primary",
+                })}
+              />
+              <p>{state.listStatusStatus}</p>
+              <p
+                class={css({
+                  fontSize: "sm",
+                  color: "text.secondary",
+                  flex: "1",
+                })}
+              >
+                <Link
+                  href={`https://myanimelist.net/anime/${content?.myanimelistId}/`}
+                  target="_blank"
+                >
+                  {content?.alternativeTitlesJa}
                 </Link>
               </p>
-              <p>
-                <img src={val.picture} loading="lazy" alt={val.name} />
-              </p>
-              <p>
-                開始日:
-                {val.startedAt.isValid() ? (
-                  <span>
-                    {val.startedAt.format("YYYY年MM月")}
-                  </span>
-                ) : (
-                  <span>
-                    -
-                  </span>
-                )}
-              </p>
-              <p>
-                終了日:
-                {val.endedAt.isValid() ? (
-                  <span>
-                    {val.endedAt.format("YYYY年MM月")}
-                  </span>
-                ) : (
-                  <span>
-                    -
-                  </span>
-                )}
-              </p>
-              <p>
-                {myState?.status}
-              </p>
-
             </li>
-          )
+          );
         })}
       </ul>
 

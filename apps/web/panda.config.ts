@@ -14,6 +14,11 @@ export default defineConfig({
     body: {
       bg: "bg.primary",
       color: "accent.primary",
+    },
+    a: {
+      color: "accent.primary",
+      textDecoration: "underline",
     }
   }
+
 });

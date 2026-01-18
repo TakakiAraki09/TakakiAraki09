@@ -41,7 +41,7 @@
     "@eslint/js": "latest",
     "@qwik-ui/headless": "^0.7.4",
     "@qwikest/icons": "^0.0.13",
-    "@repo/mal-access": "workspace:*",
+    "@repo/mal-database": "workspace:*",
     "@types/node": "20.19.0",
     "eslint": "9.32.0",
     "eslint-plugin-qwik": "^1.18.0",

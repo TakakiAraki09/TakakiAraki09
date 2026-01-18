@@ -1,5 +1,5 @@
 {
-  "name": "mal-database",
+  "name": "@repo/mal-database",
   "type": "module",
   "version": "1.0.0",
   "description": "MyAnimeList database with export/import functionality",

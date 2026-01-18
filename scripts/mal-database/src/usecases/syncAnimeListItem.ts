@@ -1,7 +1,6 @@
 import { randomUUID } from 'crypto'
-import type { Daum } from '../api/getAnimeList.ts'
+import type { UserAnimeListItemEntity, ContentStateEntity } from '../entities/index.ts'
 import { animeDetail } from '../api/getAnimeDetail.ts'
-import { convertToContentStateEntity } from '../api/getAnimeList.ts'
 import {
   findContentByMalId,
   createContent,
@@ -10,7 +9,7 @@ import {
 import { fromContentEntity, fromContentStateEntity } from '../entities/index.ts'
 
 interface SyncAnimeListItemParams {
-  item: Daum
+  item: UserAnimeListItemEntity
   contentType: 'anime' | 'manga'
   rateLimitMs?: number
 }
@@ -22,9 +21,9 @@ export const syncAnimeListItem = async ({
   contentType,
   rateLimitMs = 500,
 }: SyncAnimeListItemParams): Promise<void> => {
-  const malId = item.node.id
+  const malId = item.malId
 
-  console.log(`Processing: ${item.node.title} (MAL ID: ${malId})`)
+  console.log(`Processing: ${item.title} (MAL ID: ${malId})`)
 
   const existingContent = await findContentByMalId(malId, contentType)
 
@@ -48,7 +47,18 @@ export const syncAnimeListItem = async ({
     console.log(`  - Content already exists with id: ${contentId}`)
   }
 
-  const newContentStateEntity = convertToContentStateEntity(item.list_status, contentId)
+  const newContentStateEntity: ContentStateEntity = {
+    id: contentId,
+    listStatusStatus: item.status,
+    listStatusScore: item.score,
+    listStatusNumEpisodesWatched: item.numEpisodesWatched,
+    listStatusIsRewatching: item.isRewatching ? 1 : 0,
+    listStatusUpdatedAt: item.updatedAt,
+    listStatusStartDate: item.startDate,
+    listStatusFinishDate: item.finishDate,
+    createdAt: new Date(),
+  }
+
   await upsertContentState(fromContentStateEntity(newContentStateEntity))
   console.log(`  - Upserted content_state`)
 }

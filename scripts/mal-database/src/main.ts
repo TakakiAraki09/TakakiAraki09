@@ -1,25 +1,16 @@
-import { userAnimeList } from './api/getAnimeList.ts';
-import { syncAnimeListItem } from './usecases/syncAnimeListItem.ts';
+import { syncUserAnimeList } from './usecases/syncUserAnimeList.ts'
 
-const userName = 'araki0809'; // Replace with actual username or use '@me' for authenticated user
+const userName = 'araki0809'
 
-userAnimeList({
+syncUserAnimeList({
   userName,
-  limit: 500, // Start with a small limit for testing
+  contentType: 'anime',
+  limit: 500,
+  rateLimitMs: 500,
 })
-  .then(async (res) => {
-    console.log(`Found ${res.data.length} anime in user list`);
-
-    for (const item of res.data) {
-      await syncAnimeListItem({
-        item,
-        contentType: 'anime',
-        rateLimitMs: 500,
-      })
-    }
-
-    console.log('All done!');
+  .then(() => {
+    console.log('Sync completed successfully!')
   })
   .catch((error) => {
-    console.error('Error:', error);
+    console.error('Error:', error)
   })

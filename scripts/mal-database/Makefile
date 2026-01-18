@@ -10,13 +10,14 @@ SCHEMA_FILES := $(SCHEMA_DIR)/*.sql
 .DEFAULT_GOAL := help
 
 # Phony targets
-.PHONY: help db-init db-reset db-backup db-restore db-schema db-clean
+.PHONY: help db-init db-reset db-migrate db-backup db-restore db-schema db-clean
 
 # Help command
 help:
 	@echo "Available commands:"
 	@echo "  make db-init      - Initialize database with schema (creates if not exists)"
 	@echo "  make db-reset     - Reset database (delete and recreate)"
+	@echo "  make db-migrate   - Migrate database schema (preserve data with sqlite3def)"
 	@echo "  make db-backup    - Backup current database"
 	@echo "  make db-restore   - Restore database from backup"
 	@echo "  make db-schema    - Show database schema"
@@ -36,6 +37,18 @@ db-reset:
 	@mkdir -p ./dist
 	@cat $(SCHEMA_FILES) | sqlite3 $(DB_FILE)
 	@echo "Database reset successfully!"
+
+# Migrate database schema (preserve data)
+db-migrate:
+	@if [ ! -f $(DB_FILE) ]; then \
+		echo "Error: Database file does not exist! Run 'make db-init' first."; \
+		exit 1; \
+	fi
+	@echo "Migrating database schema..."
+	@echo "WARNING: CHECK constraints changes may not be detected by sqlite3def."
+	@echo "If you modified CHECK constraints, consider using 'make db-reset' instead."
+	@cat $(SCHEMA_FILES) | sqlite3def $(DB_FILE)
+	@echo "Migration completed!"
 
 # Backup database
 db-backup:

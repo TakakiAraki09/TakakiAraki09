@@ -1,55 +1,79 @@
 import { component$ } from "@builder.io/qwik";
-import { Link, type DocumentHead } from "@builder.io/qwik-city";
+import { type DocumentHead } from "@builder.io/qwik-city";
 import { AccordionContent } from "~/components/Accordion";
-import { Button } from "~/components/parts/Button/Button";
-import { AppLink } from "~/routes.config";
 import { css } from "~/styled-system/css";
-import { contentStates, getContentById } from "@repo/mal-database";
+import {
+  contentStates,
+  getContentAnimeById,
+  contentNews,
+} from "@repo/mal-database";
 import { day } from "~/libs/day";
 
-import { SiNetflix } from "@qwikest/icons/simpleicons";
-import { TbBrandAmazon } from "@qwikest/icons/tablericons";
-import { broadcastUtils } from "~/libs/broadcast";
+import { Card, CardProps } from "~/components/card/Card";
+import { getMyListState, getMyListStateLabel } from "~/utils/mal/MyListState";
 
-const list = contentStates
-
-  .map((state) => {
-    const content = getContentById(state.id);
-    if (content == null) return;
+const newsList = contentNews
+  .map((news): CardProps | null => {
     return {
-      state: state,
-      content: content,
+      title: news.title,
+      imageUrl: news.ogImageUrl ?? "",
+      description: `${day(news.isoDate).format("YYYY/MM/DD")}`,
+      link: news.link,
+      labels: [],
     };
   })
-  .filter(
-    (
-      val,
-    ): val is {
-      state: (typeof contentStates)[number];
-      content: NonNullable<ReturnType<typeof getContentById>>;
-    } => val != null,
-  )
+  .filter((val) => val != null);
+
+const animeList = contentStates
+  .map((state) => {
+    const animeContent = getContentAnimeById(state.id);
+    if (animeContent == null) return null;
+    return {
+      state: state,
+      content: animeContent,
+    };
+  })
+  .filter((content) => content !== null)
   .sort(
     (a, b) =>
-      day(b.content.startDate ?? 0).unix() -
-      day(a.content.startDate ?? 0).unix(),
-  );
-const styled = css({
-  fontSize: "heading-lg",
-  color: "accent.disabled",
-});
+      day(b.content?.startDate ?? 0).unix() -
+      day(a.content?.startDate ?? 0).unix(),
+  )
+  .map((val): CardProps => {
+    const state = getMyListState(val?.state.listStatusStatus ?? "");
+    const label = getMyListStateLabel(state);
+    return {
+      title: val?.content.alternativeTitlesJa ?? "No Title",
+      imageUrl: val?.content.mainPictureLarge ?? "",
+      link: `https://myanimelist.net/anime/${val?.content.myanimelistId}/`,
+      labels: [
+        {
+          displayName: label.displayLabel,
+          color: label.color,
+        },
+      ],
+    };
+  });
+
 export default component$(() => {
   return (
     <>
-      <h1 class={styled}>Hi 👋</h1>
-      <div>
-        Can't wait to see what you build with qwik!
-        <br />
-        Happy coding.
-      </div>
-      <Button size="small">button</Button>
-      <AppLink route="/">home</AppLink>
-      <p>{contentStates.length}</p>
+      <h1> dashboard 👋</h1>
+      <h2>最新ニュース</h2>
+      <ul
+        class={css({
+          display: "flex",
+          gap: "16px",
+          flexWrap: "wrap",
+          padding: "0",
+        })}
+      >
+        {newsList.map((item, index) => (
+          <li key={index} class={css({ listStyle: "none" })}>
+            <Card {...item} />
+          </li>
+        ))}
+      </ul>
       <h2>視聴可能</h2>
       <ul
         class={css({
@@ -59,159 +83,11 @@ export default component$(() => {
           padding: "0",
         })}
       >
-        {list
-          .filter(
-            (val) =>
-              day(val.content.startDate).unix() <= day().unix() &&
-              val.state.listStatusStatus === "plan_to_watch",
-          )
-          .map(({ state, content }) => {
-            return (
-              <li
-                key={content.id}
-                class={css({
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  listStyle: "none",
-                  width: "200px",
-                  border: "1px solid",
-                  borderColor: "accent.secondary",
-                })}
-              >
-                <img
-                  src={content?.mainPictureLarge ?? ""}
-                  alt={content?.title}
-                  width={200}
-                  height={300}
-                  class={css({
-                    bg: "bg.secondary",
-                    objectFit: "contain",
-                    borderBottom: "1px solid",
-                    borderColor: "accent.primary",
-                  })}
-                />
-                <p>{state.listStatusStatus}</p>
-                <p
-                  class={css({
-                    fontSize: "sm",
-                    color: "text.secondary",
-                    flex: "1",
-                  })}
-                >
-                  <Link
-                    href={`https://myanimelist.net/anime/${content?.myanimelistId}/`}
-                    target="_blank"
-                  >
-                    {content?.alternativeTitlesJa}
-                  </Link>
-                </p>
-                <p>{day(content.startDate).format("YYYY/MM/DD")}</p>
-                <p class={css({ display: "flex", gap: "8px" })}>
-                  <Link
-                    href={broadcastUtils.netflix(
-                      content.alternativeTitlesJa ?? "",
-                    )}
-                    target="_blank"
-                  >
-                    <SiNetflix font-size={"30px"} color="#E50914" />
-                  </Link>
-                  <Link
-                    href={broadcastUtils.amazon(
-                      content.alternativeTitlesJa ?? "",
-                    )}
-                    target="_blank"
-                  >
-                    <TbBrandAmazon font-size={"30px"} color="#FF9900" />
-                  </Link>
-                  <Link
-                    href={broadcastUtils.unext(
-                      content.alternativeTitlesJa ?? "",
-                    )}
-                    target="_blank"
-                  >
-                    UNext
-                  </Link>
-                  <Link
-                    href={broadcastUtils.abema(
-                      content.alternativeTitlesJa ?? "",
-                    )}
-                    target="_blank"
-                  >
-                    Abema
-                  </Link>
-                </p>
-
-                <p>
-                  {/* 視聴開始できるかどうかをstartDateで比較し確認する。 */}
-                  {day(content.startDate).unix() > day().unix()
-                    ? "Not started"
-                    : "Started"}
-                </p>
-              </li>
-            );
-          })}
-      </ul>
-      <h2>すべて</h2>
-      <ul
-        class={css({
-          display: "flex",
-          gap: "16px",
-          flexWrap: "wrap",
-          padding: "0",
-        })}
-      >
-        {list.map(({ state, content }) => {
-          return (
-            <li
-              key={content.id}
-              class={css({
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                listStyle: "none",
-                width: "200px",
-                border: "1px solid",
-                borderColor: "accent.secondary",
-              })}
-            >
-              <img
-                src={content?.mainPictureLarge ?? ""}
-                alt={content?.title}
-                width={200}
-                height={300}
-                class={css({
-                  bg: "bg.secondary",
-                  objectFit: "contain",
-                  borderBottom: "1px solid",
-                  borderColor: "accent.primary",
-                })}
-              />
-              <p>{state.listStatusStatus}</p>
-              <p
-                class={css({
-                  fontSize: "sm",
-                  color: "text.secondary",
-                  flex: "1",
-                })}
-              >
-                <Link
-                  href={`https://myanimelist.net/anime/${content?.myanimelistId}/`}
-                  target="_blank"
-                >
-                  {content?.alternativeTitlesJa}
-                </Link>
-              </p>
-              <p>{day(content.startDate).format("YYYY/MM/DD")}</p>
-              <p>
-                {/* 視聴開始できるかどうかをstartDateで比較し確認する。 */}
-                {day(content.startDate).unix() > day().unix()
-                  ? "Not started"
-                  : "Started"}
-              </p>
-            </li>
-          );
-        })}
+        {animeList.map((item, index) => (
+          <li key={index} class={css({ listStyle: "none" })}>
+            <Card {...item} />
+          </li>
+        ))}
       </ul>
 
       <AccordionContent />

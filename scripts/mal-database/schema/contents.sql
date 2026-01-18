@@ -39,6 +39,7 @@ CREATE TABLE "content_news" (
     "pub_date" text,
     "iso_date" text,
     "content" text,
+    "og_image" text,
     "content_snippet" text,
     "created_at" timestamp default current_timestamp not null,
     unique (guid),

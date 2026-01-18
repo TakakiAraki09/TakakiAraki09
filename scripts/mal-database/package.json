@@ -29,6 +29,7 @@
   "dependencies": {
     "@types/node": "20.19.0",
     "better-sqlite3": "^12.6.2",
+    "cheerio": "^1.1.2",
     "kysely": "^0.28.9",
     "rss-parser": "^3.13.0"
   },

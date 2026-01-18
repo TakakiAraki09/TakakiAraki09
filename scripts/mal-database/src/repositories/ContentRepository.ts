@@ -130,3 +130,27 @@ export const findAllContentNews = async (): Promise<ContentNews[]> => {
     .selectAll()
     .execute()
 }
+
+export const upsertContentNews = async (content: NewContent, contentNews: NewContentNews) => {
+  const existing = await findContentNewsByGuid(contentNews.guid)
+
+  if (existing) {
+    const { created_at, ...updateData } = contentNews
+    const updatedContentNews = await db
+      .updateTable('content_news')
+      .set(updateData)
+      .where('guid', '=', contentNews.guid)
+      .returningAll()
+      .executeTakeFirstOrThrow()
+
+    const existingContent = await db
+      .selectFrom('content')
+      .where('id', '=', existing.id)
+      .selectAll()
+      .executeTakeFirstOrThrow()
+
+    return { content: existingContent, contentNews: updatedContentNews }
+  }
+
+  return await createContentNews(content, contentNews)
+}

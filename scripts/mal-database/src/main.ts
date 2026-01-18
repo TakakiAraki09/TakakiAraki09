@@ -16,7 +16,9 @@ syncUserAnimeList({
     console.error('Error:', error)
   })
 
-syncNews().then(() => {
+syncNews({
+  upsert: false,
+}).then(() => {
   console.log('News sync completed successfully!')
 }).catch((error) => {
   console.error('Error during news sync:', error)

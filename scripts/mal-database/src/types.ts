@@ -56,6 +56,7 @@ export interface ContentNewsTable {
   guid: string
   title: string
   link: string
+  og_image: string | null
   pub_date: string | null
   iso_date: string | null
   content: string | null

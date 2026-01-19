@@ -26,6 +26,8 @@ export const Card = component$<CardProps>((props) => {
         borderRadius: "8px",
         overflow: "hidden",
         width: "800px",
+        textDecoration: "none",
+        color: "accent.primary",
       })}
     >
       <img

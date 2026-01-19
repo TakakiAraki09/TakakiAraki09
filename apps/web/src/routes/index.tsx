@@ -1,5 +1,5 @@
 import { component$ } from "@builder.io/qwik";
-import { type DocumentHead } from "@builder.io/qwik-city";
+import { Link, type DocumentHead } from "@builder.io/qwik-city";
 import { AccordionContent } from "~/components/Accordion";
 import { css } from "~/styled-system/css";
 import {
@@ -13,8 +13,10 @@ import { Card, CardProps } from "~/components/card/Card";
 import { getMyListState, getMyListStateLabel } from "~/utils/mal/MyListState";
 
 const newsList = contentNews
-  .map((news): CardProps | null => {
+  .map((news): (CardProps & { id: string }) | null => {
+    if (!news.title || !news.link || !news.id) return null;
     return {
+      id: news.id,
       title: news.title,
       imageUrl: news.ogImageUrl ?? "",
       description: `${day(news.isoDate).format("YYYY/MM/DD")}`,
@@ -22,7 +24,8 @@ const newsList = contentNews
       labels: [],
     };
   })
-  .filter((val) => val != null);
+  .filter((val): val is CardProps & { id: string } => val !== null)
+  .slice(0, 10);
 
 const animeList = contentStates
   .map((state) => {
@@ -33,19 +36,25 @@ const animeList = contentStates
       content: animeContent,
     };
   })
-  .filter((content) => content !== null)
+  .filter((content): content is { state: typeof contentStates[number]; content: NonNullable<ReturnType<typeof getContentAnimeById>> } => content !== null)
   .sort(
     (a, b) =>
-      day(b.content?.startDate ?? 0).unix() -
-      day(a.content?.startDate ?? 0).unix(),
+      day(b.content.startDate ?? 0).unix() -
+      day(a.content.startDate ?? 0).unix(),
   )
-  .map((val): CardProps => {
-    const state = getMyListState(val?.state.listStatusStatus ?? "");
+  .slice(0, 10)
+  .map((val): CardProps & { id: string } => {
+    const state = getMyListState(val.state.listStatusStatus ?? "");
     const label = getMyListStateLabel(state);
     return {
-      title: val?.content.alternativeTitlesJa ?? "No Title",
-      imageUrl: val?.content.mainPictureLarge ?? "",
-      link: `https://myanimelist.net/anime/${val?.content.myanimelistId}/`,
+      id: val.content.id.toString(),
+      title: val.content.alternativeTitlesJa ?? "No Title",
+      imageUrl: val.content.mainPictureLarge ?? "",
+      link: `https://myanimelist.net/anime/${val.content.myanimelistId}/`,
+      description: `
+      開始日: ${day(val.content.startDate ?? 0).format("YYYY/MM/DD")}
+      終了日: ${day(val.content.endDate ?? 0).format("YYYY/MM/DD")}
+      `,
       labels: [
         {
           displayName: label.displayLabel,
@@ -60,6 +69,7 @@ export default component$(() => {
     <>
       <h1> dashboard 👋</h1>
       <h2>最新ニュース</h2>
+      <Link href="/">a</Link>
       <ul
         class={css({
           display: "flex",
@@ -69,8 +79,13 @@ export default component$(() => {
         })}
       >
         {newsList.map((item, index) => (
-          <li key={index} class={css({ listStyle: "none" })}>
+          <li key={index} class={css({ listStyle: "none", display: "flex" })}>
             <Card {...item} />
+            <p>
+              <Link href={`/TakakiAraki09/detail/${item.id}/`} >
+                detail
+              </Link>
+            </p>
           </li>
         ))}
       </ul>
@@ -84,8 +99,11 @@ export default component$(() => {
         })}
       >
         {animeList.map((item, index) => (
-          <li key={index} class={css({ listStyle: "none" })}>
+          <li key={index} class={css({ listStyle: "none", display: "flex" })}>
             <Card {...item} />
+            <Link href={`/TakakiAraki09/detail/${item.id}/`}>
+              detail
+            </Link>
           </li>
         ))}
       </ul>

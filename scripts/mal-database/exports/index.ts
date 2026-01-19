@@ -1,9 +1,11 @@
-import type { ContentEntity, ContentAnimeEntity, ContentStateEntity, ContentNewsEntity } from '../src/entities/index.ts'
 // JSONファイルを静的にインポート（Viteがビルド時にバンドルに含める）
-import contentData from './content.json' with { type: 'json' }
-import contentAnimeData from './content_anime.json' with { type: 'json' }
-import contentStateData from './content_state.json' with { type: 'json' }
-import contentNewsData from './content_news.json' with { type: 'json' }
+import contentData from './content.json';
+import contentAnimeData from './content_anime.json';
+import contentStateData from './content_state.json';
+import contentNewsData from './content_news.json';
+import type { ContentAnimeEntity, ContentEntity, ContentNewsEntity } from '../src/entities/Content.ts';
+import type { ContentStateEntity } from '../src/entities/ContentState.ts';
+// TODO: importが変だからlibrary buildを行う
 
 // 型アサーションでJSONデータをエンティティ型として扱う
 const contentsCache = contentData as unknown as ContentEntity[]

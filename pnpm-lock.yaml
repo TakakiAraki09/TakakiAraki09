@@ -33,6 +33,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@builder.io/qwik-labs':
+        specifier: github:QwikDev/qwik-labs-build#main
+        version: https://codeload.github.com/QwikDev/qwik-labs-build/tar.gz/36ba42937317f164136c6de5c711e3361acdb705(vite@7.2.6(@types/node@20.19.0)(less@4.5.1)(lightningcss@1.25.1)(sass@1.97.2)(stylus@0.62.0))(zod@4.3.5)
       '@repo/panda-config':
         specifier: workspace:*
         version: link:../../packages/panda-config
@@ -52,9 +55,6 @@ importers:
       '@builder.io/qwik-city':
         specifier: ^1.18.0
         version: 1.18.0(@types/node@20.19.0)(less@4.5.1)(lightningcss@1.25.1)(rollup@4.55.1)(sass@1.97.2)(stylus@0.62.0)(typescript@5.4.5)
-      '@builder.io/qwik-labs':
-        specifier: github:QwikDev/qwik-labs-build#main
-        version: https://codeload.github.com/QwikDev/qwik-labs-build/tar.gz/36ba42937317f164136c6de5c711e3361acdb705(vite@7.2.6(@types/node@20.19.0)(less@4.5.1)(lightningcss@1.25.1)(sass@1.97.2)(stylus@0.62.0))(zod@4.3.5)
       '@builder.io/vite-plugin-macro':
         specifier: ~0.0.7
         version: 0.0.7(@types/node@20.19.0)(less@4.5.1)(lightningcss@1.25.1)(rollup@4.55.1)(sass@1.97.2)(stylus@0.62.0)
@@ -114,8 +114,6 @@ importers:
         version: link:../typescript-config
 
   packages/typescript-config: {}
-
-  scripts/mal-access: {}
 
   scripts/mal-database:
     dependencies:

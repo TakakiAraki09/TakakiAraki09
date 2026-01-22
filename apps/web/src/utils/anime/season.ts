@@ -1,3 +1,6 @@
+import { ContentAnimeEntity } from "@repo/mal-database";
+import { day } from "~/libs/day";
+
 export enum AnimeSeason {
   UNSTATE_SEASON = 0,
   SPRING = 1,
@@ -6,7 +9,8 @@ export enum AnimeSeason {
   WINTER = 4,
 }
 
-export const getSeason = (month: number) => {
+export const getSeasonByAnime = (anime: ContentAnimeEntity) => {
+  const month = day(anime.startDate).get("months") + 1;
   switch (month) {
     case 1:
     case 2:
@@ -16,10 +20,11 @@ export const getSeason = (month: number) => {
     case 5:
     case 6:
       return AnimeSeason.SPRING;
+    case 7:
     case 8:
     case 9:
-    case 10:
       return AnimeSeason.SUMMER;
+    case 10:
     case 11:
     case 12:
       return AnimeSeason.AUTUMN;

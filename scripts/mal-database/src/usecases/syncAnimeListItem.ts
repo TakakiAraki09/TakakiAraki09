@@ -14,12 +14,12 @@ interface SyncAnimeListItemParams {
   rateLimitMs?: number
 }
 
-const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
+// const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
 
 export const syncAnimeListItem = async ({
   item,
   contentType,
-  rateLimitMs = 500,
+  // rateLimitMs = 500,
 }: SyncAnimeListItemParams): Promise<void> => {
   const malId = item.malId
 
@@ -38,7 +38,7 @@ export const syncAnimeListItem = async ({
       animeId: malId,
       id: contentId,
     })
-    await sleep(rateLimitMs)
+    // await sleep(rateLimitMs)
 
     const newContentEntity: ContentEntity = {
       id: contentId,

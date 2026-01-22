@@ -28,9 +28,6 @@ export default defineConfig((): UserConfig => {
       qwikVite(),
       tsconfigPaths({ root: "." }),
     ],
-    optimizeDeps: {
-      exclude: [],
-    },
   };
 });
 // *** utils ***

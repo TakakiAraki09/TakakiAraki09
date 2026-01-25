@@ -1,11 +1,12 @@
 import { component$ } from "@builder.io/qwik";
+import { Children } from "~/interfaces/components";
 import { css } from "~/styled-system/css";
 
 export interface CardProps {
   title: string;
   imageUrl: string;
   link: string;
-  description?: string;
+  content?: Children;
   labels: {
     displayName: string;
     color: string;
@@ -54,8 +55,10 @@ export const Card = component$<CardProps>((props) => {
       >
         <h3 style={{ margin: "0 0 8px 0", flex: 1 }}>{props.title}</h3>
 
-        {props.description && (
-          <p style={{ margin: "8px 0 0 0", flex: 1 }}>{props.description}</p>
+        {props.content && (
+          <div style={{ margin: "8px 0 0 0", flex: 1 }}>
+            {props.content}
+          </div>
         )}
 
         <p style={{ display: "flex", gap: "4px", flexWrap: "wrap" }}>

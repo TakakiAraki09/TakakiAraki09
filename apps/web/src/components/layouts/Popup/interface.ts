@@ -1,4 +1,3 @@
-
 export interface PopupGroup {
   groupId: string;
   iconUrl: string;

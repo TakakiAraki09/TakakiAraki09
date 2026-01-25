@@ -8,10 +8,10 @@
  * - created_at は Date型（DB型は string）
  */
 export interface AuthenticateEntity {
-  id: number
-  tokenType: string
-  expiresIn: number
-  accessToken: string
-  refreshToken: string
-  createdAt: Date
+  id: number;
+  tokenType: string;
+  expiresIn: number;
+  accessToken: string;
+  refreshToken: string;
+  createdAt: Date;
 }

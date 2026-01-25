@@ -1,7 +1,5 @@
 import * as cheerio from "cheerio";
 
-
-
 export async function fetchOgImageUrl(pageUrl: string) {
   const res = await fetch(pageUrl, {
     headers: {

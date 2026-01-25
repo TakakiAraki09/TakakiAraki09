@@ -1,10 +1,8 @@
-
 import type { RecipeConfig } from "@pandacss/dev";
 export const circle: RecipeConfig = {
   className: "circle",
   description: "circle component styles",
-  base: {
-  },
+  base: {},
   variants: {
     size: {
       sm: {

@@ -19,7 +19,7 @@ const getNetflixSearchUrl = (target: string) => {
   const netflix = new URL("https://www.netflix.com/search");
   netflix.searchParams.set("q", target);
   return netflix.toString();
-}
+};
 export const broadcastUtils = {
   amazon: getAmazonSearchUrl,
   unext: getUnextSearchUrl,

@@ -12,6 +12,7 @@ tsx src/export-main.ts
 ```
 
 これで以下のファイルが生成されるのだ：
+
 - `exports/content.json` - contentテーブルのデータ（コンテンツタイプのみ）
 - `exports/content_anime.json` - content_animeテーブルのデータ（アニメ詳細情報）
 - `exports/content_state.json` - content_stateテーブルのデータ（視聴状態）
@@ -22,18 +23,22 @@ tsx src/export-main.ts
 
 ```typescript
 // 方法1: 直接import（推奨）
-import { contents, contentAnimes, contentStates } from './exports/index.ts'
+import { contents, contentAnimes, contentStates } from "./exports/index.ts";
 
-console.log(`Total contents: ${contents.length}`)
-console.log(`Total content animes: ${contentAnimes.length}`)
-console.log(`Total content states: ${contentStates.length}`)
+console.log(`Total contents: ${contents.length}`);
+console.log(`Total content animes: ${contentAnimes.length}`);
+console.log(`Total content states: ${contentStates.length}`);
 
 // 方法2: 関数で取得（動的に読み込む場合）
-import { getContents, getContentAnimes, getContentStates } from './exports/index.ts'
+import {
+  getContents,
+  getContentAnimes,
+  getContentStates,
+} from "./exports/index.ts";
 
-const contents = getContents()
-const contentAnimes = getContentAnimes()
-const contentStates = getContentStates()
+const contents = getContents();
+const contentAnimes = getContentAnimes();
+const contentStates = getContentStates();
 ```
 
 ### 3. ID指定で取得
@@ -48,25 +53,25 @@ import {
   getContentAnimeByMalId,
   searchContentAnimesByTitle,
   getContentStatesByStatus,
-} from './exports/index.ts'
+} from "./exports/index.ts";
 
 // IDで取得
-const content = getContentById('uuid-here')
-const contentAnime = getContentAnimeById('uuid-here')
-const contentState = getContentStateById('uuid-here')
+const content = getContentById("uuid-here");
+const contentAnime = getContentAnimeById("uuid-here");
+const contentState = getContentStateById("uuid-here");
 
 // MyAnimeList IDで取得
-const anime = getContentAnimeByMalId(12345)
+const anime = getContentAnimeByMalId(12345);
 
 // タイトルで検索（部分一致）
-const results = searchContentAnimesByTitle('進撃の巨人')
+const results = searchContentAnimesByTitle("進撃の巨人");
 
 // ステータスでフィルタ
-const watching = getContentStatesByStatus('watching')
-const completed = getContentStatesByStatus('completed')
+const watching = getContentStatesByStatus("watching");
+const completed = getContentStatesByStatus("completed");
 
-console.log(`Watching: ${watching.length} anime`)
-console.log(`Completed: ${completed.length} anime`)
+console.log(`Watching: ${watching.length} anime`);
+console.log(`Completed: ${completed.length} anime`);
 ```
 
 ## データ形式
@@ -77,8 +82,8 @@ console.log(`Completed: ${completed.length} anime`)
 
 ```typescript
 interface ContentEntity {
-  id: string
-  contentType: 'anime' | 'manga'
+  id: string;
+  contentType: "anime" | "manga";
 }
 ```
 
@@ -88,28 +93,28 @@ interface ContentEntity {
 
 ```typescript
 interface ContentAnimeEntity {
-  id: string
-  myanimelistId: number
-  title: string
-  mainPictureMedium: string | null
-  mainPictureLarge: string | null
-  alternativeTitlesEn: string | null
-  alternativeTitlesJa: string | null
-  alternativeTitlesSynonyms: string | null
-  startDate: string | null
-  synopsis: string | null
-  mean: number | null
-  rank: number | null
-  popularity: number | null
-  numListUsers: number | null
-  numScoringUsers: number | null
-  nsfw: string | null
-  malCreatedAt: string | null
-  malUpdatedAt: string | null
-  mediaType: string | null
-  status: string | null
-  genres: string | null
-  createdAt: Date
+  id: string;
+  myanimelistId: number;
+  title: string;
+  mainPictureMedium: string | null;
+  mainPictureLarge: string | null;
+  alternativeTitlesEn: string | null;
+  alternativeTitlesJa: string | null;
+  alternativeTitlesSynonyms: string | null;
+  startDate: string | null;
+  synopsis: string | null;
+  mean: number | null;
+  rank: number | null;
+  popularity: number | null;
+  numListUsers: number | null;
+  numScoringUsers: number | null;
+  nsfw: string | null;
+  malCreatedAt: string | null;
+  malUpdatedAt: string | null;
+  mediaType: string | null;
+  status: string | null;
+  genres: string | null;
+  createdAt: Date;
 }
 ```
 
@@ -119,21 +124,28 @@ interface ContentAnimeEntity {
 
 ```typescript
 interface ContentStateEntity {
-  id: string
-  listStatusStatus: 'watching' | 'completed' | 'on_hold' | 'dropped' | 'plan_to_watch' | 'empty'
-  listStatusScore: number | null
-  listStatusNumEpisodesWatched: number | null
-  listStatusIsRewatching: number | null
-  listStatusUpdatedAt: Date | null
-  listStatusStartDate: Date | null
-  listStatusFinishDate: Date | null
-  createdAt: Date
+  id: string;
+  listStatusStatus:
+    | "watching"
+    | "completed"
+    | "on_hold"
+    | "dropped"
+    | "plan_to_watch"
+    | "empty";
+  listStatusScore: number | null;
+  listStatusNumEpisodesWatched: number | null;
+  listStatusIsRewatching: number | null;
+  listStatusUpdatedAt: Date | null;
+  listStatusStartDate: Date | null;
+  listStatusFinishDate: Date | null;
+  createdAt: Date;
 }
 ```
 
 ## 設計のポイント
 
 **ContentとContentAnimeは別概念なのだ：**
+
 - `content` = コンテンツの種類（anime or manga）だけを管理
 - `content_anime` = アニメ固有の詳細情報を管理
 - `content_state` = ユーザーの視聴状態を管理

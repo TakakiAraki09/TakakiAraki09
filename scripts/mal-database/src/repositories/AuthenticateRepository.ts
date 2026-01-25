@@ -1,43 +1,49 @@
-import { db } from '../database.ts'
-import type { NewAuthenticate } from '../types.ts'
-import type { AuthenticateEntity } from '../entities/Authenticate.ts'
-import { toAuthenticateEntity } from '../entities/converters.ts'
+import { db } from "../database.ts";
+import type { NewAuthenticate } from "../types.ts";
+import type { AuthenticateEntity } from "../entities/Authenticate.ts";
+import { toAuthenticateEntity } from "../entities/converters.ts";
 
-export const createAuthenticate = async (authenticate: NewAuthenticate): Promise<AuthenticateEntity> => {
+export const createAuthenticate = async (
+  authenticate: NewAuthenticate,
+): Promise<AuthenticateEntity> => {
   const result = await db
-    .insertInto('authenticate')
+    .insertInto("authenticate")
     .values(authenticate)
     .returningAll()
-    .executeTakeFirstOrThrow()
+    .executeTakeFirstOrThrow();
 
-  return toAuthenticateEntity(result)
-}
+  return toAuthenticateEntity(result);
+};
 
-export const findLatestAuthenticate = async (): Promise<AuthenticateEntity | undefined> => {
+export const findLatestAuthenticate = async (): Promise<
+  AuthenticateEntity | undefined
+> => {
   const result = await db
-    .selectFrom('authenticate')
+    .selectFrom("authenticate")
     .selectAll()
-    .orderBy('created_at', 'desc')
+    .orderBy("created_at", "desc")
     .limit(1)
-    .executeTakeFirst()
+    .executeTakeFirst();
 
-  return result ? toAuthenticateEntity(result) : undefined
-}
+  return result ? toAuthenticateEntity(result) : undefined;
+};
 
-export const upsertAuthenticate = async (authenticate: NewAuthenticate): Promise<AuthenticateEntity> => {
-  const existing = await findLatestAuthenticate()
+export const upsertAuthenticate = async (
+  authenticate: NewAuthenticate,
+): Promise<AuthenticateEntity> => {
+  const existing = await findLatestAuthenticate();
 
   if (existing) {
-    const { created_at, ...updateData } = authenticate
+    const { created_at, ...updateData } = authenticate;
     const result = await db
-      .updateTable('authenticate')
+      .updateTable("authenticate")
       .set(updateData)
-      .where('id', '=', existing.id)
+      .where("id", "=", existing.id)
       .returningAll()
-      .executeTakeFirstOrThrow()
+      .executeTakeFirstOrThrow();
 
-    return toAuthenticateEntity(result)
+    return toAuthenticateEntity(result);
   }
 
-  return await createAuthenticate(authenticate)
-}
+  return await createAuthenticate(authenticate);
+};

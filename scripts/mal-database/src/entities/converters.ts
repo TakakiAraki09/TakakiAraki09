@@ -1,30 +1,47 @@
-import type { Authenticate, Content, ContentAnime, ContentNews, ContentState, NewAuthenticate, NewContent, NewContentAnime, NewContentNews, NewContentState } from '../types.ts'
-import type { AuthenticateEntity } from './Authenticate.ts'
-import type { ContentEntity, ContentAnimeEntity, ContentNewsEntity } from './Content.ts'
-import type { ContentStateEntity } from './ContentState.ts'
+import type {
+  Authenticate,
+  Content,
+  ContentAnime,
+  ContentNews,
+  ContentState,
+  NewAuthenticate,
+  NewContent,
+  NewContentAnime,
+  NewContentNews,
+  NewContentState,
+} from "../types.ts";
+import type { AuthenticateEntity } from "./Authenticate.ts";
+import type {
+  ContentEntity,
+  ContentAnimeEntity,
+  ContentNewsEntity,
+} from "./Content.ts";
+import type { ContentStateEntity } from "./ContentState.ts";
 
 const toDate = (value: string | null): Date | null => {
   if (value === null) {
-    return null
+    return null;
   }
-  return new Date(value)
-}
+  return new Date(value);
+};
 
 const fromDate = (value: Date | null): string | null => {
   if (value === null) {
-    return null
+    return null;
   }
-  return value.toISOString()
-}
+  return value.toISOString();
+};
 
 export const toContentEntity = (content: Content): ContentEntity => {
   return {
     id: content.id,
     contentType: content.content_type,
-  }
-}
+  };
+};
 
-export const toContentAnimeEntity = (contentAnime: ContentAnime): ContentAnimeEntity => {
+export const toContentAnimeEntity = (
+  contentAnime: ContentAnime,
+): ContentAnimeEntity => {
   return {
     id: contentAnime.id,
     myanimelistId: contentAnime.myanimelist_id,
@@ -48,11 +65,16 @@ export const toContentAnimeEntity = (contentAnime: ContentAnime): ContentAnimeEn
     mediaType: contentAnime.media_type,
     status: contentAnime.status,
     genres: contentAnime.genres,
-    createdAt: contentAnime.created_at instanceof Date ? contentAnime.created_at : new Date(contentAnime.created_at),
-  }
-}
+    createdAt:
+      contentAnime.created_at instanceof Date
+        ? contentAnime.created_at
+        : new Date(contentAnime.created_at),
+  };
+};
 
-export const toContentNewsEntity = (contentNews: ContentNews): ContentNewsEntity => {
+export const toContentNewsEntity = (
+  contentNews: ContentNews,
+): ContentNewsEntity => {
   return {
     id: contentNews.id,
     guid: contentNews.guid,
@@ -63,11 +85,16 @@ export const toContentNewsEntity = (contentNews: ContentNews): ContentNewsEntity
     isoDate: contentNews.iso_date,
     content: contentNews.content,
     contentSnippet: contentNews.content_snippet,
-    createdAt: contentNews.created_at instanceof Date ? contentNews.created_at : new Date(contentNews.created_at),
-  }
-}
+    createdAt:
+      contentNews.created_at instanceof Date
+        ? contentNews.created_at
+        : new Date(contentNews.created_at),
+  };
+};
 
-export const toContentStateEntity = (contentState: ContentState): ContentStateEntity => {
+export const toContentStateEntity = (
+  contentState: ContentState,
+): ContentStateEntity => {
   return {
     id: contentState.id,
     listStatusStatus: contentState.list_status_status,
@@ -77,18 +104,23 @@ export const toContentStateEntity = (contentState: ContentState): ContentStateEn
     listStatusUpdatedAt: toDate(contentState.list_status_updated_at),
     listStatusStartDate: toDate(contentState.list_status_start_date),
     listStatusFinishDate: toDate(contentState.list_status_finish_date),
-    createdAt: contentState.created_at instanceof Date ? contentState.created_at : new Date(contentState.created_at),
-  }
-}
+    createdAt:
+      contentState.created_at instanceof Date
+        ? contentState.created_at
+        : new Date(contentState.created_at),
+  };
+};
 
 export const fromContentEntity = (entity: ContentEntity): NewContent => {
   return {
     id: entity.id,
     content_type: entity.contentType,
-  }
-}
+  };
+};
 
-export const fromContentAnimeEntity = (entity: ContentAnimeEntity): NewContentAnime => {
+export const fromContentAnimeEntity = (
+  entity: ContentAnimeEntity,
+): NewContentAnime => {
   return {
     id: entity.id,
     myanimelist_id: entity.myanimelistId,
@@ -113,10 +145,12 @@ export const fromContentAnimeEntity = (entity: ContentAnimeEntity): NewContentAn
     status: entity.status,
     genres: entity.genres,
     created_at: undefined,
-  }
-}
+  };
+};
 
-export const fromContentNewsEntity = (entity: ContentNewsEntity): NewContentNews => {
+export const fromContentNewsEntity = (
+  entity: ContentNewsEntity,
+): NewContentNews => {
   return {
     id: entity.id,
     guid: entity.guid,
@@ -128,10 +162,12 @@ export const fromContentNewsEntity = (entity: ContentNewsEntity): NewContentNews
     content: entity.content,
     content_snippet: entity.contentSnippet,
     created_at: undefined,
-  }
-}
+  };
+};
 
-export const fromContentStateEntity = (entity: ContentStateEntity): NewContentState => {
+export const fromContentStateEntity = (
+  entity: ContentStateEntity,
+): NewContentState => {
   return {
     id: entity.id,
     list_status_status: entity.listStatusStatus,
@@ -142,26 +178,33 @@ export const fromContentStateEntity = (entity: ContentStateEntity): NewContentSt
     list_status_start_date: fromDate(entity.listStatusStartDate),
     list_status_finish_date: fromDate(entity.listStatusFinishDate),
     created_at: undefined,
-  }
-}
+  };
+};
 
-export const toAuthenticateEntity = (authenticate: Authenticate): AuthenticateEntity => {
+export const toAuthenticateEntity = (
+  authenticate: Authenticate,
+): AuthenticateEntity => {
   return {
     id: authenticate.id,
     tokenType: authenticate.token_type,
     expiresIn: authenticate.expires_in,
     accessToken: authenticate.access_token,
     refreshToken: authenticate.refresh_token,
-    createdAt: authenticate.created_at instanceof Date ? authenticate.created_at : new Date(authenticate.created_at),
-  }
-}
+    createdAt:
+      authenticate.created_at instanceof Date
+        ? authenticate.created_at
+        : new Date(authenticate.created_at),
+  };
+};
 
-export const fromAuthenticateEntity = (entity: AuthenticateEntity): NewAuthenticate => {
+export const fromAuthenticateEntity = (
+  entity: AuthenticateEntity,
+): NewAuthenticate => {
   return {
     token_type: entity.tokenType,
     expires_in: entity.expiresIn,
     access_token: entity.accessToken,
     refresh_token: entity.refreshToken,
     created_at: undefined,
-  }
-}
+  };
+};

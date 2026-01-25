@@ -31,5 +31,4 @@ export const getSeasonByAnime = (anime: ContentAnimeEntity) => {
     default:
       return AnimeSeason.UNSTATE_SEASON;
   }
-}
-
+};

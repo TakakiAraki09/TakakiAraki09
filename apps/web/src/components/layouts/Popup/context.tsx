@@ -11,9 +11,7 @@ const popupGroupContext = createContextId<Signal<PopupGroup[]>>(
   "global.popup.group.context",
 );
 
-const popupContext = createContextId<Signal<Popup[]>>(
-  "global.popup.context",
-);
+const popupContext = createContextId<Signal<Popup[]>>("global.popup.context");
 
 export const useProvidePopupContext = () => {
   const group = useSignal<PopupGroup[]>([]);

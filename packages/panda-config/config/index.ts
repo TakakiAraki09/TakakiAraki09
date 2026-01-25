@@ -31,8 +31,7 @@ export const baseConfig: Partial<Config> = {
       semanticTokens: {
         colors: pandaSemanticColors,
       },
-      keyframes: {
-      },
+      keyframes: {},
       recipes: pandaRecipes,
       breakpoints: pandaBreakpoints,
     },

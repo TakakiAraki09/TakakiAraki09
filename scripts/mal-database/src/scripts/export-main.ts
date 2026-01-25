@@ -1,9 +1,9 @@
-import { exportLibrary } from '../usecases/exportLibrary.ts'
+import { exportLibrary } from "../usecases/exportLibrary.ts";
 
 exportLibrary()
   .then(() => {
-    console.log('Export completed successfully!')
+    console.log("Export completed successfully!");
   })
   .catch((error) => {
-    console.error('Error:', error)
-  })
+    console.error("Error:", error);
+  });

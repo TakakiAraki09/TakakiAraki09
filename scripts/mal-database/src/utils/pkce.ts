@@ -1,4 +1,3 @@
-
 /**
  * State parameter data for OAuth flow (encoded in state parameter)
  */
@@ -20,7 +19,10 @@ export interface PkcePair {
 function getRandomBytes(length: number): Uint8Array {
   const bytes = new Uint8Array(length);
   // Use Web Crypto API (available in both Node.js 19+ and browsers)
-  if (typeof globalThis.crypto !== "undefined" && globalThis.crypto.getRandomValues) {
+  if (
+    typeof globalThis.crypto !== "undefined" &&
+    globalThis.crypto.getRandomValues
+  ) {
     globalThis.crypto.getRandomValues(bytes);
   } else {
     // Fallback for older Node.js versions

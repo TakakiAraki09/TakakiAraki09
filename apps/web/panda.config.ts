@@ -1,4 +1,4 @@
-import preset from '@repo/panda-config/preset';
+import preset from "@repo/panda-config/preset";
 import { defineConfig } from "@pandacss/dev";
 
 export default defineConfig({
@@ -18,7 +18,6 @@ export default defineConfig({
     a: {
       color: "accent.primary",
       textDecoration: "underline",
-    }
-  }
-
+    },
+  },
 });

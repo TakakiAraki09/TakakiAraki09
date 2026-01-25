@@ -1,6 +1,5 @@
 import { component$ } from "@builder.io/qwik";
 import { Link, type DocumentHead } from "@builder.io/qwik-city";
-import { AccordionContent } from "~/components/Accordion";
 import { css } from "~/styled-system/css";
 import {
   contentStates,
@@ -110,7 +109,6 @@ export default component$(() => {
           </li>
         ))}
       </ul>
-      <AccordionContent />
     </div>
   );
 });

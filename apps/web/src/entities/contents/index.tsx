@@ -27,18 +27,6 @@ export type ContentNewsProps = {
 };
 export type ContentProps = ContentAnimeProps | ContentNewsProps;
 
-export const isContentAnimeProps = (
-  content: ContentProps,
-): content is ContentAnimeProps => {
-  return content.type === "anime";
-};
-
-export const isContentNewsProps = (
-  content: ContentProps,
-): content is ContentNewsProps => {
-  return content.type === "news";
-};
-
 export const getContent = (content: ContentEntity): ContentProps => {
   switch (content.contentType) {
     case "anime": {
@@ -120,3 +108,4 @@ export const ContentSwitch = (
       throw new UnreachableError(type);
   }
 };
+

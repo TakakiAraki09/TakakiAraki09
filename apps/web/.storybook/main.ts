@@ -13,6 +13,25 @@ const config: StorybookConfig = {
   core: {
     builder: "@storybook/builder-vite",
   },
+  viteFinal: async (config) => {
+    if (config.build) {
+      config.build.rollupOptions = {
+        ...config.build.rollupOptions,
+        onLog(level, log, handler) {
+          // Suppress PURE comment warnings from Panda CSS
+          if (log.message?.includes('__PURE__')) {
+            return;
+          }
+          // Suppress eval warnings from Storybook
+          if (log.message?.includes('Use of eval')) {
+            return;
+          }
+          handler(level, log);
+        },
+      };
+    }
+    return config;
+  },
 };
 
 export default config;

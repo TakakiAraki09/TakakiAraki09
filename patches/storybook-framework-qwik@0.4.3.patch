@@ -1,0 +1,26 @@
+diff --git a/dist/docs/config.d.ts b/dist/docs/config.d.ts
+deleted file mode 100644
+index a6076fa727f234425817c31b67219f9221f31172..0000000000000000000000000000000000000000
+diff --git a/dist/docs/qwik-docgen.d.ts b/dist/docs/qwik-docgen.d.ts
+deleted file mode 100644
+index cd3fd25ed727a326f07643df200e563e50253796..0000000000000000000000000000000000000000
+diff --git a/package.json b/package.json
+index 16de45c6ea7fd09b3b728a7c5f8ae413c3263825..d03c1961c7d4768ad9b9f36d93de128b48e5e6ac 100644
+--- a/package.json
++++ b/package.json
+@@ -64,7 +64,7 @@
+   "license": "MIT",
+   "files": [
+     "README.md",
+-    "./preset.js",
++    "./preset.cjs",
+     "./dist/**/*.js",
+     "./template/cli/**",
+     "*.js",
+diff --git a/preset.js b/preset.cjs
+similarity index 100%
+rename from preset.js
+rename to preset.cjs
+diff --git a/src/typings.d.ts b/src/typings.d.ts
+deleted file mode 100644
+index ebc8d4067b6163b83c15f2bab02f506e4459f4f5..0000000000000000000000000000000000000000

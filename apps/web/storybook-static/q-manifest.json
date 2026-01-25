@@ -1,6 +1,6 @@
 {
 	"version": "1",
-	"manifestHash": "mhlan7",
+	"manifestHash": "p3a1md",
 	"options": {
 		"target": "client",
 		"buildMode": "production",
@@ -452,10 +452,10 @@
 			"origins": [
 				"../../node_modules/.pnpm/@storybook+addon-actions@8.6.14_storybook@8.6.15_prettier@3.6.2_/node_modules/@storybook/addon-actions/dist/chunk-4XZ63LWV.mjs",
 				"../../node_modules/.pnpm/@storybook+addon-actions@8.6.14_storybook@8.6.15_prettier@3.6.2_/node_modules/@storybook/addon-actions/dist/index.mjs",
-				"../../node_modules/.pnpm/storybook-framework-qwik@0.4.3_@builder.io+qwik@1.18.0_vite@7.2.6_@types+node@20.19.0_l_c9d821e735fe63ccc3101f462f42ae0e/node_modules/storybook-framework-qwik/dist/addArgsHelpers.js",
-				"../../node_modules/.pnpm/storybook-framework-qwik@0.4.3_@builder.io+qwik@1.18.0_vite@7.2.6_@types+node@20.19.0_l_c9d821e735fe63ccc3101f462f42ae0e/node_modules/storybook-framework-qwik/dist/component-to-jsx.js",
-				"../../node_modules/.pnpm/storybook-framework-qwik@0.4.3_@builder.io+qwik@1.18.0_vite@7.2.6_@types+node@20.19.0_l_c9d821e735fe63ccc3101f462f42ae0e/node_modules/storybook-framework-qwik/dist/docs/config.js",
-				"../../node_modules/.pnpm/storybook-framework-qwik@0.4.3_@builder.io+qwik@1.18.0_vite@7.2.6_@types+node@20.19.0_l_c9d821e735fe63ccc3101f462f42ae0e/node_modules/storybook-framework-qwik/dist/preview.js"
+				"../../node_modules/.pnpm/storybook-framework-qwik@0.4.3_patch_hash=1cf1e7fe5872a63c6cecb660324cef2473bc014e7213b_550d42a5bb0de14ee801c66523df7a81/node_modules/storybook-framework-qwik/dist/addArgsHelpers.js",
+				"../../node_modules/.pnpm/storybook-framework-qwik@0.4.3_patch_hash=1cf1e7fe5872a63c6cecb660324cef2473bc014e7213b_550d42a5bb0de14ee801c66523df7a81/node_modules/storybook-framework-qwik/dist/component-to-jsx.js",
+				"../../node_modules/.pnpm/storybook-framework-qwik@0.4.3_patch_hash=1cf1e7fe5872a63c6cecb660324cef2473bc014e7213b_550d42a5bb0de14ee801c66523df7a81/node_modules/storybook-framework-qwik/dist/docs/config.js",
+				"../../node_modules/.pnpm/storybook-framework-qwik@0.4.3_patch_hash=1cf1e7fe5872a63c6cecb660324cef2473bc014e7213b_550d42a5bb0de14ee801c66523df7a81/node_modules/storybook-framework-qwik/dist/preview.js"
 			],
 			"interactivity": 0
 		},

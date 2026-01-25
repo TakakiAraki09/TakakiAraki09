@@ -4,14 +4,14 @@ export const pandaSemanticColors: GetPandaSematicToken<"colors"> = {
   bg: {
     primary: {
       value: {
-        _light: "{colors.white}",
-        _dark: "{colors.black}",
+        _light: "{colors.purple.200}",
+        _dark: "{colors.purple.800}",
       },
     },
     secondary: {
       value: {
-        _light: "{colors.gray.200}",
-        _dark: "{colors.gray.800}",
+        _light: "{colors.orange.200}",
+        _dark: "{colors.orange.800}",
       },
     },
     info: {
@@ -48,8 +48,8 @@ export const pandaSemanticColors: GetPandaSematicToken<"colors"> = {
   contents: {
     primary: {
       value: {
-        _light: "{colors.gray.800}",
-        _dark: "{colors.gray.200}",
+        _light: "{colors.purple.800}",
+        _dark: "{colors.purple.200}",
       },
     },
     info: {
@@ -86,8 +86,8 @@ export const pandaSemanticColors: GetPandaSematicToken<"colors"> = {
   accent: {
     primary: {
       value: {
-        _light: "{colors.gray.600}",
-        _dark: "{colors.gray.400}",
+        _light: "{colors.purple.600}",
+        _dark: "{colors.purple.400}",
       },
     },
     info: {

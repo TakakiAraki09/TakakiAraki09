@@ -48,8 +48,8 @@ export const getMyListStateLabel = (state: MyListState): MyListStateLabel => {
         state,
         displayLabel: "Dropped",
         color: css({
-          color: "bg.primary",
-          bg: "accent.warn",
+          color: "bg.error",
+          bg: "accent.error",
         }),
       };
     case MyListState.ON_HOLD:
@@ -57,7 +57,7 @@ export const getMyListStateLabel = (state: MyListState): MyListStateLabel => {
         state,
         displayLabel: "On Hold",
         color: css({
-          color: "bg.primary",
+          color: "bg.warn",
           bg: "accent.warn",
         }),
       };
@@ -66,7 +66,7 @@ export const getMyListStateLabel = (state: MyListState): MyListStateLabel => {
         state,
         displayLabel: "Plan to Watch",
         color: css({
-          color: "bg.primary",
+          color: "bg.info",
           bg: "accent.info",
         }),
       };
@@ -75,7 +75,7 @@ export const getMyListStateLabel = (state: MyListState): MyListStateLabel => {
         state,
         displayLabel: "Watching",
         color: css({
-          color: "bg.primary",
+          color: "bg.success",
           bg: "accent.success",
         }),
       };
@@ -84,7 +84,7 @@ export const getMyListStateLabel = (state: MyListState): MyListStateLabel => {
         state: MyListState.MY_LIST_STATE_EMPTY,
         displayLabel: "No List State",
         color: css({
-          color: "bg.primary",
+          color: "bg.muted",
           bg: "accent.muted",
         }),
       };

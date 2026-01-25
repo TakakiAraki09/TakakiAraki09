@@ -1,6 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 import { Children } from "~/interfaces/components";
-import { css } from "~/styled-system/css";
+import { css, cx } from "~/styled-system/css";
 
 export interface CardProps {
   title: string;
@@ -53,26 +53,36 @@ export const Card = component$<CardProps>((props) => {
           flex: 1,
         })}
       >
-        <h3 style={{ margin: "0 0 8px 0", flex: 1 }}>{props.title}</h3>
+        <h3 class={css({ marginTop: 2, flex: 1 })}>{props.title}</h3>
 
         {props.content && (
-          <div style={{ margin: "8px 0 0 0", flex: 1 }}>
+          <div
+            class={css({
+              marginTop: "2",
+              flex: 1,
+            })}
+          >
             {props.content}
           </div>
         )}
 
-        <p style={{ display: "flex", gap: "4px", flexWrap: "wrap" }}>
+        <p class={css({ display: "flex", gap: "4px", flexWrap: "wrap" })}>
           {props.labels.map((label, index) => (
             <span
               key={index}
               onClick$={label.onAction}
-              class={label.color}
+              class={cx(
+                label.color,
+                css({
+                  paddingX: "2",
+                  paddingY: "1",
+                  fontWeight: "bold",
+                  fontSize: "small",
+                }),
+              )}
               style={{
-                color: "#fff",
-                padding: "4px 8px",
                 borderRadius: "4px",
                 cursor: label.onAction ? "pointer" : "default",
-                fontSize: "12px",
               }}
             >
               {label.displayName}

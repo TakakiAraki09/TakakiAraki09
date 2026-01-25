@@ -61,7 +61,7 @@ export const ContentCard = component$((props: ContentProps) => {
           labels: [
             {
               displayName: "ニュース",
-              color: css({ bg: "bg.info" }),
+              color: css({ bg: "bg.info", color: "accent.info" }),
             },
           ],
         };

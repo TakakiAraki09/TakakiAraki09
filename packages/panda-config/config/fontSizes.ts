@@ -4,7 +4,11 @@ export const pandaFontSizes: GetPandaConfigMap<"fontSizes"> = {
   // ---- Body / Text ----
   body: { value: "1rem" }, // 16px: 通常本文
   "body-sm": { value: "0.875rem" }, // 14px: 補足テキスト
-  "body-xs": { value: "0.75rem" }, // 12px: キャプション、バッジ等
+  "body-xs": { value: "0.75rem" }, // 12px: 小さめテキスト
+
+  // ---- Caption ----
+  caption: { value: "0.75rem" }, // 12px: キャプション、注釈
+  "caption-sm": { value: "0.625rem" }, // 10px: 極小キャプション
 
   // ---- Heading ----
   "heading-sm": { value: "1.125rem" }, // 18px: 小見出し

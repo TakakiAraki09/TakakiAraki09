@@ -108,4 +108,3 @@ export const ContentSwitch = (
       throw new UnreachableError(type);
   }
 };
-

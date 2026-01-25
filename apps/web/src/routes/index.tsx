@@ -46,8 +46,8 @@ const animeList = pipe(
       content: animeContent,
     };
   }),
-  filter((val) => val != null),
-  sortBy((val) => -day(val!.content.startDate ?? 0).unix()),
+  filter((val): val is NonNullable<typeof val> => val != null),
+  sortBy((val) => -day(val.content.startDate ?? 0).unix()),
   map((val): CardProps & { id: string } => {
     const state = getMyListState(val.state.listStatusStatus ?? "");
     const label = getMyListStateLabel(state);

@@ -10,7 +10,6 @@ export enum MyListState {
 }
 
 export const getMyListState = (value: string) => {
-  console.log(value);
   switch (value) {
     case MyListState.COMPLETED:
       return MyListState.COMPLETED;

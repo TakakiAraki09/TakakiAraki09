@@ -11,9 +11,10 @@
     "./usecases": "./src/usecases/exportLibrary.ts"
   },
   "scripts": {
-    "sync": "node src/main.ts",
-    "export": "node src/export-main.ts",
-    "generate": "node src/main.ts",
+    "auth": "tsx src/scripts/auth.ts",
+    "refresh": "tsx src/scripts/refresh.ts",
+    "sync": "tsx src/scripts/sync.ts",
+    "export": "tsx src/scripts/export-main.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -27,11 +28,15 @@
   "license": "ISC",
   "packageManager": "pnpm@10.23.0",
   "dependencies": {
+    "@inquirer/prompts": "^8.2.0",
     "@types/node": "20.19.0",
     "better-sqlite3": "^12.6.2",
     "cheerio": "^1.1.2",
+    "dotenv": "^17.2.3",
     "kysely": "^0.28.9",
-    "rss-parser": "^3.13.0"
+    "pkce-challenge": "^5.0.1",
+    "rss-parser": "^3.13.0",
+    "tsx": "^4.21.0"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.13"

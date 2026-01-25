@@ -4,14 +4,32 @@
 
 ## アーキテクチャ構成
 
+### 依存性注入（DI）パターンを採用
+
+このプロジェクトは**完全な依存性注入パターン**で設計されているのだ。
+
 ```
-main.ts
-  ↓ usecaseを呼ぶだけ
+Scripts層 (src/scripts/)
+  ↓ 【全ての依存性を組み立てる】
+  const refreshTokenUsecase = refreshToken({
+    refreshAccessToken,      ← API層
+    findLatestAuthenticate,  ← Repository層
+    upsertAuthenticate,      ← Repository層
+  })
+  const getTokenUsecase = getToken({
+    findLatestAuthenticate,  ← Repository層
+    refreshToken: refreshTokenUsecase  ← 他のUsecase
+  })
+  initializeAPI(getTokenUsecase)  ← API層を初期化
+  ↓ Usecaseを実行
 Usecase層 (src/usecases/)
-  ├─ syncUserAnimeList（全体制御）
-  └─ syncAnimeListItem（アイテム処理）
+  ├─ authenticate = (deps) => async (params) => { ... }
+  ├─ refreshToken = (deps) => async () => { ... }
+  ├─ getToken = (deps) => async () => { ... }
+  └─ syncUserAnimeList（全体制御）
   ↓ エンティティで通信
 API層 (src/api/)
+  ├─ base.ts（initializeAPIで依存性を受け取る）
   ├─ userAnimeList → UserAnimeListItemEntity[]
   └─ animeDetail → ContentEntity
   ↓ エンティティ変換（内部で実行）
@@ -208,7 +226,94 @@ import { findContentByMalId } from '../repositories/ContentRepository.ts'
 3. **型の隠蔽**: 内部実装の型（`Daum`, `Root`など）は外に出さない
 4. **責務の分離**: 各層の責務を明確にして、越境させない
 5. **usecase層は高レベル**: ビジネスロジック全体をまとめる
-6. **main.tsは薄く**: usecase層を呼ぶだけにする
+6. **scripts層で依存性を組み立てる**: 全ての依存性注入はscripts層で行う
+7. **依存関係は一方向**: API層→Usecase層の依存は禁止（逆方向のみ）
+
+## 依存性注入（DI）パターンの重要ポイント
+
+### ❌ 禁止事項
+```typescript
+// API層やRepository層でUsecaseを直接import
+import { getToken } from '../usecases/getToken.ts'  // ❌ ダメ！
+
+// Usecase内でAPI層を直接import
+import { fetchAccessToken } from '../api/oauth.ts'  // ❌ ダメ！
+```
+
+### ✅ 正しいパターン
+```typescript
+// 1. Usecase層：高階関数で依存性を受け取る
+export const getToken = (deps: GetTokenDeps) => async (): Promise<string> => {
+  const auth = await deps.findLatestAuthenticate()  // 注入された関数を使う
+  // ...
+}
+
+// 2. Scripts層：依存性を組み立てて注入
+const getTokenUsecase = getToken({
+  findLatestAuthenticate,  // ← Repository層の関数
+  refreshToken: refreshTokenUsecase,  // ← 他のUsecase
+})
+
+// 3. API層：initializeAPIで受け取る
+initializeAPI(getTokenUsecase)  // ← Scripts層から注入
+```
+
+### なぜPromise<string>でトークンを渡すのか？
+
+**質問**: `initializeAPI`に`string`（固定トークン）ではなく、`Promise<string>`（関数）を渡す理由は？
+
+**回答**: 動的な有効期限チェックとトークン自動リフレッシュのため。
+
+#### ❌ string版（固定トークン）の問題点
+```typescript
+// 起動時に1回だけトークンを取得
+const token = await getTokenUsecase()  // "abc123..."
+initializeAPI(token)  // 固定文字列を渡す
+
+// 問題1: 長時間実行すると期限切れ
+await syncUserAnimeList({ limit: 10000 })  // 30分かかる
+// → 途中でトークンが期限切れになってもリフレッシュされない！
+
+// 問題2: 毎回同じトークンを使う
+await api1()  // "abc123..." を使う
+// ... 10分経過 ...
+await api2()  // まだ "abc123..." を使う（期限切れかも）
+```
+
+#### ✅ Promise<string>版（関数）のメリット
+```typescript
+// 関数を渡す
+initializeAPI(getTokenUsecase)
+
+// メリット1: API呼び出しの度に有効期限チェック
+await api1()
+// → getTokenUsecase() が実行される
+// → 有効期限チェック
+// → まだ有効 → そのまま返す
+
+// ... 10分経過 ...
+
+await api2()
+// → getTokenUsecase() が再度実行される
+// → 有効期限チェック
+// → 期限切れ間近 → 自動リフレッシュ！→ 新しいトークンを返す
+
+// メリット2: 5分の安全マージン
+const bufferMs = 5 * 60 * 1000  // getToken内部
+// → 期限切れギリギリではなく、余裕を持ってリフレッシュ
+
+// メリット3: スクリプト側は何も気にしなくていい
+// トークン管理を完全に自動化！
+```
+
+#### 前提条件の違い
+
+| 方式 | 前提条件 | 適用場面 |
+|------|----------|----------|
+| `string`版 | スクリプトが短時間（トークン有効期限内）で終わる | ワンショットの小さなスクリプト |
+| `Promise<string>`版 | 長時間実行もあり得る | バッチ処理、大量データ同期 |
+
+**結論**: このプロジェクトはバッチ処理で長時間実行する可能性があるため、`Promise<string>`版が最適なのだ！
 
 ## トラブルシューティング
 

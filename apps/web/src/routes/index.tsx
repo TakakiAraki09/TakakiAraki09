@@ -75,7 +75,6 @@ const animeList = pipe(
 export default component$(() => {
   return (
     <div>
-      <h1> dashboard 👋</h1>
       <h2>最新ニュース</h2>
       <Link href="/">a</Link>
       <ul

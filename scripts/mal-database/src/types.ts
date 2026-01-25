@@ -10,6 +10,7 @@ export interface Database {
   content_anime: ContentAnimeTable
   content_news: ContentNewsTable
   content_state: ContentStateTable
+  authenticate: AuthenticateTable
 }
 
 export interface ContentTable {
@@ -83,3 +84,16 @@ export interface ContentStateTable {
 export type ContentState = Selectable<ContentStateTable>
 export type NewContentState = Insertable<ContentStateTable>
 export type ContentStateUpdate = Updateable<ContentStateTable>
+
+export interface AuthenticateTable {
+  id: ColumnType<number, never, never>
+  token_type: string
+  expires_in: number
+  access_token: string
+  refresh_token: string
+  created_at: ColumnType<Date, string | undefined, never>
+}
+
+export type Authenticate = Selectable<AuthenticateTable>
+export type NewAuthenticate = Insertable<AuthenticateTable>
+export type AuthenticateUpdate = Updateable<AuthenticateTable>

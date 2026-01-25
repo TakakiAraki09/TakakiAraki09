@@ -1,4 +1,5 @@
-import type { Content, ContentAnime, ContentNews, ContentState, NewContent, NewContentAnime, NewContentNews, NewContentState } from '../types.ts'
+import type { Authenticate, Content, ContentAnime, ContentNews, ContentState, NewAuthenticate, NewContent, NewContentAnime, NewContentNews, NewContentState } from '../types.ts'
+import type { AuthenticateEntity } from './Authenticate.ts'
 import type { ContentEntity, ContentAnimeEntity, ContentNewsEntity } from './Content.ts'
 import type { ContentStateEntity } from './ContentState.ts'
 
@@ -140,6 +141,27 @@ export const fromContentStateEntity = (entity: ContentStateEntity): NewContentSt
     list_status_updated_at: fromDate(entity.listStatusUpdatedAt),
     list_status_start_date: fromDate(entity.listStatusStartDate),
     list_status_finish_date: fromDate(entity.listStatusFinishDate),
+    created_at: undefined,
+  }
+}
+
+export const toAuthenticateEntity = (authenticate: Authenticate): AuthenticateEntity => {
+  return {
+    id: authenticate.id,
+    tokenType: authenticate.token_type,
+    expiresIn: authenticate.expires_in,
+    accessToken: authenticate.access_token,
+    refreshToken: authenticate.refresh_token,
+    createdAt: authenticate.created_at instanceof Date ? authenticate.created_at : new Date(authenticate.created_at),
+  }
+}
+
+export const fromAuthenticateEntity = (entity: AuthenticateEntity): NewAuthenticate => {
+  return {
+    token_type: entity.tokenType,
+    expires_in: entity.expiresIn,
+    access_token: entity.accessToken,
+    refresh_token: entity.refreshToken,
     created_at: undefined,
   }
 }

@@ -1,4 +1,4 @@
-import { exportLibrary } from './usecases/exportLibrary.ts'
+import { exportLibrary } from '../usecases/exportLibrary.ts'
 
 exportLibrary()
   .then(() => {

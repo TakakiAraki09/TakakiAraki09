@@ -34,21 +34,27 @@ export const syncAnimeListItem = async ({
 
     contentId = randomUUID()
 
-    const newContentAnimeEntity = await animeDetail({
-      animeId: malId,
-      id: contentId,
-    })
-    // await sleep(rateLimitMs)
+    try {
+      const newContentAnimeEntity = await animeDetail({
+        animeId: malId,
+        id: contentId,
+      })
+      // await sleep(rateLimitMs)
 
-    const newContentEntity: ContentEntity = {
-      id: contentId,
-      contentType,
+      const newContentEntity: ContentEntity = {
+        id: contentId,
+        contentType,
+      }
+
+      const content = fromContentEntity(newContentEntity)
+      const contentAnime = fromContentAnimeEntity(newContentAnimeEntity)
+      await createContent(content, contentAnime)
+      console.log(`  - Created content with id: ${contentId}`)
+    } catch (error) {
+      console.error(`  - Failed to fetch anime detail for MAL ID: ${malId}`)
+      console.error(`    Title: ${item.title}`)
+      throw error
     }
-
-    const content = fromContentEntity(newContentEntity)
-    const contentAnime = fromContentAnimeEntity(newContentAnimeEntity)
-    await createContent(content, contentAnime)
-    console.log(`  - Created content with id: ${contentId}`)
   } else {
     contentId = existingContent.id
     console.log(`  - Content already exists with id: ${contentId}`)

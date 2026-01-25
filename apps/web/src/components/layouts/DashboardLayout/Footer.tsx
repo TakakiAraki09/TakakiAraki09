@@ -17,8 +17,6 @@ const styles = {
   footer: css({
     padding: "4",
     bg: "bg.primary",
-    borderTop: "1px solid",
-    borderColor: "accent.primary",
     textAlign: "center",
     fontSize: "sm",
     color: "accent.primary",

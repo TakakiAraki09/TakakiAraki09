@@ -26,8 +26,6 @@ const styles = {
     gap: "4",
     padding: "4",
     bg: "bg.primary",
-    borderBottom: "1px solid",
-    borderColor: "accent.primary",
   }),
   hamburger: css({
     display: "flex",
@@ -35,7 +33,6 @@ const styles = {
     gap: "1.5",
     padding: "2",
     bg: "transparent",
-    border: "none",
     cursor: "pointer",
     tb: {
       display: "none",
@@ -48,7 +45,6 @@ const styles = {
     width: "24px",
     height: "2px",
     bg: "accent.primary",
-    borderRadius: "2px",
     transition: "all 0.3s",
   }),
   title: css({

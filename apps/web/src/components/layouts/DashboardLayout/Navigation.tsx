@@ -64,13 +64,6 @@ const styles = {
       tb: "100%",
     },
     bg: "bg.primary",
-    borderRight: {
-      base: "none",
-      tb: "1px solid",
-    },
-    borderColor: {
-      tb: "accent.primary",
-    },
     transform: {
       base: "translateX(-100%)",
       tb: "translateX(0)",

@@ -3873,5 +3873,30 @@
     "status": "currently_airing",
     "genres": "[{\"id\":1,\"name\":\"Action\"},{\"id\":2,\"name\":\"Adventure\"},{\"id\":10,\"name\":\"Fantasy\"}]",
     "createdAt": "2026-01-22T03:14:55.000Z"
+  },
+  {
+    "id": "4b7edb43-2e33-45db-be4a-019362bf7d59",
+    "myanimelistId": 25777,
+    "title": "Shingeki no Kyojin Season 2",
+    "mainPictureMedium": "https://cdn.myanimelist.net/images/anime/4/84177.jpg",
+    "mainPictureLarge": "https://cdn.myanimelist.net/images/anime/4/84177l.jpg",
+    "alternativeTitlesEn": "Attack on Titan Season 2",
+    "alternativeTitlesJa": "進撃の巨人 Season2",
+    "alternativeTitlesSynonyms": "[]",
+    "startDate": "2017-04-01",
+    "endDate": "2017-06-17",
+    "synopsis": "For centuries, humanity has been hunted by giant, mysterious predators known as the Titans. Three mighty walls—Wall Maria, Rose, and Sheena—provided peace and protection for humanity for over a hundred years. That peace, however, was shattered when the Colossal Titan and Armored Titan appeared and destroyed the outermost wall, Wall Maria. Forced to retreat behind Wall Rose, humanity waited with bated breath for the Titans to reappear and destroy their safe haven once more.\n\nIn Shingeki no Kyojin Season 2, Eren Yeager and others of the 104th Training Corps have just begun to become full members of the Survey Corps. As they ready themselves to face the Titans once again, their preparations are interrupted by the invasion of Wall Rose—but all is not as it seems as more mysteries are unraveled. As the Survey Corps races to save the wall, they uncover more about the invading Titans and the dark secrets of their own members.\n\n[Written by MAL Rewrite]",
+    "mean": 8.54,
+    "rank": 138,
+    "popularity": 12,
+    "numListUsers": 2973901,
+    "numScoringUsers": 2034588,
+    "nsfw": "white",
+    "malCreatedAt": "2014-08-04T23:40:50+00:00",
+    "malUpdatedAt": "2024-07-05T07:07:10+00:00",
+    "mediaType": "tv",
+    "status": "finished_airing",
+    "genres": "[{\"id\":1,\"name\":\"Action\"},{\"id\":8,\"name\":\"Drama\"},{\"id\":58,\"name\":\"Gore\"},{\"id\":38,\"name\":\"Military\"},{\"id\":27,\"name\":\"Shounen\"},{\"id\":76,\"name\":\"Survival\"},{\"id\":41,\"name\":\"Suspense\"}]",
+    "createdAt": "2026-01-25T00:50:05.000Z"
   }
 ]

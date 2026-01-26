@@ -37,6 +37,9 @@ const styles = {
     display: "grid",
     minHeight: "100vh",
     position: "relative",
+    width: "full",
+    maxWidth: "100vw",
+    overflowX: "hidden",
     gridTemplate: {
       base: `
         "header" var(--header-height)
@@ -48,21 +51,24 @@ const styles = {
         "header header" var(--header-height)
         "nav content" 1fr
         "footer footer" auto
-        / var(--nav-width) 1fr
+        / var(--nav-width) calc(100vw - var(--nav-width))
       `,
     },
     ["--header-height"]: "60px",
     ["--nav-width"]: "240px",
   }),
   header: css({
+    width: "full",
     gridArea: "header",
   }),
   nav: css({
     gridArea: "nav",
+    width: "full",
   }),
   content: css({
     gridArea: "content",
-    padding: "4",
+    flex: 1,
+    width: "full",
   }),
   footer: css({
     gridArea: "footer",

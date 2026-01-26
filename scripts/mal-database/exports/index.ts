@@ -38,6 +38,10 @@ export const getContentById = (id: string): ContentEntity | undefined => {
   return contents.find((content) => content.id === id);
 };
 
+export const getContentStatesById = (id: string): ContentStateEntity => {
+  return contentStatesCache.filter((state) => state.id === id)[0];
+};
+
 export const getContentAnimeById = (
   id: string,
 ): ContentAnimeEntity | undefined => {

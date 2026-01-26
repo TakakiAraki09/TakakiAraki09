@@ -19,7 +19,14 @@ export const ContentCard = component$((props: ContentProps) => {
           imageUrl: content.payload.mainPictureLarge ?? "",
           link: `https://myanimelist.net/anime/${content.payload.myanimelistId}/`,
           content: (
-            <div>
+            <div
+              class={css({
+                display: "flex",
+                flexDirection: "column",
+                gap: "1",
+                fontSize: "small",
+              })}
+            >
               <p>
                 開始日:{" "}
                 {formatDay({
@@ -49,13 +56,22 @@ export const ContentCard = component$((props: ContentProps) => {
           title: content.payload.title ?? "No Title",
           imageUrl: content.payload.ogImageUrl ?? "",
           content: (
-            <p>
-              日付:{" "}
-              {formatDay({
-                day: content.payload.isoDate,
-                format: "YYYY/MM/DD",
+            <div
+              class={css({
+                display: "flex",
+                flexDirection: "column",
+                gap: "1",
+                fontSize: "small",
               })}
-            </p>
+            >
+              <p>
+                日付:{" "}
+                {formatDay({
+                  day: content.payload.isoDate,
+                  format: "YYYY/MM/DD",
+                })}
+              </p>
+            </div>
           ),
           link: content.payload.link ?? "",
           labels: [

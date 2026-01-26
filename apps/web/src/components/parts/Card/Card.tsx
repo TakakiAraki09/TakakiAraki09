@@ -24,66 +24,97 @@ export const Card = component$<CardProps>((props) => {
         display: "flex",
         gap: "3",
         height: "100%",
-        borderRadius: "8px",
+        maxHeight: "200px",
+        width: "100%",
+        borderRadius: "outer",
+        bg: "bg.secondary",
         overflow: "hidden",
-        width: "800px",
         textDecoration: "none",
-        color: "accent.primary",
+        border: "1px solid token(colors.bg.tertiary)",
+        boxShadow: "card",
+        transition: "all 300ms ease",
+        _hover: {
+          transform: "translateY(-4px)",
+          boxShadow:
+            "0px 12px 26px 0px rgba(0, 0, 0, 0.15), 0px 48px 48px 0px rgba(0, 0, 0, 0.13), 0px 106px 64px 0px rgba(0, 0, 0, 0.08), 0px 190px 76px 0px rgba(0, 0, 0, 0.02), 0px 296px 84px 0px rgba(0, 0, 0, 0)",
+        },
       })}
     >
-      <img
-        src={props.imageUrl}
-        alt={props.title}
-        width="200"
-        height="100"
-        class={css({
-          display: "block",
-          bg: "bg.secondary",
-          width: "200px",
-          height: "200px",
-          objectFit: "cover",
-          borderRadius: "inner",
-        })}
-      />
       <div
         class={css({
-          padding: "12px",
+          overflow: "hidden",
+          borderLeftRadius: "inner",
+          flexShrink: 0,
+        })}
+      >
+        <img
+          src={props.imageUrl}
+          alt={props.title}
+          width="200"
+          height="200"
+          class={css({
+            display: "block",
+            width: "200px",
+            height: "full",
+            objectFit: "cover",
+            transition: "transform 300ms ease",
+            _hover: {
+              transform: "scale(1.05)",
+            },
+          })}
+        />
+      </div>
+      <div
+        class={css({
+          padding: "4",
           display: "flex",
           flexDirection: "column",
           flex: 1,
         })}
       >
-        <h3 class={css({ marginTop: 2, flex: 1 })}>{props.title}</h3>
+        <h3
+          class={css({
+            overflow: "hidden",
+            display: "box",
+            boxOrient: "vertical",
+            textOverflow: "ellipsis",
+            margin: 0,
+            fontWeight: "bold",
+            flex: "none",
+            lineClamp: 2,
+          })}
+        >
+          {props.title}
+        </h3>
 
         {props.content && (
           <div
             class={css({
-              marginTop: "2",
               flex: 1,
+              opacity: 0.85,
             })}
           >
             {props.content}
           </div>
         )}
 
-        <p class={css({ display: "flex", gap: "4px", flexWrap: "wrap" })}>
+        <p
+          class={css({
+            display: "flex",
+            gap: "2",
+            flex: "none",
+            margin: 0,
+          })}
+        >
           {props.labels.map((label, index) => (
             <span
               key={index}
               onClick$={label.onAction}
               class={cx(
                 label.color,
-                css({
-                  paddingX: "2",
-                  paddingY: "1",
-                  fontWeight: "bold",
-                  fontSize: "small",
-                }),
+                styles.label.base,
+                label.onAction && styles.label.clickable,
               )}
-              style={{
-                borderRadius: "4px",
-                cursor: label.onAction ? "pointer" : "default",
-              }}
             >
               {label.displayName}
             </span>
@@ -93,3 +124,22 @@ export const Card = component$<CardProps>((props) => {
     </a>
   );
 });
+
+const styles = {
+  label: {
+    base: css({
+      paddingX: "3",
+      paddingY: "1",
+      fontWeight: "bold",
+      fontSize: "small",
+      borderRadius: "full",
+      transition: "all 200ms ease",
+    }),
+    clickable: css({
+      cursor: "pointer",
+      _hover: {
+        transform: "scale(1.05)",
+      },
+    }),
+  },
+};

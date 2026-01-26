@@ -13,6 +13,13 @@ import { pandaShadows } from "./shadows";
 import { pandaSizes } from "./sizes";
 import { pandaSpacing } from "./spacing";
 import { pandaUtilities } from "./utilities";
+import { defineGlobalStyles } from "@pandacss/dev";
+
+const globalCss = defineGlobalStyles({
+  "p, h1, h2, h3, h4, h5, h6": {
+    margin: 0,
+  },
+});
 
 export const baseConfig: Partial<Config> = {
   theme: {
@@ -36,6 +43,7 @@ export const baseConfig: Partial<Config> = {
       breakpoints: pandaBreakpoints,
     },
   },
+  globalCss: globalCss,
   conditions: pandaConditions,
   utilities: pandaUtilities,
 } as const;

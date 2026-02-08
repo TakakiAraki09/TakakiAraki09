@@ -10,6 +10,9 @@ const getEnv = (key: string): string => {
 };
 
 export const ENV = {
+  get TARGET_ENV() {
+    return getEnv('TARGET_ENV')
+  },
   get MAL_CLIENT_ID() {
     return getEnv("MAL_CLIENT_ID");
   },

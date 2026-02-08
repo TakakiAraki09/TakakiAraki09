@@ -26,7 +26,6 @@
   ],
   "author": "ArakiTakaki09",
   "license": "ISC",
-  "packageManager": "pnpm@10.23.0",
   "dependencies": {
     "@inquirer/prompts": "^8.2.0",
     "@types/node": "20.19.0",

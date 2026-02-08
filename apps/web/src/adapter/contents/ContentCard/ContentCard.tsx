@@ -41,6 +41,15 @@ export const ContentCard = component$((props: ContentProps) => {
                   format: "YYYY/MM/DD",
                 })}
               </p>
+              <p>
+                直近視聴日:{" "}
+                {
+                  formatDay({
+                    day: content.state?.listStatusUpdatedAt,
+                    format: "YYYY/MM/DD",
+                  })
+                }
+              </p>
             </div>
           ),
           labels: [
@@ -77,7 +86,7 @@ export const ContentCard = component$((props: ContentProps) => {
           labels: [
             {
               displayName: "ニュース",
-              color: css({ bg: "bg.info", color: "accent.info" }),
+              color: css({ bg: "accent.info", color: "bg.info" }),
             },
           ],
         };

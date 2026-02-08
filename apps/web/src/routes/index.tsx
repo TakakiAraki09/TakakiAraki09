@@ -1,9 +1,8 @@
 import { component$ } from "@builder.io/qwik";
 import { type DocumentHead } from "@builder.io/qwik-city";
 import { getContents, getContentStatesById } from "@repo/mal-database";
-import { pipe, filter } from "remeda";
+import { pipe, filter, sortBy } from "remeda";
 import { ContentCard } from "~/adapter/contents/ContentCard/ContentCard";
-import { Carousel } from "~/components/parts/Carousel/Carousel";
 import { css } from "~/styled-system/css";
 
 const newsList = pipe(
@@ -22,6 +21,11 @@ const animeList = pipe(
       state.listStatusStatus === "plan_to_watch"
     );
   }),
+  sortBy((content) => {
+    const state = getContentStatesById(content.id);
+
+    return -(new Date(state.listStatusUpdatedAt || '').getTime());
+  }),
   (val) => val.slice(0, 10),
 );
 
@@ -39,36 +43,14 @@ export default component$(() => {
     >
       <h2>最新ニュース</h2>
 
-      <Carousel.Root>
-        <div>
-          <Carousel.Prev>prev</Carousel.Prev>
-          <Carousel.Next>next</Carousel.Next>
-        </div>
-        <Carousel.Container>
-          {newsList.map((content) => (
-            <Carousel.Item key={content.id}>
-              <ContentCard payload={content} />
-            </Carousel.Item>
-          ))}
-        </Carousel.Container>
-      </Carousel.Root>
+      {newsList.map((content) => (
+        <ContentCard payload={content} key={content.id} />
+      ))}
 
       <h2>視聴可能</h2>
-      <Carousel.Root>
-        <div>
-          <Carousel.Prev>prev</Carousel.Prev>
-          <Carousel.Next>next</Carousel.Next>
-        </div>
-        <Carousel.Container>
-          {animeList.map((content) => (
-            <Carousel.Item key={content.id} class={css({
-              padding: "3"
-            })}>
-              <ContentCard payload={content} />
-            </Carousel.Item>
-          ))}
-        </Carousel.Container>
-      </Carousel.Root>
+      {animeList.map((content) => (
+        <ContentCard payload={content} key={content.id} />
+      ))}
     </main>
   );
 });

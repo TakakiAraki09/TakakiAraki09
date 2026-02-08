@@ -1,6 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 import { type DocumentHead } from "@builder.io/qwik-city";
-import { getContents, getContentStatesById } from "@repo/mal-database";
+import { getContentNewsById, getContents, getContentStatesById } from "@repo/mal-database";
 import { pipe, filter, sortBy } from "remeda";
 import { ContentCard } from "~/adapter/contents/ContentCard/ContentCard";
 import { css } from "~/styled-system/css";
@@ -8,6 +8,9 @@ import { css } from "~/styled-system/css";
 const newsList = pipe(
   getContents(),
   filter((content) => content.contentType === "news"),
+  sortBy((content) => {
+    return (new Date(getContentNewsById(content.id)?.pubDate || '')).getTime() * -1;
+  }),
   (val) => val.slice(0, 10),
 );
 

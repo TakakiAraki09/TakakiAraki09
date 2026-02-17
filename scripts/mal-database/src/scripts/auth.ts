@@ -43,6 +43,7 @@ const main = async () => {
   console.log("Token saved to database.");
   console.log(`Token type: ${auth.tokenType}`);
   console.log(`Expires in: ${auth.expiresIn} seconds`);
+  console.log(`Token: ${auth.accessToken}`);
 };
 
 main()

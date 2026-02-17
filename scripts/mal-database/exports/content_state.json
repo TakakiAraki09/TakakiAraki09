@@ -267,9 +267,9 @@
     "id": "0d29b11e-26c2-4f27-a449-a32e05cf377b",
     "listStatusStatus": "watching",
     "listStatusScore": 0,
-    "listStatusNumEpisodesWatched": 2,
+    "listStatusNumEpisodesWatched": 5,
     "listStatusIsRewatching": 0,
-    "listStatusUpdatedAt": "2026-01-25T13:58:32.000Z",
+    "listStatusUpdatedAt": "2026-02-03T14:26:21.000Z",
     "listStatusStartDate": "2026-01-25T00:00:00.000Z",
     "listStatusFinishDate": null,
     "createdAt": "2026-01-17T23:18:26.000Z"
@@ -1354,13 +1354,13 @@
   },
   {
     "id": "3fe78f12-dd43-44cc-83b5-d60dfe2b2e3e",
-    "listStatusStatus": "watching",
+    "listStatusStatus": "completed",
     "listStatusScore": 0,
-    "listStatusNumEpisodesWatched": 17,
+    "listStatusNumEpisodesWatched": 28,
     "listStatusIsRewatching": 0,
-    "listStatusUpdatedAt": "2026-01-18T13:12:10.000Z",
+    "listStatusUpdatedAt": "2026-01-28T01:45:09.000Z",
     "listStatusStartDate": "2026-01-18T00:00:00.000Z",
-    "listStatusFinishDate": null,
+    "listStatusFinishDate": "2026-01-28T00:00:00.000Z",
     "createdAt": "2026-01-17T23:27:55.000Z"
   },
   {
@@ -1376,13 +1376,13 @@
   },
   {
     "id": "c46f8366-1a8a-458b-ac14-5de2843ffdbc",
-    "listStatusStatus": "watching",
-    "listStatusScore": 0,
-    "listStatusNumEpisodesWatched": 11,
+    "listStatusStatus": "completed",
+    "listStatusScore": 7,
+    "listStatusNumEpisodesWatched": 12,
     "listStatusIsRewatching": 0,
-    "listStatusUpdatedAt": "2026-01-25T15:45:43.000Z",
+    "listStatusUpdatedAt": "2026-01-25T16:06:17.000Z",
     "listStatusStartDate": "2026-01-25T00:00:00.000Z",
-    "listStatusFinishDate": null,
+    "listStatusFinishDate": "2026-01-26T00:00:00.000Z",
     "createdAt": "2026-01-17T23:28:06.000Z"
   },
   {
@@ -1631,9 +1631,9 @@
     "id": "592d5205-4e3d-43ed-8965-6b671cb26de7",
     "listStatusStatus": "watching",
     "listStatusScore": 0,
-    "listStatusNumEpisodesWatched": 3,
+    "listStatusNumEpisodesWatched": 5,
     "listStatusIsRewatching": 0,
-    "listStatusUpdatedAt": "2026-01-25T07:37:02.000Z",
+    "listStatusUpdatedAt": "2026-02-03T17:53:36.000Z",
     "listStatusStartDate": "2026-01-25T00:00:00.000Z",
     "listStatusFinishDate": null,
     "createdAt": "2026-01-17T23:30:19.000Z"
@@ -1710,7 +1710,7 @@
     "listStatusScore": 0,
     "listStatusNumEpisodesWatched": 12,
     "listStatusIsRewatching": 0,
-    "listStatusUpdatedAt": "2026-01-25T08:00:16.000Z",
+    "listStatusUpdatedAt": "2026-02-03T15:13:48.000Z",
     "listStatusStartDate": "2026-01-25T00:00:00.000Z",
     "listStatusFinishDate": null,
     "createdAt": "2026-01-25T00:50:05.000Z"
@@ -1725,5 +1725,49 @@
     "listStatusStartDate": "2026-01-25T00:00:00.000Z",
     "listStatusFinishDate": "2026-01-25T00:00:00.000Z",
     "createdAt": "2026-01-25T06:55:11.000Z"
+  },
+  {
+    "id": "7730b814-56ec-4ef4-b745-7cfdbd26f544",
+    "listStatusStatus": "watching",
+    "listStatusScore": 0,
+    "listStatusNumEpisodesWatched": 23,
+    "listStatusIsRewatching": 0,
+    "listStatusUpdatedAt": "2026-02-05T05:45:08.000Z",
+    "listStatusStartDate": "2026-02-04T00:00:00.000Z",
+    "listStatusFinishDate": null,
+    "createdAt": "2026-02-07T21:52:16.000Z"
+  },
+  {
+    "id": "2869403d-2eb6-421a-b86d-b3930f62a373",
+    "listStatusStatus": "watching",
+    "listStatusScore": 0,
+    "listStatusNumEpisodesWatched": 3,
+    "listStatusIsRewatching": 0,
+    "listStatusUpdatedAt": "2026-02-07T16:04:05.000Z",
+    "listStatusStartDate": "2026-02-05T00:00:00.000Z",
+    "listStatusFinishDate": null,
+    "createdAt": "2026-02-07T21:52:21.000Z"
+  },
+  {
+    "id": "8055fd4a-845e-43d0-87b9-199ff1e54916",
+    "listStatusStatus": "watching",
+    "listStatusScore": 0,
+    "listStatusNumEpisodesWatched": 12,
+    "listStatusIsRewatching": 0,
+    "listStatusUpdatedAt": "2026-02-15T11:25:39.000Z",
+    "listStatusStartDate": "2026-02-05T00:00:00.000Z",
+    "listStatusFinishDate": null,
+    "createdAt": "2026-02-07T21:52:27.000Z"
+  },
+  {
+    "id": "b26887ea-4e05-486f-aa5e-dd3098df15cd",
+    "listStatusStatus": "plan_to_watch",
+    "listStatusScore": 0,
+    "listStatusNumEpisodesWatched": 6,
+    "listStatusIsRewatching": 0,
+    "listStatusUpdatedAt": "2026-02-16T01:05:42.000Z",
+    "listStatusStartDate": null,
+    "listStatusFinishDate": null,
+    "createdAt": "2026-02-17T01:19:07.000Z"
   }
 ]
